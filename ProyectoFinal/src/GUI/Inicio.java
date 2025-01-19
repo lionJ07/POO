@@ -59,6 +59,9 @@ public class Inicio extends JFrame {
 		JButton btnInicioSesion = new JButton("Iniciar Sesión");
 		btnInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				IniciarSesion iniciarwindow = new IniciarSesion();
+				iniciarwindow.setVisible(true);
+				dispose();
 			}
 		});
 		btnInicioSesion.setBounds(158, 123, 115, 37);

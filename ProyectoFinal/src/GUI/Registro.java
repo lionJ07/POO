@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Registro extends JFrame {
 
@@ -16,8 +17,6 @@ public class Registro extends JFrame {
     private JTextField textFieldCorreo;
     private JTextField textFieldUsuario;
     private JTextField textFieldContraseña;
-    private JRadioButton rdbtnVendedor;
-    private JRadioButton rdbtnComprador;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -61,7 +60,7 @@ public class Registro extends JFrame {
 
         JLabel lblContraseña = new JLabel("Contraseña:");
         lblContraseña.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblContraseña.setBounds(83, 151, 81, 26);
+        lblContraseña.setBounds(83, 151, 100, 26);
         contentPane.add(lblContraseña);
 
         textFieldNombre = new JTextField();
@@ -84,20 +83,6 @@ public class Registro extends JFrame {
         contentPane.add(textFieldContraseña);
         textFieldContraseña.setColumns(10);
 
-        rdbtnVendedor = new JRadioButton("Vendedor");
-        rdbtnVendedor.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        rdbtnVendedor.setBounds(82, 183, 114, 19);
-        contentPane.add(rdbtnVendedor);
-
-        rdbtnComprador = new JRadioButton("Comprador");
-        rdbtnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        rdbtnComprador.setBounds(234, 182, 114, 21);
-        contentPane.add(rdbtnComprador);
-
-        ButtonGroup roleGroup = new ButtonGroup();
-        roleGroup.add(rdbtnVendedor);
-        roleGroup.add(rdbtnComprador);
-
         JButton btnRegresar = new JButton("Regresar");
         btnRegresar.addActionListener(e -> {
             dispose();
@@ -105,7 +90,7 @@ public class Registro extends JFrame {
             iniciowindow.setVisible(true);
         });
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnRegresar.setBounds(83, 216, 113, 19);
+        btnRegresar.setBounds(83, 199, 113, 36);
         contentPane.add(btnRegresar);
 
         JButton btnRegistrarse = new JButton("Registrarse");
@@ -120,7 +105,7 @@ public class Registro extends JFrame {
             }
         });
         btnRegistrarse.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnRegistrarse.setBounds(226, 216, 122, 19);
+        btnRegistrarse.setBounds(226, 199, 122, 36);
         contentPane.add(btnRegistrarse);
     }
 
@@ -130,12 +115,10 @@ public class Registro extends JFrame {
         String usuario = textFieldUsuario.getText().trim();
         String contraseña = textFieldContraseña.getText().trim();
 
-        if (nombre.isEmpty()) throw new Exception("El campo 'Nombre' no puede estar vacío.");
-        if (correo.isEmpty() || !correo.contains("@")) throw new Exception("El correo no es válido.");
-        if (usuario.isEmpty()) throw new Exception("El campo 'Usuario' no puede estar vacío.");
+        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
+        if (!correo.contains("@")) throw new Exception("El correo no es válido.");
         if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
-        if (!rdbtnVendedor.isSelected() && !rdbtnComprador.isSelected()) 
-            throw new Exception("Debe seleccionar un rol (Vendedor o Comprador).");
+ 
     }
 }
 
