@@ -93,7 +93,7 @@ public class IniciarSesion extends JFrame {
 		contentPane.add(textFieldContraseña);
 		textFieldContraseña.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Regresar");
+		JButton btnNewButton = new JButton("Regresar ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

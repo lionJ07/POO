@@ -83,7 +83,7 @@ public class Registro extends JFrame {
         contentPane.add(textFieldContraseña);
         textFieldContraseña.setColumns(10);
 
-        JButton btnRegresar = new JButton("Regresar");
+        JButton btnRegresar = new JButton("Regresar ");
         btnRegresar.addActionListener(e -> {
             dispose();
             Inicio iniciowindow = new Inicio();

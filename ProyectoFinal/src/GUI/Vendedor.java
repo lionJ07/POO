@@ -65,7 +65,7 @@ public class Vendedor extends JFrame {
 		btnNewButton_2.setBounds(179, 161, 85, 21);
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Ver Balance");
+		JButton btnNewButton_3 = new JButton("VerBalance");
 		btnNewButton_3.setBounds(179, 217, 85, 21);
 		contentPane.add(btnNewButton_3);
 		

@@ -49,7 +49,7 @@ public class Seleccion extends JFrame {
 		lblNewLabel.setBounds(137, 21, 182, 36);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnVendedor = new JButton("Vendedor");
+		JButton btnVendedor = new JButton("Vendedor ");
 		btnVendedor.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnVendedor.setBounds(159, 80, 127, 36);
 		contentPane.add(btnVendedor);
