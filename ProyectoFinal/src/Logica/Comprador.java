@@ -11,7 +11,6 @@ public class Comprador implements Usuario {
 		this.nombre = nombre;
 		this.correo = correo;
 		this.usuario = usuario;
-		
 	}
 
 }
