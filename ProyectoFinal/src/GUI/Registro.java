@@ -129,10 +129,9 @@ public class Registro extends JFrame {
         String correo = textFieldCorreo.getText().trim();
         String usuario = textFieldUsuario.getText().trim();
         String contraseña = textFieldContraseña.getText().trim();
-
-        if (nombre.isEmpty()) throw new Exception("El campo 'Nombre' no puede estar vacío.");
-        if (correo.isEmpty() || !correo.contains("@")) throw new Exception("El correo no es válido.");
-        if (usuario.isEmpty()) throw new Exception("El campo 'Usuario' no puede estar vacío.");
+        
+        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
+        if (!correo.contains("@")) throw new Exception("El correo no es válido.");
         if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
         if (!rdbtnVendedor.isSelected() && !rdbtnComprador.isSelected()) 
             throw new Exception("Debe seleccionar un rol (Vendedor o Comprador).");
