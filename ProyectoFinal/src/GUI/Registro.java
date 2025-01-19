@@ -2,133 +2,140 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Registro extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextField textFieldNombre;
+    private JTextField textFieldCorreo;
+    private JTextField textFieldUsuario;
+    private JTextField textFieldContraseña;
+    private JRadioButton rdbtnVendedor;
+    private JRadioButton rdbtnComprador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registro frame = new Registro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                Registro frame = new Registro();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public Registro() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(157, 226, 230));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public Registro() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(157, 226, 230));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Registro");
-		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-		lblNewLabel.setBounds(180, 10, 91, 36);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Nombre:");
-		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(83, 52, 69, 26);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Correo:");
-		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(83, 84, 60, 24);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Usuario:");
-		lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(83, 118, 69, 23);
-		contentPane.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Contraseña");
-		lblNewLabel_4.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_4.setBounds(83, 151, 81, 26);
-		contentPane.add(lblNewLabel_4);
-		
-		textField = new JTextField();
-		textField.setBounds(155, 54, 193, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(153, 88, 195, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(155, 122, 193, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(180, 153, 168, 19);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
-		
-		JRadioButton rdbtnVendedor = new JRadioButton("Vendedor");
-		rdbtnVendedor.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		rdbtnVendedor.setBounds(82, 183, 114, 19);
-		contentPane.add(rdbtnVendedor);
-		
-		JRadioButton rdbtnComprador = new JRadioButton("Comprador");
-		rdbtnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		rdbtnComprador.setBounds(234, 182, 114, 21);
-		contentPane.add(rdbtnComprador);
-		
-		JButton btnRegresar = new JButton("Regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				volverAventanaPrincipal();
-			}
-			private void volverAventanaPrincipal() {
-				dispose();
-				Inicio iniciowindow = new Inicio ();
-				iniciowindow.setVisible(true);
-			}
-		});
-		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(83, 216, 113, 19);
-		contentPane.add(btnRegresar);
-		
-		JButton btnRegistrarse = new JButton("Registrarse");
-		btnRegistrarse.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnRegistrarse.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegistrarse.setBounds(226, 216, 122, 19);
-		contentPane.add(btnRegistrarse);
-	}
+        JLabel lblTitulo = new JLabel("Registro");
+        lblTitulo.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
+        lblTitulo.setBounds(180, 10, 91, 36);
+        contentPane.add(lblTitulo);
+
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblNombre.setBounds(83, 52, 69, 26);
+        contentPane.add(lblNombre);
+
+        JLabel lblCorreo = new JLabel("Correo:");
+        lblCorreo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCorreo.setBounds(83, 84, 60, 24);
+        contentPane.add(lblCorreo);
+
+        JLabel lblUsuario = new JLabel("Usuario:");
+        lblUsuario.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblUsuario.setBounds(83, 118, 69, 23);
+        contentPane.add(lblUsuario);
+
+        JLabel lblContraseña = new JLabel("Contraseña:");
+        lblContraseña.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblContraseña.setBounds(83, 151, 81, 26);
+        contentPane.add(lblContraseña);
+
+        textFieldNombre = new JTextField();
+        textFieldNombre.setBounds(155, 54, 193, 19);
+        contentPane.add(textFieldNombre);
+        textFieldNombre.setColumns(10);
+
+        textFieldCorreo = new JTextField();
+        textFieldCorreo.setBounds(155, 88, 193, 19);
+        contentPane.add(textFieldCorreo);
+        textFieldCorreo.setColumns(10);
+
+        textFieldUsuario = new JTextField();
+        textFieldUsuario.setBounds(155, 122, 193, 19);
+        contentPane.add(textFieldUsuario);
+        textFieldUsuario.setColumns(10);
+
+        textFieldContraseña = new JTextField();
+        textFieldContraseña.setBounds(180, 153, 168, 19);
+        contentPane.add(textFieldContraseña);
+        textFieldContraseña.setColumns(10);
+
+        rdbtnVendedor = new JRadioButton("Vendedor");
+        rdbtnVendedor.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        rdbtnVendedor.setBounds(82, 183, 114, 19);
+        contentPane.add(rdbtnVendedor);
+
+        rdbtnComprador = new JRadioButton("Comprador");
+        rdbtnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        rdbtnComprador.setBounds(234, 182, 114, 21);
+        contentPane.add(rdbtnComprador);
+
+        ButtonGroup roleGroup = new ButtonGroup();
+        roleGroup.add(rdbtnVendedor);
+        roleGroup.add(rdbtnComprador);
+
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.addActionListener(e -> {
+            dispose();
+            Inicio iniciowindow = new Inicio();
+            iniciowindow.setVisible(true);
+        });
+        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegresar.setBounds(83, 216, 113, 19);
+        contentPane.add(btnRegresar);
+
+        JButton btnRegistrarse = new JButton("Registrarse");
+        btnRegistrarse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    validarDatos();
+                    JOptionPane.showMessageDialog(contentPane, "¡Registro exitoso!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        btnRegistrarse.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegistrarse.setBounds(226, 216, 122, 19);
+        contentPane.add(btnRegistrarse);
+    }
+
+    private void validarDatos() throws Exception {
+        String nombre = textFieldNombre.getText().trim();
+        String correo = textFieldCorreo.getText().trim();
+        String usuario = textFieldUsuario.getText().trim();
+        String contraseña = textFieldContraseña.getText().trim();
+
+        if (nombre.isEmpty()) throw new Exception("El campo 'Nombre' no puede estar vacío.");
+        if (correo.isEmpty() || !correo.contains("@")) throw new Exception("El correo no es válido.");
+        if (usuario.isEmpty()) throw new Exception("El campo 'Usuario' no puede estar vacío.");
+        if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+        if (!rdbtnVendedor.isSelected() && !rdbtnComprador.isSelected()) 
+            throw new Exception("Debe seleccionar un rol (Vendedor o Comprador).");
+    }
 }
+
