@@ -44,7 +44,7 @@ public class Seleccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Seleccione un rol:");
+		JLabel lblNewLabel = new JLabel("Seleccione una opción");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
 		lblNewLabel.setBounds(137, 21, 182, 36);
 		contentPane.add(lblNewLabel);

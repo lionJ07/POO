@@ -51,7 +51,7 @@ public class IniciarSesion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Inicio Sesión ");
+		JLabel lblNewLabel = new JLabel("Inicio de Sesión ");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
 		lblNewLabel.setBounds(144, 31, 124, 32);
 		contentPane.add(lblNewLabel);

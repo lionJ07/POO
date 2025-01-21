@@ -73,7 +73,7 @@ public class Vendedor extends JFrame {
 		btnNewButton_4.setBounds(10, 217, 85, 21);
 		contentPane.add(btnNewButton_4);
 		
-		JLabel lblNewLabel = new JLabel("¿Que deseas hacer?");
+		JLabel lblNewLabel = new JLabel("¿Que deseas realizar?");
 		lblNewLabel.setBounds(162, 10, 117, 13);
 		contentPane.add(lblNewLabel);
 	}
