@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Seleccion extends JFrame {
 
@@ -46,10 +48,17 @@ public class Seleccion extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Seleccione una opción");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-		lblNewLabel.setBounds(137, 21, 182, 36);
+		lblNewLabel.setBounds(125, 22, 210, 36);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnVendedor = new JButton("Vendedor");
+		btnVendedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Vendedor vendedorwindow = new Vendedor();
+				vendedorwindow.setVisible(true);
+			}
+		});
 		btnVendedor.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnVendedor.setBounds(159, 80, 127, 36);
 		contentPane.add(btnVendedor);
