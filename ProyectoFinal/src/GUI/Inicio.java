@@ -41,7 +41,7 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("00000");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(198, 25, 45, 13);
 		contentPane.add(lblNewLabel);
 		

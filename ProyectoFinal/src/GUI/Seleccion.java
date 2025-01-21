@@ -44,7 +44,7 @@ public class Seleccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Seleccione un rol");
+		JLabel lblNewLabel = new JLabel("Seleccione un rol:");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
 		lblNewLabel.setBounds(137, 21, 182, 36);
 		contentPane.add(lblNewLabel);
@@ -54,7 +54,7 @@ public class Seleccion extends JFrame {
 		btnVendedor.setBounds(159, 80, 127, 36);
 		contentPane.add(btnVendedor);
 		
-		JButton btnComprador = new JButton("Comprador ");
+		JButton btnComprador = new JButton("Comprador");
 		btnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnComprador.setBounds(159, 149, 127, 36);
 		contentPane.add(btnComprador);
