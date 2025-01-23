@@ -102,7 +102,7 @@ public class Agregar extends JFrame {
 		contentPane.add(textFieldCantidad);
 		textFieldCantidad.setColumns(10);
 		
-		JButton btnRegresar = new JButton("Atras");
+		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose ();

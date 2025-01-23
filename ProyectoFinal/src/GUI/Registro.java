@@ -115,6 +115,8 @@ public class Registro extends JFrame {
         String usuario = textFieldUsuario.getText().trim();
         String contraseña = textFieldContraseña.getText().trim();
 
+
+
         if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
         if (!correo.contains("@")) throw new Exception("El correo no es válido.");
         if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");

@@ -46,52 +46,58 @@ public class Vendedor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Agregar Producto");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnAgregar = new JButton("Agregar Producto");
+		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				Agregar agregarwindow = new Agregar();
 				agregarwindow.setVisible(true);
 			}
 		});
-		btnNewButton.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnNewButton.setBounds(145, 60, 175, 29);
-		contentPane.add(btnNewButton);
+		btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnAgregar.setBounds(145, 60, 175, 29);
+		contentPane.add(btnAgregar);
 		
-		JButton btnNewButton_1 = new JButton("Editar Producto");
-		btnNewButton_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnEditar = new JButton("Editar Producto");
+		btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Editar editarwindow = new Editar();
+				editarwindow.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(145, 99, 175, 29);
-		contentPane.add(btnNewButton_1);
+		btnEditar.setBounds(145, 99, 175, 29);
+		contentPane.add(btnEditar);
 		
-		JButton btnNewButton_2 = new JButton("Eliminar Producto");
-		btnNewButton_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnEliminar = new JButton("Eliminar Producto");
+		btnEliminar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Eliminar eliminarwindow = new Eliminar();
+				eliminarwindow.setVisible(true);
 			}
 		});
-		btnNewButton_2.setBounds(145, 138, 175, 29);
-		contentPane.add(btnNewButton_2);
+		btnEliminar.setBounds(145, 138, 175, 29);
+		contentPane.add(btnEliminar);
 		
-		JButton btnNewButton_3 = new JButton("Ver Balance");
-		btnNewButton_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnNewButton_3.setBounds(167, 177, 128, 29);
-		contentPane.add(btnNewButton_3);
+		JButton btnBalance = new JButton("Ver Balance");
+		btnBalance.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnBalance.setBounds(167, 177, 128, 29);
+		contentPane.add(btnBalance);
 		
-		JButton btnNewButton_4 = new JButton("Regresar");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				Seleccion seleccionwindow= new Seleccion();
 				seleccionwindow.setVisible(true);
 			}
 		});
-		btnNewButton_4.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnNewButton_4.setBounds(26, 203, 106, 34);
-		contentPane.add(btnNewButton_4);
+		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnRegresar.setBounds(26, 203, 106, 34);
+		contentPane.add(btnRegresar);
 		
 		JLabel lblNewLabel = new JLabel("¿Que deseas realizar?");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
