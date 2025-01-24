@@ -83,6 +83,13 @@ public class Vendedor extends JFrame {
 		contentPane.add(btnEliminar);
 		
 		JButton btnBalance = new JButton("Ver Balance");
+		btnBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Mostrar mostrarwindow = new Mostrar();
+				mostrarwindow.setVisible(true);
+			}
+		});
 		btnBalance.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnBalance.setBounds(167, 177, 128, 29);
 		contentPane.add(btnBalance);
