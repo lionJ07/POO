@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,10 +31,6 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(198, 25, 45, 13);
-		contentPane.add(lblNewLabel);
-		
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegistro.addActionListener(new ActionListener() {
@@ -43,7 +40,7 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		btnRegistro.setBounds(158, 72, 115, 41);
+		btnRegistro.setBounds(140, 72, 150, 41);
 		contentPane.add(btnRegistro);
 		
 		JButton btnInicioSesion = new JButton("Iniciar Sesión");
@@ -65,11 +62,51 @@ public class Inicio extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(158, 170, 115, 39);
+		btnSalir.setBounds(140, 170, 150, 39);
 		contentPane.add(btnSalir);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(198, 37, 45, 13);
+		JLabel lblNewLabel_1 = new JLabel("GATICOMMERCE");
+		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 25));
+		lblNewLabel_1.setBounds(124, 24, 201, 38);
 		contentPane.add(lblNewLabel_1);
+		
+		ImageIcon stickerIcon = new ImageIcon(getClass().getResource("/Imagenes/sticker.png"));
+		JLabel stickerLabel = new JLabel(stickerIcon);
+		stickerLabel.setBounds(306, 153, 120, 110);
+		contentPane.add(stickerLabel);
+		
+		ImageIcon sticker = new ImageIcon(getClass().getResource("/Imagenes/gatocaja2.png"));
+		JLabel StickerLabel = new JLabel(sticker);
+		StickerLabel.setBounds(0, 25, 92, 88);
+		contentPane.add(StickerLabel);
+		
+		ImageIcon sticker2 = new ImageIcon(getClass().getResource("/Imagenes/patitas.png"));
+		JLabel Sticker2Label = new JLabel(sticker2);
+		Sticker2Label.setBounds(30, 195, 45, 35);
+		contentPane.add(Sticker2Label);
+		
+		JLabel Sticker2Label_1 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_1.setBounds(318, 82, 45, 35);
+		contentPane.add(Sticker2Label_1);
+		
+		JLabel Sticker2Label_2 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_2.setBounds(218, 228, 45, 35);
+		contentPane.add(Sticker2Label_2);
+		
+		JLabel Sticker2Label_3 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_3.setBounds(85, 82, 45, 35);
+		contentPane.add(Sticker2Label_3);
+		
+		JLabel Sticker2Label_4 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_4.setBounds(381, 0, 45, 35);
+		contentPane.add(Sticker2Label_4);
+		
+		JLabel Sticker2Label_5 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_5.setBounds(30, 0, 45, 35);
+		contentPane.add(Sticker2Label_5);
+		
+		JLabel Sticker2Label_6 = new JLabel(new ImageIcon(Inicio.class.getResource("/Imagenes/patitas.png")));
+		Sticker2Label_6.setBounds(198, -15, 45, 35);
+		contentPane.add(Sticker2Label_6);
 	}
 }
