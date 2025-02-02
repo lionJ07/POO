@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,23 +14,7 @@ public class Comprador extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Comprador frame = new Comprador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -48,19 +30,29 @@ public class Comprador extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("¿ Que deseas realizar?");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
-		lblNewLabel.setBounds(122, 20, 193, 22);
+		lblNewLabel.setBounds(133, 22, 193, 22);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnCarrito = new JButton("Carrito de compras");
 		btnCarrito.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnCarrito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose ();
+				Carrito carritowindow = new Carrito();
+				carritowindow.setVisible(true);
 			}
 		});
-		btnCarrito.setBounds(132, 116, 169, 29);
+		btnCarrito.setBounds(122, 116, 186, 29);
 		contentPane.add(btnCarrito);
 		
 		JButton btnProductoDisponibles = new JButton("Comprar productos disponibles\r\n");
+		btnProductoDisponibles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Comprar comprarwindow = new Comprar();
+				comprarwindow.setVisible(true);
+				}
+		});
 		btnProductoDisponibles.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnProductoDisponibles.setBounds(78, 65, 266, 29);
 		contentPane.add(btnProductoDisponibles);
@@ -74,7 +66,7 @@ public class Comprador extends JFrame {
 			}
 		});
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(167, 167, 109, 29);
+		btnRegresar.setBounds(159, 167, 117, 29);
 		contentPane.add(btnRegresar);
 	}
 

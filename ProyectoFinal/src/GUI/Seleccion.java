@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,23 +14,6 @@ public class Seleccion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Seleccion frame = new Seleccion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -64,6 +45,13 @@ public class Seleccion extends JFrame {
 		contentPane.add(btnVendedor);
 		
 		JButton btnComprador = new JButton("Comprador");
+		btnComprador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Comprador compradorwindow = new Comprador();
+				compradorwindow.setVisible(true);
+			}
+		});
 		btnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnComprador.setBounds(159, 149, 127, 36);
 		contentPane.add(btnComprador);

@@ -1,26 +1,26 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Mostrar extends JFrame {
+public class Carrito extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+
 	/**
 	 * Create the frame.
 	 */
-	public Mostrar() {
+	public Carrito() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -30,30 +30,30 @@ public class Mostrar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Balance Total:");
-		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-		lblNewLabel.setBounds(148, 10, 147, 26);
+		JLabel lblNewLabel = new JLabel("  Carrito de Compras:");
+		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		lblNewLabel.setBounds(140, 20, 157, 28);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnMostrar = new JButton("Mostrar");
 		btnMostrar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnMostrar.setBounds(158, 36, 111, 26);
+		btnMostrar.setBounds(166, 47, 100, 28);
 		contentPane.add(btnMostrar);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(38, 72, 353, 133);
-		contentPane.add(textArea);
 		
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose ();
-				Vendedor vendedorwindow = new Vendedor ();
-				vendedorwindow.setVisible(true);
+				dispose();
+				Comprador compradorwindow = new Comprador();
+				compradorwindow.setVisible(true);
 			}
 		});
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(280, 221, 111, 21);
+		btnRegresar.setBounds(166, 221, 100, 32);
 		contentPane.add(btnRegresar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(54, 85, 319, 126);
+		contentPane.add(scrollPane);
 	}
 }

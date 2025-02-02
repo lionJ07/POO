@@ -23,23 +23,6 @@ public class Editar extends JFrame {
 	private JTextField textFieldPrecioNuevo;
 	private JTextField textFieldCantidadNuevo;
 	private JTextField textFieldDescripcionNuevo;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Editar frame = new Editar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */

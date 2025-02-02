@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,28 +10,13 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class Comprar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Comprar frame = new Comprar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -49,17 +32,17 @@ public class Comprar extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Comprar productos ");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
-		lblNewLabel.setBounds(141, 10, 167, 22);
+		lblNewLabel.setBounds(145, 10, 167, 22);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Método de pago:");
 		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(83, 114, 118, 20);
+		lblNewLabel_1.setBounds(157, 143, 118, 20);
 		contentPane.add(lblNewLabel_1);
 		
-		JButton btnFinalizarCompra = new JButton("Finalizar Compra ");
+		JButton btnFinalizarCompra = new JButton("Finalizar compra ");
 		btnFinalizarCompra.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnFinalizarCompra.setBounds(254, 208, 159, 22);
+		btnFinalizarCompra.setBounds(236, 208, 159, 22);
 		contentPane.add(btnFinalizarCompra);
 		
 		JButton btnRegresar = new JButton("Regresar");
@@ -71,7 +54,27 @@ public class Comprar extends JFrame {
 			}
 		});
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(29, 208, 118, 23);
+		btnRegresar.setBounds(69, 208, 118, 23);
 		contentPane.add(btnRegresar);
+		
+		JRadioButton rdbtnEfectivo = new JRadioButton("Efectivo");
+		rdbtnEfectivo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		rdbtnEfectivo.setBounds(84, 169, 103, 21);
+		contentPane.add(rdbtnEfectivo);
+		
+		JRadioButton rdbtnTarjeta = new JRadioButton("Tarjeta ");
+		rdbtnTarjeta.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		rdbtnTarjeta.setBounds(236, 169, 103, 21);
+		contentPane.add(rdbtnTarjeta);
+		
+		JLabel lblNewLabel_2 = new JLabel("Seleccione el producto a comprar: ");
+		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		lblNewLabel_2.setBounds(102, 42, 246, 22);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Cantidad:");
+		lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		lblNewLabel_3.setBounds(176, 93, 79, 22);
+		contentPane.add(lblNewLabel_3);
 	}
 }

@@ -22,23 +22,6 @@ public class Agregar extends JFrame {
 	private JTextField textFieldNombreProducto;
 	private JTextField textFieldPrecio;
 	private JTextField textFieldCantidad;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Agregar frame = new Agregar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */

@@ -17,18 +17,6 @@ public class Registro extends JFrame {
     private JTextField textFieldCorreo;
     private JTextField textFieldUsuario;
     private JTextField textFieldContraseña;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Registro frame = new Registro();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     public Registro() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
