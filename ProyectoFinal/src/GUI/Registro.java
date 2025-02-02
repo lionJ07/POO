@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import Logica.Usuario;
 
 public class Registro extends JFrame {
 
@@ -85,7 +86,18 @@ public class Registro extends JFrame {
         btnRegistrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    validarDatos();
+                	String nombre = textFieldNombre.getText().trim();
+                    String correo = textFieldCorreo.getText().trim();
+                    String usuario = textFieldUsuario.getText().trim();
+                    String contraseña = textFieldContraseña.getText().trim();
+                    if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
+                    if (!correo.contains("@")) throw new Exception("El correo no es válido.");
+                    if (!correo.contains("gmail") && !correo.contains("hotmail")) throw new Exception("El correo no es válido. (Falta gmail/hotmail)");
+                    if (!correo.contains(".com") && !correo.contains(".es")) throw new Exception("El correo no es válido. (Falta .com/.es).");
+                    if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+
+                   Usuario user = new Usuario(nombre, usuario, correo, contraseña);
+                   user.guardarUsuario();
                     JOptionPane.showMessageDialog(contentPane, "¡Registro exitoso!");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -97,18 +109,5 @@ public class Registro extends JFrame {
         contentPane.add(btnRegistrarse);
     }
 
-    private void validarDatos() throws Exception {
-        String nombre = textFieldNombre.getText().trim();
-        String correo = textFieldCorreo.getText().trim();
-        String usuario = textFieldUsuario.getText().trim();
-        String contraseña = textFieldContraseña.getText().trim();
-
-
-
-        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
-        if (!correo.contains("@")) throw new Exception("El correo no es válido.");
-        if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
- 
-    }
 }
 

@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.io.*;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -54,15 +56,27 @@ public class IniciarSesion extends JFrame {
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					validarInicio();
-					Seleccion seleccionwindow = new Seleccion();
-					seleccionwindow.setVisible(true);
-					dispose();
-				}catch (Exception ex) {
+					String usuario = textFieldUsuario.getText().trim();
+					String contraseña = textFieldContraseña.getText().trim();
+
+					if (usuario.isEmpty() || contraseña.isEmpty()) {
+					    throw new Exception("Todos los campos deben estar llenos");
+					}
+
+                    if (verificar(usuario, contraseña)) {
+                        Seleccion seleccionwindow = new Seleccion();
+                        seleccionwindow.setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(contentPane, "Datos incorrectos. Intentalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-		});
+        });
+		
 		btnIniciarSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnIniciarSesion.setBounds(252, 192, 102, 32);
 		contentPane.add(btnIniciarSesion);
@@ -89,14 +103,33 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
 	}
-	private void validarInicio() throws Exception {
-		String usuario = textFieldUsuario.getText().trim();
-        String contraseña = textFieldContraseña.getText().trim();
-        if (usuario.isEmpty()|| contraseña.isEmpty()) throw new Exception("Todos los campos deben estar llenos");
-        // Poner excepcion de usuario y contraseña incorrecta 
 
-		
-		
+	private boolean verificar(String usuario, String contraseña) {
+        try {
+            File archivo = new File("usuarios.txt");
+            Scanner scanner = new Scanner(archivo);
+
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                String[] partes = linea.split(",");
+
+                if (partes.length == 4) {
+                    String usuarioArchivo = partes[0].trim();
+                    String contraseñaArchivo = partes[1].trim();
+
+                    if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
+                        scanner.close();
+                        return true;
+                    }
+                }
+            }
+
+            scanner.close();
+            return false;
+
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
 	}
-
 }

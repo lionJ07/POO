@@ -1,74 +1,60 @@
 package Logica;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Producto {
-	// Declarar variables 
-	private String nombreprod;
-	private double precioprod;
-	private double cantprod;
-	private String descripcionprod;
-	private double cantvendido;
-	// Constructor
-	Producto(String nombreprod, double precioprod, double cantprod, String descripcionprod){
-		this.nombreprod = nombreprod;
-		this.precioprod = precioprod;
-		this.cantprod = cantprod;
-		this.descripcionprod = descripcionprod;
-		this.cantvendido = 0.0;
-	}
-	// Get y Set
-	public String getNombreprod() {
-		return nombreprod;
-	}
+    private String nombreprod;
+    private double precioprod;
+    private int cantprod;
+    private String descripcionprod;
 
-	public void setNombreprod(String nombreprod) {
-		this.nombreprod = nombreprod;
-	}
+    public Producto(String nombreprod, double precioprod, int cantprod, String descripcionprod) {
+        this.nombreprod = nombreprod;
+        this.precioprod = precioprod;
+        this.cantprod = cantprod;
+        this.descripcionprod = descripcionprod;
+    }
 
-	public double getPrecioprod() {
-		return precioprod;
-	}
+    public String getNombreprod() { return nombreprod; }
+    public double getPrecioprod() { return precioprod; }
+    public int getCantprod() { return cantprod; }
+    public String getDescripcionprod() { return descripcionprod; }
 
-	public void setPrecioprod(double precioprod) {
-		this.precioprod = precioprod;
-	}
+    public void setCantprod(int cantprod) { this.cantprod = cantprod; }
 
-	public double getCantprod() {
-		return cantprod;
-	}
+    public void venderProductos(int cantidadVendida) {
+        if (cantidadVendida <= cantprod) {
+            this.cantprod -= cantidadVendida;
+            actualizarProductoEnArchivo();
+        } else {
+            System.out.println("Stock insuficiente.");
+        }
+    }
 
-	public void setCantprod(double cantprod) {
-		this.cantprod = cantprod;
-	}
+    private void actualizarProductoEnArchivo() {
+        List<Producto> productos = cargarProductos();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
+            for (Producto p : productos) {
+                writer.write(p.getNombreprod() + "," + p.getPrecioprod() + "," + (p.getNombreprod().equals(this.nombreprod) ? this.cantprod : p.getCantprod()) + "," + p.getDescripcionprod() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al actualizar productos.");
+        }
+    }
 
-	public String getDescripcionprod() {
-		return descripcionprod;
-	}
-
-	public void setDescripcionprod(String descripcionprod) {
-		this.descripcionprod = descripcionprod;
-	}
-
-	public double getCantvendido() {
-		return cantvendido;
-	}
-
-	public void setCantvendido(double cantvendido) {
-		this.cantvendido = cantvendido;
-	}
-	// Método para Vender productos 
-	public boolean venderProductos(int cantidad) {
-		if(cantprod >= cantidad) {
-			cantprod -= cantidad;
-			cantvendido += cantidad;
-			return true;
-		} return false;
-	}
-	// Método para calcular ventas 
-	public double calcularventas() {
-		return cantvendido * precioprod;
-	}
-	// Método para calcular inventario
-	public void calcularInv(int nuevacant) {
-		this.cantprod = nuevacant;
-	}
+    public static List<Producto> cargarProductos() {
+        List<Producto> productos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("productos.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                productos.add(new Producto(data[0], Double.parseDouble(data[1]), Integer.parseInt(data[2]), data[3]));
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cargar productos.");
+        }
+        return productos;
+    }
 }
