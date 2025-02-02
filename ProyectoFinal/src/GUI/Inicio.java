@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Inicio extends JFrame {
 
@@ -34,6 +35,7 @@ public class Inicio extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnRegistro = new JButton("Registrarse");
+		btnRegistro.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Registro registrowindow = new Registro();
@@ -45,6 +47,7 @@ public class Inicio extends JFrame {
 		contentPane.add(btnRegistro);
 		
 		JButton btnInicioSesion = new JButton("Iniciar Sesión");
+		btnInicioSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				IniciarSesion iniciarwindow = new IniciarSesion();
@@ -52,10 +55,11 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		btnInicioSesion.setBounds(158, 123, 115, 37);
+		btnInicioSesion.setBounds(140, 123, 150, 37);
 		contentPane.add(btnInicioSesion);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -63,5 +67,9 @@ public class Inicio extends JFrame {
 		});
 		btnSalir.setBounds(158, 170, 115, 39);
 		contentPane.add(btnSalir);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(198, 37, 45, 13);
+		contentPane.add(lblNewLabel_1);
 	}
 }

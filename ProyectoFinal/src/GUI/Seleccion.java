@@ -53,8 +53,20 @@ public class Seleccion extends JFrame {
 			}
 		});
 		btnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnComprador.setBounds(159, 149, 127, 36);
+		btnComprador.setBounds(159, 136, 127, 36);
 		contentPane.add(btnComprador);
+		
+		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Inicio iniciowindow = new Inicio();
+				iniciowindow.setVisible(true);
+			}
+		});
+		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnRegresar.setBounds(159, 195, 127, 36);
+		contentPane.add(btnRegresar);
 	}
 
 }
