@@ -3,6 +3,7 @@ package Logica;
 import java.io.*;
 
 public class Usuario {
+	
     private String nombre;
     private String usuario;
     private String contraseña;

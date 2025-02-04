@@ -3,6 +3,7 @@ package Logica;
 import java.util.List;
 
 class Transaccion {
+	
     private Comprador comprador;
     private List<Producto> productos;
     private double total;

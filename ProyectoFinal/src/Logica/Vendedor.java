@@ -3,7 +3,8 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
-class Vendedor extends Usuario {
+public class Vendedor extends Usuario {
+	
     private List<Producto> productos;
     private double balanceTotal;
 
@@ -25,6 +26,22 @@ class Vendedor extends Usuario {
             System.out.println("Error al guardar el producto.");
         }
     }
+    
+    public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("usuario.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 4 && data[1].equals(usuarioBuscado)) {  // Buscar por nombre de usuario
+                    return new Vendedor(data[0], data[1], data[2], data[3]);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cargar el vendedor.");
+        }
+        return null; // Retorna null si no encuentra el vendedor
+    }
+
 }
 
 

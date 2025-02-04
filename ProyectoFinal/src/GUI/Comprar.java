@@ -49,7 +49,7 @@ public class Comprar extends JFrame {
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Comprador compradorwindow = new Comprador();
+				CompradorGUI compradorwindow = new CompradorGUI();
 				compradorwindow.setVisible(true);
 			}
 		});

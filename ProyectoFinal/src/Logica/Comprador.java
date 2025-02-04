@@ -1,6 +1,7 @@
 package Logica;
 
-class Comprador extends Usuario {
+public class Comprador extends Usuario {
+	
     private CarritoCompras carrito;
 
     public Comprador(String nombre, String usuario, String correo, String contraseña) {

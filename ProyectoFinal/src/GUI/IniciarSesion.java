@@ -8,6 +8,10 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logica.SesionIniciada;
+import Logica.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -54,28 +58,37 @@ public class IniciarSesion extends JFrame {
 		
 		JButton btnIniciarSesion = new JButton("Ingresar ");
 		btnIniciarSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					String usuario = textFieldUsuario.getText().trim();
-					String contraseña = textFieldContraseña.getText().trim();
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            String usuario = textFieldUsuario.getText().trim();
+		            String contraseña = textFieldContraseña.getText().trim();
 
-					if (usuario.isEmpty() || contraseña.isEmpty()) {
-					    throw new Exception("Todos los campos deben estar llenos");
-					}
+		            if (usuario.isEmpty() || contraseña.isEmpty()) {
+		                throw new Exception("Todos los campos deben estar llenos");
+		            }
 
-                    if (verificar(usuario, contraseña)) {
-                        Seleccion seleccionwindow = new Seleccion();
-                        seleccionwindow.setVisible(true);
-                        dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(contentPane, "Datos incorrectos. Intentalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+		            Usuario usuarioLogueado = verificar(usuario, contraseña);
 
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
+		            if (usuarioLogueado != null) {
+		                // Guardar el usuario en la sesión
+		                SesionIniciada.iniciarSesion(usuarioLogueado);
+
+		                JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		                
+		                // Abrir ventana de selección
+		                Seleccion seleccionwindow = new Seleccion();
+		                seleccionwindow.setVisible(true);
+		                dispose(); // Cerrar la ventana de login
+		            } else {
+		                JOptionPane.showMessageDialog(contentPane, "Datos incorrectos. Inténtalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+		            }
+
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+		});
+
 		
 		btnIniciarSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnIniciarSesion.setBounds(252, 192, 102, 32);
@@ -104,32 +117,33 @@ public class IniciarSesion extends JFrame {
 		contentPane.add(btnNewButton);
 	}
 
-	private boolean verificar(String usuario, String contraseña) {
-        try {
-            File archivo = new File("usuarios.txt");
-            Scanner scanner = new Scanner(archivo);
+	private Usuario verificar(String usuario, String contraseña) {
+	    try {
+	        File archivo = new File("usuarios.txt");
+	        Scanner scanner = new Scanner(archivo);
 
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                String[] partes = linea.split(",");
+	        while (scanner.hasNextLine()) {
+	            String linea = scanner.nextLine();
+	            String[] partes = linea.split(",");
 
-                if (partes.length == 4) {
-                    String usuarioArchivo = partes[0].trim();
-                    String contraseñaArchivo = partes[1].trim();
+	            if (partes.length == 4) {
+	                String usuarioArchivo = partes[0].trim();
+	                String contraseñaArchivo = partes[1].trim();
+	                String nombreArchivo = partes[2].trim();
+	                String correoArchivo = partes[3].trim();
 
-                    if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
-                        scanner.close();
-                        return true;
-                    }
-                }
-            }
+	                if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
+	                    scanner.close();
+	                    return new Usuario(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+	                }
+	            }
+	        }
 
-            scanner.close();
-            return false;
-
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+	        scanner.close();
+	    } catch (FileNotFoundException ex) {
+	        JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	    return null;
 	}
+
 }
