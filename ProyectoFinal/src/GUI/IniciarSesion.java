@@ -8,10 +8,16 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.io.*;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logica.SesionIniciada;
+import Logica.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -65,6 +71,7 @@ public class IniciarSesion extends JFrame {
 		 */
 		JButton btnIniciarSesion = new JButton("Ingresar ");
 		btnIniciarSesion.addActionListener(new ActionListener() {
+<<<<<<< HEAD
 			public void actionPerformed(ActionEvent e) {
 				/**
 				 * Validación para que el usuario y la contraseña estan correctas el programa mande al usuario a la ventana de selección
@@ -78,7 +85,40 @@ public class IniciarSesion extends JFrame {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+=======
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            String usuario = textFieldUsuario.getText().trim();
+		            String contraseña = textFieldContraseña.getText().trim();
+
+		            if (usuario.isEmpty() || contraseña.isEmpty()) {
+		                throw new Exception("Todos los campos deben estar llenos");
+		            }
+
+		            Usuario usuarioLogueado = verificar(usuario, contraseña);
+
+		            if (usuarioLogueado != null) {
+		                // Guardar el usuario en la sesión
+		                SesionIniciada.iniciarSesion(usuarioLogueado);
+
+		                JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+		                
+		                // Abrir ventana de selección
+		                Seleccion seleccionwindow = new Seleccion();
+		                seleccionwindow.setVisible(true);
+		                dispose(); // Cerrar la ventana de login
+		            } else {
+		                JOptionPane.showMessageDialog(contentPane, "Datos incorrectos. Inténtalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+		            }
+
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+>>>>>>> branch 'main' of https://github.com/lionJ07/POO.git
 		});
+
+		
 		btnIniciarSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnIniciarSesion.setBounds(252, 192, 102, 32);
 		contentPane.add(btnIniciarSesion);
@@ -107,6 +147,7 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
 	}
+<<<<<<< HEAD
 	/**
 	 * Validación parra que los campos requerido esten completos 
 	 * @throws Exception por si el usuario y la contraseña llegan a ser incorrectos 
@@ -118,9 +159,36 @@ public class IniciarSesion extends JFrame {
         if (usuario.isEmpty()|| contraseña.isEmpty()) throw new Exception("Todos los campos deben estar llenos");
         JOptionPane.showMessageDialog(rootPane,"Todos los campos deben estar completados","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen);
         // Poner excepcion de usuario y contraseña incorrecta 
+=======
+>>>>>>> branch 'main' of https://github.com/lionJ07/POO.git
 
-		
-		
+	private Usuario verificar(String usuario, String contraseña) {
+	    try {
+	        File archivo = new File("usuarios.txt");
+	        Scanner scanner = new Scanner(archivo);
+
+	        while (scanner.hasNextLine()) {
+	            String linea = scanner.nextLine();
+	            String[] partes = linea.split(",");
+
+	            if (partes.length == 4) {
+	                String usuarioArchivo = partes[0].trim();
+	                String contraseñaArchivo = partes[1].trim();
+	                String nombreArchivo = partes[2].trim();
+	                String correoArchivo = partes[3].trim();
+
+	                if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
+	                    scanner.close();
+	                    return new Usuario(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+	                }
+	            }
+	        }
+
+	        scanner.close();
+	    } catch (FileNotFoundException ex) {
+	        JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
+	    return null;
 	}
 
 }

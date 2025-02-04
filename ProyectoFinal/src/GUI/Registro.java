@@ -13,6 +13,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import Logica.Usuario;
 /**
  * Ventana para que los nuevos usuarios se puedan registrar al programa 
  */
@@ -102,6 +110,19 @@ public class Registro extends JFrame {
                     validarDatos();
                     Icon icono = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
                     JOptionPane.showMessageDialog(rootPane,"¡Registro exitoso!","Mensaje", JOptionPane.PLAIN_MESSAGE,icono);
+                	String nombre = textFieldNombre.getText().trim();
+                    String correo = textFieldCorreo.getText().trim();
+                    String usuario = textFieldUsuario.getText().trim();
+                    String contraseña = textFieldContraseña.getText().trim();
+                    if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
+                    if (!correo.contains("@")) throw new Exception("El correo no es válido.");
+                    if (!correo.contains("gmail") && !correo.contains("hotmail")) throw new Exception("El correo no es válido. (Falta gmail/hotmail)");
+                    if (!correo.contains(".com") && !correo.contains(".es")) throw new Exception("El correo no es válido. (Falta .com/.es).");
+                    if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+
+                   Usuario user = new Usuario(nombre, usuario, correo, contraseña);
+                   user.guardarUsuario();
+                    JOptionPane.showMessageDialog(contentPane, "¡Registro exitoso!");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }

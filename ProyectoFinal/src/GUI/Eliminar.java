@@ -68,7 +68,7 @@ public class Eliminar extends JFrame {
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Vendedor vendedorwindow = new Vendedor();
+				VendedorGUI vendedorwindow = new VendedorGUI();
 				vendedorwindow.setVisible(true);
 			}
 		});
