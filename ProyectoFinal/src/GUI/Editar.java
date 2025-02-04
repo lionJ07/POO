@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -12,7 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Ventana para editar algun producto
+ */
 public class Editar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -70,7 +78,9 @@ public class Editar extends JFrame {
 		lblNewLabel_6.setFont(new Font("Sitka Subheading", Font.BOLD, 15) );
 		lblNewLabel_6.setBounds(34, 196, 239, 20);
 		contentPane.add(lblNewLabel_6);
-		
+		/**
+		 * Botón para regresar al menú de la ventana de vendedor 
+		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +92,9 @@ public class Editar extends JFrame {
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegresar.setBounds(80, 226, 102, 27);
 		contentPane.add(btnRegresar);
-		
+		/**
+		 * Botón para editar el producto indicado por el codigo 
+		 */
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnEditar.setBounds(265, 226, 93, 27);

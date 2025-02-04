@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -9,7 +15,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Ventana de Comprador
+ */
 public class Comprador extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -27,12 +35,16 @@ public class Comprador extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		/**
+		 * Botones del menú de la ventana de comprador
+		 */
 		JLabel lblNewLabel = new JLabel("¿ Que deseas realizar?");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
 		lblNewLabel.setBounds(133, 22, 193, 22);
 		contentPane.add(lblNewLabel);
-		
+		/**
+		 * Botón para abrir la ventana de carrito de compras 
+		 */
 		JButton btnCarrito = new JButton("Carrito de compras");
 		btnCarrito.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnCarrito.addActionListener(new ActionListener() {
@@ -44,7 +56,9 @@ public class Comprador extends JFrame {
 		});
 		btnCarrito.setBounds(122, 116, 186, 29);
 		contentPane.add(btnCarrito);
-		
+		/**
+		 * Botón para comprar los productos disponibles e deir los productos que se han agregado 
+		 */
 		JButton btnProductoDisponibles = new JButton("Comprar productos disponibles\r\n");
 		btnProductoDisponibles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -56,7 +70,9 @@ public class Comprador extends JFrame {
 		btnProductoDisponibles.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnProductoDisponibles.setBounds(78, 65, 266, 29);
 		contentPane.add(btnProductoDisponibles);
-		
+		/**
+		 * Botón para regresar a la ventana de seleccion de roles 
+		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

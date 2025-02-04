@@ -1,14 +1,21 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * Ventana para que los nuevos usuarios se puedan registrar al programa 
+ */
 public class Registro extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +77,9 @@ public class Registro extends JFrame {
         textFieldContraseña.setBounds(180, 153, 168, 19);
         contentPane.add(textFieldContraseña);
         textFieldContraseña.setColumns(10);
-
+        /**
+         * Botón para regresar a la ventana de Inicio 
+         */
         JButton btnRegresar = new JButton("Atras");
         btnRegresar.addActionListener(e -> {
             dispose();
@@ -80,13 +89,19 @@ public class Registro extends JFrame {
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnRegresar.setBounds(83, 199, 113, 36);
         contentPane.add(btnRegresar);
-
+        /**
+         * Botón para confirmar el registro del usuario 
+         */
         JButton btnRegistrarse = new JButton("Registrarse");
         btnRegistrarse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	/**
+            	 * Excepción para que el registro sea exitoso y si no se muestre un error 
+            	 */
                 try {
                     validarDatos();
-                    JOptionPane.showMessageDialog(contentPane, "¡Registro exitoso!");
+                    Icon icono = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
+                    JOptionPane.showMessageDialog(rootPane,"¡Registro exitoso!","Mensaje", JOptionPane.PLAIN_MESSAGE,icono);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -96,18 +111,23 @@ public class Registro extends JFrame {
         btnRegistrarse.setBounds(226, 199, 122, 36);
         contentPane.add(btnRegistrarse);
     }
-
+    /**
+     * Validación de datos para que todos los espacios esten completados
+     */
     private void validarDatos() throws Exception {
         String nombre = textFieldNombre.getText().trim();
         String correo = textFieldCorreo.getText().trim();
         String usuario = textFieldUsuario.getText().trim();
         String contraseña = textFieldContraseña.getText().trim();
-
-
-
-        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
-        if (!correo.contains("@")) throw new Exception("El correo no es válido.");
-        if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+        Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) 
+        	JOptionPane.showMessageDialog(rootPane,"Todos los campos deben estar completados","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen);
+        Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+        if (!correo.contains("@")) 
+        	JOptionPane.showMessageDialog(rootPane,"El correo debe tener @","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen2);
+        Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+        if (contraseña.length() < 6)
+        	JOptionPane.showMessageDialog(rootPane,"La contraseña debe tener 6 caracteres","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen3);
  
     }
 }

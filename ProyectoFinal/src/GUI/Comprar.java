@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -11,7 +17,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
-
+/**
+ * Ventana para comprar productos 
+ */
 public class Comprar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -39,12 +47,16 @@ public class Comprar extends JFrame {
 		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(157, 143, 118, 20);
 		contentPane.add(lblNewLabel_1);
-		
+		/**
+		 * Botón para finalizar la compra, sacando un mensaje para la confirmación de la compra 
+		 */
 		JButton btnFinalizarCompra = new JButton("Finalizar compra ");
 		btnFinalizarCompra.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnFinalizarCompra.setBounds(236, 208, 159, 22);
 		contentPane.add(btnFinalizarCompra);
-		
+		/**
+		 * Botón para regresar a la ventana de comprador y mostrando su menú 
+		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -56,12 +68,16 @@ public class Comprar extends JFrame {
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegresar.setBounds(69, 208, 118, 23);
 		contentPane.add(btnRegresar);
-		
+		/**
+		 * Botón para seleciona si el metodo de pago es efectivo 
+		 */
 		JRadioButton rdbtnEfectivo = new JRadioButton("Efectivo");
 		rdbtnEfectivo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		rdbtnEfectivo.setBounds(84, 169, 103, 21);
 		contentPane.add(rdbtnEfectivo);
-		
+		/**
+		 * Botón para seleccionar si el metodo de pago es tarjeta 
+		 */
 		JRadioButton rdbtnTarjeta = new JRadioButton("Tarjeta ");
 		rdbtnTarjeta.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		rdbtnTarjeta.setBounds(236, 169, 103, 21);

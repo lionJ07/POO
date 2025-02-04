@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -13,7 +19,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
-
+/**
+ * Ventana para agregar un nuevo producto
+ */
 public class Agregar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -84,7 +92,9 @@ public class Agregar extends JFrame {
 		textFieldCantidad.setBounds(198, 119, 216, 19);
 		contentPane.add(textFieldCantidad);
 		textFieldCantidad.setColumns(10);
-		
+		/**
+		 * Botón para regresar a la ventana de vendedor con el respectivo menu de opciones 
+		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +106,9 @@ public class Agregar extends JFrame {
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegresar.setBounds(89, 203, 85, 41);
 		contentPane.add(btnRegresar);
-		
+		/**
+		 * Botón para editar el producto con exito 
+		 */
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnAgregar.setBounds(253, 203, 103, 41);

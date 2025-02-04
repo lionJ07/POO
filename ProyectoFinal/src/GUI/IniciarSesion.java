@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -10,11 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-
+/**
+ * Ventana para iniciar sesión 
+ */
 public class IniciarSesion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -49,10 +60,15 @@ public class IniciarSesion extends JFrame {
 		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		lblNewLabel_2.setBounds(104, 140, 102, 21);
 		contentPane.add(lblNewLabel_2);
-		
+		/**
+		 * Botón para ingresar con el usuario y la contraseña 
+		 */
 		JButton btnIniciarSesion = new JButton("Ingresar ");
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				/**
+				 * Validación para que el usuario y la contraseña estan correctas el programa mande al usuario a la ventana de selección
+				 */
 				try {
 					validarInicio();
 					Seleccion seleccionwindow = new Seleccion();
@@ -76,7 +92,9 @@ public class IniciarSesion extends JFrame {
 		textFieldContraseña.setBounds(196, 139, 122, 19);
 		contentPane.add(textFieldContraseña);
 		textFieldContraseña.setColumns(10);
-		
+		/**
+		 * Botón para regresar a la ventana de inicio 
+		 */
 		JButton btnNewButton = new JButton("Atras");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,10 +107,16 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
 	}
+	/**
+	 * Validación parra que los campos requerido esten completos 
+	 * @throws Exception por si el usuario y la contraseña llegan a ser incorrectos 
+	 */
 	private void validarInicio() throws Exception {
 		String usuario = textFieldUsuario.getText().trim();
-        String contraseña = textFieldContraseña.getText().trim();
+        String contraseña = textFieldContraseña.getText().trim();Icon 
+        imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
         if (usuario.isEmpty()|| contraseña.isEmpty()) throw new Exception("Todos los campos deben estar llenos");
+        JOptionPane.showMessageDialog(rootPane,"Todos los campos deben estar completados","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen);
         // Poner excepcion de usuario y contraseña incorrecta 
 
 		

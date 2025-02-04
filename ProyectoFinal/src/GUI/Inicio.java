@@ -1,6 +1,10 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
-
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +17,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
+/**
+ * Ventana de Inicio 
+ */
 public class Inicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +36,9 @@ public class Inicio extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		/**
+		 * Botón que manda a los usuarios a la ventana de registro
+		 */
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegistro.addActionListener(new ActionListener() {
@@ -42,7 +50,9 @@ public class Inicio extends JFrame {
 		});
 		btnRegistro.setBounds(140, 72, 150, 41);
 		contentPane.add(btnRegistro);
-		
+		/**
+		 * Botón para que los usuarios ya registrados solo inicien sesión 
+		 */
 		JButton btnInicioSesion = new JButton("Iniciar Sesión");
 		btnInicioSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnInicioSesion.addActionListener(new ActionListener() {
@@ -54,7 +64,9 @@ public class Inicio extends JFrame {
 		});
 		btnInicioSesion.setBounds(140, 123, 150, 37);
 		contentPane.add(btnInicioSesion);
-		
+		/**
+		 * Botón para salir del programa
+		 */
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnSalir.addActionListener(new ActionListener() {
@@ -69,7 +81,9 @@ public class Inicio extends JFrame {
 		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 25));
 		lblNewLabel_1.setBounds(124, 24, 201, 38);
 		contentPane.add(lblNewLabel_1);
-		
+		/**
+		 * Objetos que permiten el uso de las imagenes y la visualización de las mismas 
+		 */
 		ImageIcon stickerIcon = new ImageIcon(getClass().getResource("/Imagenes/sticker.png"));
 		JLabel stickerLabel = new JLabel(stickerIcon);
 		stickerLabel.setBounds(306, 153, 120, 110);
