@@ -66,7 +66,37 @@ public class Eliminar extends JFrame {
 
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                eliminarProducto();
+                    try {
+                        String codigoStr = textField.getText().trim();
+                        if (!codigoStr.matches("\\d+")) {
+                            JOptionPane.showMessageDialog(null, "Ingrese un código numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        int codigo = Integer.parseInt(codigoStr);
+
+                        List<Producto> productos = Producto.cargarProductos();
+                        List<Producto> productosActualizados = productos.stream()
+                                .filter(p -> p.getCodigo() != codigo)
+                                .collect(Collectors.toList());
+
+                        if (productos.size() == productosActualizados.size()) {
+                            JOptionPane.showMessageDialog(null, "No se encontró el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
+                            for (Producto p : productosActualizados) {
+                                writer.write(String.format("%d,%s,%.2f,%d,%s\n", 
+                                        p.getCodigo(), p.getNombreprod(), p.getPrecioprod(), p.getCantprod(), p.getDescripcionprod()));
+                            }
+                        }
+
+                        JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un código válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Error al eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
             }
         });
 
@@ -84,43 +114,6 @@ public class Eliminar extends JFrame {
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnRegresar.setBounds(58, 185, 105, 31);
         contentPane.add(btnRegresar);
-    }
-
-    /**
-     * Método para eliminar un producto del archivo productos.txt basado en su código
-     */
-    private void eliminarProducto() {
-        try {
-            String codigoStr = textField.getText().trim();
-            if (!codigoStr.matches("\\d+")) {
-                JOptionPane.showMessageDialog(this, "Ingrese un código numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            int codigo = Integer.parseInt(codigoStr);
-
-            List<Producto> productos = Producto.cargarProductos();
-            List<Producto> productosActualizados = productos.stream()
-                    .filter(p -> p.getCodigo() != codigo)
-                    .collect(Collectors.toList());
-
-            if (productos.size() == productosActualizados.size()) {
-                JOptionPane.showMessageDialog(this, "No se encontró el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
-                for (Producto p : productosActualizados) {
-                    writer.write(String.format("%d,%s,%.2f,%d,%s\n", 
-                            p.getCodigo(), p.getNombreprod(), p.getPrecioprod(), p.getCantprod(), p.getDescripcionprod()));
-                }
-            }
-
-            JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Ingrese un código válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error al eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
 
