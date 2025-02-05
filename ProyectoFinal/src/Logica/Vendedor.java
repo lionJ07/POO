@@ -1,8 +1,8 @@
 /**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  * @JulianaSofiaLopez
  * @LeonardoAlejandroGuio
  * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  */
 package Logica;
 
@@ -42,12 +42,12 @@ public class Vendedor extends Usuario {
                 String[] data = line.split(",");
                 if (data.length == 4 && data[1].equals(usuarioBuscado)) {  // Buscar por nombre de usuario
                     return new Vendedor(data[0], data[1], data[2], data[3]);
-                }
+            }
             }
         } catch (IOException e) {
             System.out.println("Error al cargar el vendedor.");
         }
-        return null; // Retorna null si no encuentra el vendedor
+        return null; 
     }
 
 }
