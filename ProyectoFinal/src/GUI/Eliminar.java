@@ -97,6 +97,7 @@ public class Eliminar extends JFrame {
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(null, "Error al eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
+                    
             }
         });
 
