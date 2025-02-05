@@ -29,7 +29,6 @@ public class Agregar extends JFrame {
     private JTextPane textPaneDescripcion;
 
     public Agregar() {
-        // Configuración de la ventana
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 350);
         contentPane = new JPanel();
@@ -38,13 +37,11 @@ public class Agregar extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        // Título de la ventana
         JLabel lblNewLabel = new JLabel("Agregar Producto:");
         lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
         lblNewLabel.setBounds(129, 10, 173, 23);
         contentPane.add(lblNewLabel);
         
-        // Etiquetas y campos de texto
         JLabel lblNewLabel_1 = new JLabel("Código del Producto:");
         lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         lblNewLabel_1.setBounds(26, 32, 147, 23);

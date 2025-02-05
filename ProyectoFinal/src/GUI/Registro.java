@@ -98,7 +98,7 @@ public class Registro extends JFrame {
         btnRegresar.setBounds(83, 199, 113, 36);
         contentPane.add(btnRegresar);
         /**
-         * Botón para confirmar el registro del usuario 
+         * Botón para  el registro del usuario 
          */
         JButton btnRegistrarse = new JButton("Registrarse");
         btnRegistrarse.addActionListener(new ActionListener() {

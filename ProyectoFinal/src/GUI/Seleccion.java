@@ -73,7 +73,7 @@ public class Seleccion extends JFrame {
 		btnComprador.setBounds(159, 136, 127, 36);
 		contentPane.add(btnComprador);
 		/**
-		 * Botón para regresar a la ventana de inicio 
+		 * Botón para regresar a la ventana de inicio
 		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {

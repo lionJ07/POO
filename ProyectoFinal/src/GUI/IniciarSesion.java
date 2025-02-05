@@ -92,7 +92,6 @@ public class IniciarSesion extends JFrame {
 		textFieldContraseña.setBounds(196, 139, 122, 19);
 		contentPane.add(textFieldContraseña);
 		textFieldContraseña.setColumns(10);
-
 		/**
 		 * Botón para regresar a la ventana de inicio 
 		 */
