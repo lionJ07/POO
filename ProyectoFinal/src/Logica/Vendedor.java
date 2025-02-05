@@ -27,11 +27,13 @@ public class Vendedor extends Usuario {
 
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
-            writer.write(producto.getNombreprod() + "," + producto.getPrecioprod() + "," + producto.getCantprod() + "," + producto.getDescripcionprod() + "\n");
+            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción
+            writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," + producto.getCantprod() + "," + producto.getDescripcionprod() + "\n");
         } catch (IOException e) {
             System.out.println("Error al guardar el producto.");
         }
     }
+
     
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
         try (BufferedReader reader = new BufferedReader(new FileReader("usuario.txt"))) {

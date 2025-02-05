@@ -57,29 +57,46 @@ public class Producto {
         List<Producto> productos = cargarProductos();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
             for (Producto p : productos) {
-                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," + (p.getCodigo() == this.codigo ? this.cantprod : p.getCantprod()) + "," + p.getDescripcionprod() + "\n");
+                String linea = String.format("%d,%s,%.2f,%s",
+                        p.getCodigo(),
+                        p.getNombreprod(),
+                        p.getPrecioprod(),
+                        p.getDescripcionprod());
+                writer.write(linea);
+                writer.newLine();
             }
         } catch (IOException e) {
             System.out.println("Error al actualizar productos.");
         }
     }
 
+
+
     public static List<Producto> cargarProductos() {
         List<Producto> productos = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("productos.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                int codigo = Integer.parseInt(data[0]);
-                String nombre = data[1];
-                double precio = Double.parseDouble(data[2]);
-                int cantidad = Integer.parseInt(data[3]);
-                String descripcion = data[4];
-                productos.add(new Producto(codigo, nombre, precio, cantidad, descripcion));
+                String[] data = line.split(","); // Separa por comas
+                if (data.length == 5) { // Verifica que haya 5 elementos
+                    int codigo = Integer.parseInt(data[0].trim());
+                    String nombre = data[1].trim();
+                    double precio = Double.parseDouble(data[2].trim());
+                    int cantidad = Integer.parseInt(data[3].trim()); // Se agrega la cantidad correctamente
+                    String descripcion = data[4].trim();
+                    productos.add(new Producto(codigo, nombre, precio, cantidad, descripcion)); 
+                } else {
+                    System.out.println("Formato incorrecto en línea: " + line);
+                }
             }
         } catch (IOException e) {
             System.out.println("Error al cargar productos.");
+        } catch (NumberFormatException e) {
+            System.out.println("Error en el formato de los datos del archivo.");
         }
         return productos;
     }
+
+
+
 }

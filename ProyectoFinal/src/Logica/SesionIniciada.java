@@ -18,4 +18,9 @@ public class SesionIniciada {
     public static boolean esVendedor() {
         return usuarioActual instanceof Vendedor;
     }
+    
+    public static void setUsuarioActual(Usuario usuario) {
+        usuarioActual = usuario;
+    }
+
 }
