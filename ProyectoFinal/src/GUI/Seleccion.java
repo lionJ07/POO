@@ -10,14 +10,11 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Logica.SesionIniciada;
 import Logica.Usuario;
 import Logica.Vendedor;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -52,15 +49,9 @@ public class Seleccion extends JFrame {
 		JButton btnVendedor = new JButton("Vendedor");
 		btnVendedor.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        Usuario usuario = SesionIniciada.getUsuarioActual();
-
-		        if (usuario instanceof Vendedor) {
-		            dispose();
-		            VendedorGUI vendedorwindow = new VendedorGUI();
-		            vendedorwindow.setVisible(true);
-		        } else {
-		            JOptionPane.showMessageDialog(null, "No hay un vendedor iniciado. Inicie sesión como vendedor.", "Error", JOptionPane.ERROR_MESSAGE);
-		        }
+		        dispose();
+		        VendedorGUI vendedorwindow = new VendedorGUI();
+		        vendedorwindow.setVisible(true);
 		    }
 		});
 

@@ -107,22 +107,50 @@ public class Registro extends JFrame {
             	 * Excepción para que el registro sea exitoso y si no se muestre un error 
             	 */
                 try {
-                    validarDatos();
-                    Icon icono = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
-                    JOptionPane.showMessageDialog(rootPane,"¡Registro exitoso!","Mensaje", JOptionPane.PLAIN_MESSAGE,icono);
                 	String nombre = textFieldNombre.getText().trim();
                     String correo = textFieldCorreo.getText().trim();
                     String usuario = textFieldUsuario.getText().trim();
                     String contraseña = textFieldContraseña.getText().trim();
-                    if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) throw new Exception("Todos los campos deben de estar llenos");
-                    if (!correo.contains("@")) throw new Exception("El correo no es válido.");
-                    if (!correo.contains("gmail") && !correo.contains("hotmail")) throw new Exception("El correo no es válido. (Falta gmail/hotmail)");
-                    if (!correo.contains(".com") && !correo.contains(".es")) throw new Exception("El correo no es válido. (Falta .com/.es).");
-                    if (contraseña.length() < 6) throw new Exception("La contraseña debe tener al menos 6 caracteres.");
-
+                    // Validacion para que los campos esten completos 
+                    if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) {
+                        Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                        JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completados", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
+                        return; 
+                    }
+                    // Validacion del correo 
+                    if (!correo.contains("@")) {
+                        Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                        JOptionPane.showMessageDialog(rootPane, "El correo no es válido", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen2);
+                        return; 
+                    }    
+                    // Validacion correo completo 
+                    if (!correo.contains("gmail") && !correo.contains("hotmail")) {
+                        Icon imagen4 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                        JOptionPane.showMessageDialog(rootPane, "El correo no es válido (Falta gmail/hotmail)", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen4);
+                        return; 
+                    }
+                    // Validacion correo
+                    if (!correo.contains(".com") && !correo.contains(".es")) {
+                        Icon imagen5 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                        JOptionPane.showMessageDialog(rootPane, "El correo no es válido (Falta .es/.com)", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen5);
+                        return; 
+                    }
+                    // Validacion contraseña
+                    if (contraseña.length() < 6) {
+                        Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                        JOptionPane.showMessageDialog(rootPane, "La contraseña debe tener al menos 6 caracteres", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen3);
+                        return; 
+                    }
+                    // Objeto 
                    Usuario user = new Usuario(nombre, usuario, correo, contraseña);
                    user.guardarUsuario();
-                    JOptionPane.showMessageDialog(contentPane, "¡Registro exitoso!");
+                   //Mensaje de exito 
+                   Icon icono = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
+                   JOptionPane.showMessageDialog(rootPane,"¡Registro exitoso!","Mensaje", JOptionPane.PLAIN_MESSAGE,icono);
+                   // Manda al usuario a la ventana de iniciar sesión
+                   dispose();
+                   IniciarSesion iniciarsesion = new IniciarSesion();
+                   iniciarsesion.setVisible(true);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -132,24 +160,6 @@ public class Registro extends JFrame {
         btnRegistrarse.setBounds(226, 199, 122, 36);
         contentPane.add(btnRegistrarse);
     }
-    /**
-     * Validación de datos para que todos los espacios esten completados
-     */
-    private void validarDatos() throws Exception {
-        String nombre = textFieldNombre.getText().trim();
-        String correo = textFieldCorreo.getText().trim();
-        String usuario = textFieldUsuario.getText().trim();
-        String contraseña = textFieldContraseña.getText().trim();
-        Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-        if (nombre.isEmpty() || correo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty()) 
-        	JOptionPane.showMessageDialog(rootPane,"Todos los campos deben estar completados","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen);
-        Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-        if (!correo.contains("@")) 
-        	JOptionPane.showMessageDialog(rootPane,"El correo debe tener @","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen2);
-        Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-        if (contraseña.length() < 6)
-        	JOptionPane.showMessageDialog(rootPane,"La contraseña debe tener 6 caracteres","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen3);
- 
-    }
 }
+
 

@@ -7,28 +7,23 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.io.*;
 import java.util.Scanner;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Logica.SesionIniciada;
 import Logica.Usuario;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
 /**
  * Ventana para iniciar sesión 
  */
@@ -51,87 +46,53 @@ public class IniciarSesion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Inicio de Sesión ");
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
 		lblNewLabel.setBounds(144, 31, 152, 32);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Usuario:");
 		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(104, 84, 62, 21);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Contraseña: ");
 		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		lblNewLabel_2.setBounds(104, 140, 102, 21);
 		contentPane.add(lblNewLabel_2);
+
 		/**
 		 * Botón para ingresar con el usuario y la contraseña 
 		 */
 		JButton btnIniciarSesion = new JButton("Ingresar ");
 		btnIniciarSesion.addActionListener(new ActionListener() {
-<<<<<<< HEAD
 			public void actionPerformed(ActionEvent e) {
-				/**
-				 * Validación para que el usuario y la contraseña estan correctas el programa mande al usuario a la ventana de selección
-				 */
+				// Acción de iniciar sesión
 				try {
 					validarInicio();
 					Seleccion seleccionwindow = new Seleccion();
 					seleccionwindow.setVisible(true);
-					dispose();
-				}catch (Exception ex) {
-                    JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-=======
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            String usuario = textFieldUsuario.getText().trim();
-		            String contraseña = textFieldContraseña.getText().trim();
-
-		            if (usuario.isEmpty() || contraseña.isEmpty()) {
-		                throw new Exception("Todos los campos deben estar llenos");
-		            }
-
-		            Usuario usuarioLogueado = verificar(usuario, contraseña);
-
-		            if (usuarioLogueado != null) {
-		                // Guardar el usuario en la sesión
-		                SesionIniciada.iniciarSesion(usuarioLogueado);
-
-		                JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-		                
-		                // Abrir ventana de selección
-		                Seleccion seleccionwindow = new Seleccion();
-		                seleccionwindow.setVisible(true);
-		                dispose(); // Cerrar la ventana de login
-		            } else {
-		                JOptionPane.showMessageDialog(contentPane, "Datos incorrectos. Inténtalo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-		            }
-
-		        } catch (Exception ex) {
-		            JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-		        }
-		    }
->>>>>>> branch 'main' of https://github.com/lionJ07/POO.git
+					dispose(); // Cierra la ventana de inicio de sesión
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
-
-		
 		btnIniciarSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnIniciarSesion.setBounds(252, 192, 102, 32);
 		contentPane.add(btnIniciarSesion);
-		
+
 		textFieldUsuario = new JTextField();
 		textFieldUsuario.setBounds(176, 83, 142, 19);
 		contentPane.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
-		
+
 		textFieldContraseña = new JTextField();
 		textFieldContraseña.setBounds(196, 139, 122, 19);
 		contentPane.add(textFieldContraseña);
 		textFieldContraseña.setColumns(10);
+
 		/**
 		 * Botón para regresar a la ventana de inicio 
 		 */
@@ -139,56 +100,73 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-	            Inicio iniciowindow = new Inicio();
-	            iniciowindow.setVisible(true);
+				Inicio iniciowindow = new Inicio();
+				iniciowindow.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
 	}
-<<<<<<< HEAD
 	/**
-	 * Validación parra que los campos requerido esten completos 
-	 * @throws Exception por si el usuario y la contraseña llegan a ser incorrectos 
+	 * Validación para que los campos requeridos estén completos
+	 * @throws Exception si el usuario o la contraseña son incorrectos o están vacíos
 	 */
 	private void validarInicio() throws Exception {
 		String usuario = textFieldUsuario.getText().trim();
-        String contraseña = textFieldContraseña.getText().trim();Icon 
-        imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-        if (usuario.isEmpty()|| contraseña.isEmpty()) throw new Exception("Todos los campos deben estar llenos");
-        JOptionPane.showMessageDialog(rootPane,"Todos los campos deben estar completados","Mensaje", JOptionPane.PLAIN_MESSAGE,imagen);
-        // Poner excepcion de usuario y contraseña incorrecta 
-=======
->>>>>>> branch 'main' of https://github.com/lionJ07/POO.git
-
-	private Usuario verificar(String usuario, String contraseña) {
-	    try {
-	        File archivo = new File("usuarios.txt");
-	        Scanner scanner = new Scanner(archivo);
-
-	        while (scanner.hasNextLine()) {
-	            String linea = scanner.nextLine();
-	            String[] partes = linea.split(",");
-
-	            if (partes.length == 4) {
-	                String usuarioArchivo = partes[0].trim();
-	                String contraseñaArchivo = partes[1].trim();
-	                String nombreArchivo = partes[2].trim();
-	                String correoArchivo = partes[3].trim();
-
-	                if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
-	                    scanner.close();
-	                    return new Usuario(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
-	                }
-	            }
-	        }
-
-	        scanner.close();
-	    } catch (FileNotFoundException ex) {
-	        JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-	    }
-	    return null;
+		String contraseña = textFieldContraseña.getText().trim();
+		// Verificar que los campos no estén vacíos
+		if (usuario.isEmpty() || contraseña.isEmpty()) {
+			Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+			JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completados", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
+			return;
+		}
+		// Verificar usuario y contraseña
+		Usuario usuarioLogueado = verificar(usuario, contraseña);
+		if (usuarioLogueado == null) {
+			Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
+			JOptionPane.showMessageDialog(contentPane, "Usuario o contraseña incorrectos.", "Error", JOptionPane.PLAIN_MESSAGE,imagen1);
+			return;
+		} else {
+			// Iniciar sesión si todo es correcto
+			SesionIniciada.iniciarSesion(usuarioLogueado);
+			Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
+			JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
+			return;
+		}
 	}
-
+	/**
+	 * Método para verificar si el usuario y la contraseña son correctos
+	 * @param usuario el nombre de usuario
+	 * @param contraseña la contraseña proporcionada
+	 * @return el usuario si es correcto, o null si no lo es
+	 */
+	private Usuario verificar(String usuario, String contraseña) {
+		try {
+			File archivo = new File("usuarios.txt");
+			if (!archivo.exists()) {
+				JOptionPane.showMessageDialog(contentPane, "El archivo de usuarios no existe", "Error", JOptionPane.ERROR_MESSAGE);
+				return null;
+			}
+			Scanner scanner = new Scanner(archivo);
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				String[] partes = linea.split(",");
+				if (partes.length == 4) {
+					String usuarioArchivo = partes[0].trim();
+					String contraseñaArchivo = partes[1].trim();
+					String nombreArchivo = partes[2].trim();
+					String correoArchivo = partes[3].trim();
+					if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
+						scanner.close();
+						return new Usuario(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+					}
+				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException ex) {
+			JOptionPane.showMessageDialog(contentPane, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return null;
+	}
 }
