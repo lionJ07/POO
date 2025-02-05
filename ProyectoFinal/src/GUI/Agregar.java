@@ -146,6 +146,7 @@ public class Agregar extends JFrame {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         });
         btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnAgregar.setBounds(253, 203, 103, 41);
