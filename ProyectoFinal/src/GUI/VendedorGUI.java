@@ -18,7 +18,6 @@ public class VendedorGUI extends JFrame {
 	private JPanel contentPane;
 	
 	/**
-	 * Create the frame.
 	 */
 	public VendedorGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -90,7 +90,15 @@ public class Comprar extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("Cantidad:");
 		lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(176, 93, 79, 22);
+		lblNewLabel_3.setBounds(173, 89, 79, 22);
 		contentPane.add(lblNewLabel_3);
+		
+		JList listProducto = new JList();
+		listProducto.setBounds(145, 63, 130, 22);
+		contentPane.add(listProducto);
+		
+		JList listCantidad = new JList();
+		listCantidad.setBounds(145, 111, 130, 22);
+		contentPane.add(listCantidad);
 	}
 }
