@@ -142,10 +142,12 @@ public class Agregar extends JFrame {
                 Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
                 JOptionPane.showMessageDialog(rootPane, "Producto registrado con exito", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen2);
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(contentPane, "Error en formato de número.", "Error", JOptionPane.ERROR_MESSAGE);
+            	Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+            	 JOptionPane.showMessageDialog(rootPane, "Fijate que los campos tengan los datos correctos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen3);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
         });
         btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnAgregar.setBounds(253, 203, 103, 41);

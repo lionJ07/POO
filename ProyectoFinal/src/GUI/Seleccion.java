@@ -20,7 +20,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
- * Estaventana es la que permite al usuario seleccionar el rol que desea ser
+ * Esta ventana permite al usuario seleccionar el rol que desea ser
  */
 public class Seleccion extends JFrame {
 
@@ -44,11 +44,16 @@ public class Seleccion extends JFrame {
 		lblNewLabel.setBounds(125, 22, 210, 36);
 		contentPane.add(lblNewLabel);
 		/**
-		 * Este boton dirige al usuario a la ventana de vendedor
+		 * Este botón dirige al usuario a la ventana de vendedor
 		 */
 		JButton btnVendedor = new JButton("Vendedor");
 		btnVendedor.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
+		        Usuario usuario = SesionIniciada.getUsuarioActual();
+		        if (!(usuario instanceof Vendedor)) {
+		        	usuario = new Vendedor(usuario.getNombre(), usuario.getUsuario(), usuario.getCorreo(), usuario.getContraseña());
+		            SesionIniciada.setUsuarioActual(usuario);
+		        }
 		        dispose();
 		        VendedorGUI vendedorwindow = new VendedorGUI();
 		        vendedorwindow.setVisible(true);
