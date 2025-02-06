@@ -7,6 +7,7 @@
 package GUI;
 
 import Logica.Producto;
+import Logica.SesionIniciada;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -15,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Ventana para eliminar un producto 
@@ -24,7 +24,7 @@ public class Eliminar extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textField;
+    private JComboBox<String> productosComboBox;
 
     /**
      * Create the frame.
@@ -39,68 +39,18 @@ public class Eliminar extends JFrame {
         contentPane.setLayout(null);
 
         /**
-         * Se le solicita al usuario ingresar el codigo del producto para eliminarlo
+         * Se le solicita al usuario seleccionar el producto a eliminar
          */
         JLabel lblTitulo = new JLabel("Eliminar Producto ");
         lblTitulo.setFont(new Font("Sitka Subheading", Font.BOLD, 18));
         lblTitulo.setBounds(135, 32, 164, 31);
         contentPane.add(lblTitulo);
 
-        JLabel lblCodigo = new JLabel("Indica el código del producto a eliminar: ");
+        JLabel lblCodigo = new JLabel("Seleccione el producto a eliminar: ");
         lblCodigo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         lblCodigo.setBounds(76, 89, 291, 28);
         contentPane.add(lblCodigo);
-
-        textField = new JTextField();
-        textField.setBounds(162, 115, 96, 19);
-        contentPane.add(textField);
-        textField.setColumns(10);
-
-        /**
-         * Botón para eliminar algun producto (filtro por codigo)
-         */
-        JButton btnEliminar = new JButton("Eliminar");
-        btnEliminar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnEliminar.setBounds(262, 185, 105, 31);
-        contentPane.add(btnEliminar);
-
-        btnEliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                    try {
-                        String codigoStr = textField.getText().trim();
-                        if (!codigoStr.matches("\\d+")) {
-                            JOptionPane.showMessageDialog(null, "Ingrese un código numérico válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        int codigo = Integer.parseInt(codigoStr);
-
-                        List<Producto> productos = Producto.cargarProductos();
-                        List<Producto> productosActualizados = productos.stream()
-                                .filter(p -> p.getCodigo() != codigo)
-                                .collect(Collectors.toList());
-
-                        if (productos.size() == productosActualizados.size()) {
-                            JOptionPane.showMessageDialog(null, "No se encontró el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
-                            for (Producto p : productosActualizados) {
-                                writer.write(String.format("%d,%s,%.2f,%d,%s\n", 
-                                        p.getCodigo(), p.getNombreprod(), p.getPrecioprod(), p.getCantprod(), p.getDescripcionprod()));
-                            }
-                        }
-
-                        JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Ingrese un código válido.", "Error", JOptionPane.ERROR_MESSAGE);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error al eliminar el producto.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    
-            }
-        });
-
+        
         /**
          * Botón para regresar al menú de la ventana de vendedor 
          */
@@ -115,8 +65,53 @@ public class Eliminar extends JFrame {
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnRegresar.setBounds(58, 185, 105, 31);
         contentPane.add(btnRegresar);
+        
+
+        productosComboBox = new JComboBox<>();
+        productosComboBox.setBounds(76, 120, 300, 25);
+        contentPane.add(productosComboBox);
+        
+        if (SesionIniciada.getUsuarioActual() == null) {
+            JOptionPane.showMessageDialog(null, "No hay usuario en sesión.", "Error", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            return;
+        }
+
+        String usuarioActual = SesionIniciada.getUsuarioActual().getNombre();
+
+        List<Producto> productosUsuario = Producto.obtenerProductosPorUsuario(usuarioActual);
+        
+        if (productosUsuario == null || productosUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tienes productos para eliminar.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            return;
+        }
+        
+        for (Producto producto : productosUsuario) {
+            productosComboBox.addItem(producto.getNombreprod() + " - " + producto.getCodigo());
+        }
+        
+        /**
+         * Botón para eliminar un producto seleccionado de la lista
+         */
+        JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnEliminar.setBounds(262, 185, 105, 31);
+        contentPane.add(btnEliminar);
+
+        btnEliminar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = productosComboBox.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    Producto productoSeleccionado = productosUsuario.get(selectedIndex);
+                    Producto.eliminarProducto(productoSeleccionado);
+                    JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    productosComboBox.removeItemAt(selectedIndex);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un producto para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+       
     }
-
-
 }
-

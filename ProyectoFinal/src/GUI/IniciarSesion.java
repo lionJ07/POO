@@ -134,12 +134,7 @@ public class IniciarSesion extends JFrame {
 			return;
 		}
 	}
-	/**
-	 * Método para verificar si el usuario y la contraseña son correctos
-	 * @param usuario el nombre de usuario
-	 * @param contraseña la contraseña proporcionada
-	 * @return el usuario si es correcto, o null si no lo es
-	 */
+	
 	private Usuario verificar(String usuario, String contraseña) {
 		try {
 			File archivo = new File("usuarios.txt");

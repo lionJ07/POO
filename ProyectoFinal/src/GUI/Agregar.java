@@ -116,39 +116,47 @@ public class Agregar extends JFrame {
                 String precioTexto = textFieldPrecio.getText().trim();
                 String cantidadTexto = textFieldCantidad.getText().trim();
                 String descripcion = textPaneDescripcion.getText().trim();
+                
                 // Validación de campos vacíos
                 if (codigoTexto.isEmpty() || producto.isEmpty() || precioTexto.isEmpty() || cantidadTexto.isEmpty() || descripcion.isEmpty()) {
-                	Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-                	JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar llenos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen1);
+                    Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                    JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar llenos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen1);
+                    return;
                 }
                 // Validación de la descripción 
                 if (descripcion.length() < 6) {
-                	Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-                	JOptionPane.showMessageDialog(rootPane, "La descripción debe tener al menos 6 caracteres", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
+                    Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                    JOptionPane.showMessageDialog(rootPane, "La descripción debe tener al menos 6 caracteres", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
+                    return;
                 }
+                
                 int codigo = Integer.parseInt(codigoTexto);
                 double precio = Double.parseDouble(precioTexto);
                 int cantidad = Integer.parseInt(cantidadTexto);
-                // Creación del producto
-                Producto prod = new Producto(codigo, producto, precio, cantidad, descripcion);
+
                 // Verificar si hay un vendedor en sesión
                 if (!SesionIniciada.esVendedor()) {
                     throw new Exception("Error: No hay un vendedor en sesión.");
                 }
-                /**Obtener el vendedor actual y agregar el producto
-                 */
+
+                // Obtener el vendedor actual
                 Vendedor vendedor = (Vendedor) SesionIniciada.getUsuarioActual();
+                String nombreVendedor = vendedor.getNombre();
+
+                // Creación del producto con el nombre del vendedor
+                Producto prod = new Producto(codigo, producto, precio, cantidad, descripcion, nombreVendedor);
                 vendedor.agregarProducto(prod);
+
                 Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
-                JOptionPane.showMessageDialog(rootPane, "Producto registrado con exito", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen2);
+                JOptionPane.showMessageDialog(rootPane, "Producto registrado con éxito", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen2);
             } catch (NumberFormatException ex) {
-            	Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-            	 JOptionPane.showMessageDialog(rootPane, "Fijate que los campos tengan los datos correctos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen3);
+                Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                JOptionPane.showMessageDialog(rootPane, "Fijate que los campos tengan los datos correctos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen3);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
         });
+
         btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnAgregar.setBounds(253, 203, 103, 41);
         contentPane.add(btnAgregar);
