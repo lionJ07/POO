@@ -69,12 +69,30 @@ public class IniciarSesion extends JFrame {
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción de iniciar sesión
-				try {
-					validarInicio();
+				try {String usuario = textFieldUsuario.getText().trim();
+				String contraseña = textFieldContraseña.getText().trim();
+				// Verificar que los campos no estén vacíos
+				if (usuario.isEmpty() || contraseña.isEmpty()) {
+					Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+					JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completados", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
+					return;
+				}
+				// Verificar usuario y contraseña
+				Usuario usuarioLogueado = verificar(usuario, contraseña);
+				if (usuarioLogueado == null) {
+					Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
+					JOptionPane.showMessageDialog(contentPane, "Usuario o contraseña incorrectos.", "Error", JOptionPane.PLAIN_MESSAGE,imagen1);
+					return;
+				} else {
+					// Iniciar sesión si todo es correcto
+					SesionIniciada.iniciarSesion(usuarioLogueado);
+					Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
+					JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
 					Seleccion seleccionwindow = new Seleccion();
 					seleccionwindow.setVisible(true);
 					dispose(); // Cierra la ventana de inicio de sesión
-				} catch (Exception ex) {
+				} 
+				}catch (Exception ex) {
 					JOptionPane.showMessageDialog(contentPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -106,35 +124,7 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
-	}
-	/**
-	 * Validación para que los campos requeridos estén completos
-	 * @throws Exception si el usuario o la contraseña son incorrectos o están vacíos
-	 */
-	private void validarInicio() throws Exception {
-		String usuario = textFieldUsuario.getText().trim();
-		String contraseña = textFieldContraseña.getText().trim();
-		// Verificar que los campos no estén vacíos
-		if (usuario.isEmpty() || contraseña.isEmpty()) {
-			Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-			JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completados", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen);
-			return;
-		}
-		// Verificar usuario y contraseña
-		Usuario usuarioLogueado = verificar(usuario, contraseña);
-		if (usuarioLogueado == null) {
-			Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
-			JOptionPane.showMessageDialog(contentPane, "Usuario o contraseña incorrectos.", "Error", JOptionPane.PLAIN_MESSAGE,imagen1);
-			return;
-		} else {
-			// Iniciar sesión si todo es correcto
-			SesionIniciada.iniciarSesion(usuarioLogueado);
-			Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
-			JOptionPane.showMessageDialog(contentPane, "Inicio de sesión exitoso", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
-			return;
-		}
-	}
-	
+	}	
 	private Usuario verificar(String usuario, String contraseña) {
 		try {
 			File archivo = new File("usuarios.txt");

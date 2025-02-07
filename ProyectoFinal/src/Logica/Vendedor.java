@@ -9,8 +9,10 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
+import java.util.Iterator;
+
 public class Vendedor extends Usuario {
-	
+
     private List<Producto> productos;
     private double balanceTotal;
 
@@ -24,18 +26,19 @@ public class Vendedor extends Usuario {
         productos.add(producto);
         guardarProductoEnArchivo(producto);
     }
+
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
-            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción
-        	writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," + producto.getCantprod() + "," + producto.getDescripcionprod() + "," + producto.getNombreVendedor() + "\n");
+            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción, nombre del vendedor
+            writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," 
+                + producto.getCantprod() + "," + producto.getDescripcionprod() + "," + producto.getNombreVendedor() + "\n");
         } catch (IOException e) {
-            System.out.println("Error al guardar el producto.");
+            System.out.println("Error al guardar el producto: " + e.getMessage());
         }
     }
 
-    
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) { // Cambio de usuario.txt a usuarios.txt
+        try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -44,27 +47,31 @@ public class Vendedor extends Usuario {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al cargar el vendedor.");
+            System.out.println("Error al cargar el vendedor: " + e.getMessage());
         }
         return null; 
     }
 
-    
     private void actualizarArchivoProductos() {
+        // Mejorar actualización del archivo de productos
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
             for (Producto p : productos) {
-                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," + p.getCantprod() + "," + p.getDescripcionprod() + "\n");
+                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," 
+                    + p.getCantprod() + "," + p.getDescripcionprod() + "," + p.getNombreVendedor() + "\n");
             }
         } catch (IOException e) {
-            System.out.println("Error al actualizar el archivo de productos.");
+            System.out.println("Error al actualizar el archivo de productos: " + e.getMessage());
         }
     }
 
     public boolean eliminarProducto(int codigo) {
-        for (Producto p : productos) {
+        // Usamos un iterador para evitar ConcurrentModificationException al eliminar elementos
+        Iterator<Producto> iterator = productos.iterator();
+        while (iterator.hasNext()) {
+            Producto p = iterator.next();
             if (p.getCodigo() == codigo) {
-                productos.remove(p);
-                actualizarArchivoProductos();
+                iterator.remove(); // Elimina el producto de la lista
+                actualizarArchivoProductos(); // Actualiza el archivo después de eliminar
                 return true;
             }
         }
@@ -78,6 +85,7 @@ public class Vendedor extends Usuario {
         }
         return balance;
     }
+
     public static List<Producto> obtenerProductosPorUsuario(String nombreUsuario) {
         List<Producto> productosUsuario = new ArrayList<>();
         File file = new File("productos.txt");
@@ -94,7 +102,7 @@ public class Vendedor extends Usuario {
                     try {
                         int codigo = Integer.parseInt(data[0].trim());
                         String nombre = data[1].trim();
-                        // 🔹 Reemplazamos la coma por un punto en el precio antes de convertirlo a double
+                        // Reemplazamos la coma por un punto en el precio antes de convertirlo a double
                         double precio = Double.parseDouble(data[2].trim().replace(",", "."));
                         int cantidad = Integer.parseInt(data[3].trim());
                         String descripcion = data[4].trim();
@@ -112,15 +120,9 @@ public class Vendedor extends Usuario {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo de productos.");
+            System.out.println("Error al leer el archivo de productos: " + e.getMessage());
         }
 
         return productosUsuario; // Devuelve los productos del usuario o una lista vacía si no tiene
     }
-
-
-
-
 }
-
-
