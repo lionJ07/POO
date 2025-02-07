@@ -1,1 +1,1 @@
-34232,Lapiz,422.0,23,Lapicero,xxx
+34232,Lapiz,422,00,23,Lapicero,xxx

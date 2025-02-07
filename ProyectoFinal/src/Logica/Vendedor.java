@@ -9,10 +9,8 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
-import java.util.Iterator;
-
 public class Vendedor extends Usuario {
-
+	
     private List<Producto> productos;
     private double balanceTotal;
 
@@ -29,16 +27,16 @@ public class Vendedor extends Usuario {
 
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
-            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción, nombre del vendedor
-            writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," 
-                + producto.getCantprod() + "," + producto.getDescripcionprod() + "," + producto.getNombreVendedor() + "\n");
+            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción
+        	writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," + producto.getCantprod() + "," + producto.getDescripcionprod() + "," + producto.getNombreVendedor() + "\n");
         } catch (IOException e) {
-            System.out.println("Error al guardar el producto: " + e.getMessage());
+            System.out.println("Error al guardar el producto.");
         }
     }
 
+    
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) { // Cambio de usuario.txt a usuarios.txt
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -47,31 +45,27 @@ public class Vendedor extends Usuario {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al cargar el vendedor: " + e.getMessage());
+            System.out.println("Error al cargar el vendedor.");
         }
         return null; 
     }
 
+    
     private void actualizarArchivoProductos() {
-        // Mejorar actualización del archivo de productos
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
             for (Producto p : productos) {
-                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," 
-                    + p.getCantprod() + "," + p.getDescripcionprod() + "," + p.getNombreVendedor() + "\n");
+                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," + p.getCantprod() + "," + p.getDescripcionprod() + "\n");
             }
         } catch (IOException e) {
-            System.out.println("Error al actualizar el archivo de productos: " + e.getMessage());
+            System.out.println("Error al actualizar el archivo de productos.");
         }
     }
 
     public boolean eliminarProducto(int codigo) {
-        // Usamos un iterador para evitar ConcurrentModificationException al eliminar elementos
-        Iterator<Producto> iterator = productos.iterator();
-        while (iterator.hasNext()) {
-            Producto p = iterator.next();
+        for (Producto p : productos) {
             if (p.getCodigo() == codigo) {
-                iterator.remove(); // Elimina el producto de la lista
-                actualizarArchivoProductos(); // Actualiza el archivo después de eliminar
+                productos.remove(p);
+                actualizarArchivoProductos();
                 return true;
             }
         }
@@ -85,11 +79,10 @@ public class Vendedor extends Usuario {
         }
         return balance;
     }
-
     public static List<Producto> obtenerProductosPorUsuario(String nombreUsuario) {
         List<Producto> productosUsuario = new ArrayList<>();
-        File file = new File("productos.txt");
 
+        File file = new File("productos.txt");
         if (!file.exists()) {
             return productosUsuario; // Si el archivo no existe, retorna lista vacía
         }
@@ -99,30 +92,33 @@ public class Vendedor extends Usuario {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 6) { // Verifica que la línea tenga 6 elementos
-                    try {
-                        int codigo = Integer.parseInt(data[0].trim());
-                        String nombre = data[1].trim();
-                        // Reemplazamos la coma por un punto en el precio antes de convertirlo a double
-                        double precio = Double.parseDouble(data[2].trim().replace(",", "."));
-                        int cantidad = Integer.parseInt(data[3].trim());
-                        String descripcion = data[4].trim();
-                        String nombreVendedor = data[5].trim(); // Último campo es el vendedor
+                    int codigo = Integer.parseInt(data[0].trim());
+                    String nombre = data[1].trim();
+                    double precio = Double.parseDouble(data[2].trim());
+                    int cantidad = Integer.parseInt(data[3].trim());
+                    String descripcion = data[4].trim();
+                    String nombreVendedor = data[5].trim(); // Último campo es el vendedor
 
-                        // Filtra solo los productos del usuario actual
-                        if (nombreVendedor.equals(nombreUsuario)) {
-                            productosUsuario.add(new Producto(codigo, nombre, precio, cantidad, descripcion, nombreVendedor));
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Error en el formato de la línea: " + line);
+                    // Filtra solo los productos del usuario actual
+                    if (nombreVendedor.equals(nombreUsuario)) {
+                        productosUsuario.add(new Producto(codigo, nombre, precio, cantidad, descripcion, nombreVendedor));
                     }
+                    
                 } else {
                     System.out.println("Formato incorrecto en línea: " + line);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo de productos: " + e.getMessage());
+            System.out.println("Error al leer el archivo de productos.");
+        } catch (NumberFormatException e) {
+            System.out.println("Error en el formato de los datos del archivo.");
         }
 
         return productosUsuario; // Devuelve los productos del usuario o una lista vacía si no tiene
     }
+
+
+
 }
+
+
