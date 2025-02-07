@@ -22,5 +22,4 @@ public class SesionIniciada {
     public static void setUsuarioActual(Usuario usuario) {
         usuarioActual = usuario;
     }
-
 }

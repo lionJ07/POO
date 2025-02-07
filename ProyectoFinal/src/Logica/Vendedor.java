@@ -103,6 +103,7 @@ public class Vendedor extends Usuario {
                     if (nombreVendedor.equals(nombreUsuario)) {
                         productosUsuario.add(new Producto(codigo, nombre, precio, cantidad, descripcion, nombreVendedor));
                     }
+                    
                 } else {
                     System.out.println("Formato incorrecto en línea: " + line);
                 }

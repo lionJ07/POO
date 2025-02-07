@@ -51,6 +51,7 @@ public class VendedorGUI extends JFrame {
 				editarwindow.setVisible(true);
 			}
 		});
+		
 		btnEditar.setBounds(145, 99, 175, 29);
 		contentPane.add(btnEditar);
 		

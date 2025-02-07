@@ -106,6 +106,7 @@ public class Registro extends JFrame {
             	/**
             	 * Excepción para que el registro sea exitoso y si no se muestre un error 
             	 */
+            	
                 try {
                 	String nombre = textFieldNombre.getText().trim();
                     String correo = textFieldCorreo.getText().trim();

@@ -142,6 +142,7 @@ public class IniciarSesion extends JFrame {
 				JOptionPane.showMessageDialog(contentPane, "El archivo de usuarios no existe", "Error", JOptionPane.ERROR_MESSAGE);
 				return null;
 			}
+			
 			Scanner scanner = new Scanner(archivo);
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();

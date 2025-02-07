@@ -21,7 +21,6 @@ public class Usuario {
         this.correo = correo;
         this.contraseña = contraseña;
     }
-
     public String getNombre() { return nombre; }
     public String getUsuario() { return usuario; }
     public String getCorreo() { return correo; }

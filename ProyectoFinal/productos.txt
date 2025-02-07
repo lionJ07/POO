@@ -1,1 +1,2 @@
-3456,Mouse,45000,00,3,Mouse para compu,xxxx
+24553,Torta,1.0,20000,Torta pa comer,xxx
+3242,Mouse,4000.0,345,Mouse para compu,xxxx

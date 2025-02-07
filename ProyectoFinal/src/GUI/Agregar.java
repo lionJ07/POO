@@ -108,6 +108,7 @@ public class Agregar extends JFrame {
         /**
          * Botón para agregar un producto
          */
+        
         JButton btnAgregar = new JButton("Agregar");
         btnAgregar.addActionListener(e -> {
             try {
