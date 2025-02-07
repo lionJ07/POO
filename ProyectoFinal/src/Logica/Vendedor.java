@@ -24,7 +24,6 @@ public class Vendedor extends Usuario {
         productos.add(producto);
         guardarProductoEnArchivo(producto);
     }
-
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
             // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción

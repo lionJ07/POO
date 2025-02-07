@@ -56,6 +56,7 @@ public class Producto {
     public void setCantprod(int cantprod) {
         this.cantprod = cantprod;
     }
+    
     public void venderProductos(int cantidadVendida) {
         if (cantidadVendida <= cantprod) {
             this.cantprod -= cantidadVendida;
