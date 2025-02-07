@@ -80,8 +80,8 @@ public class Vendedor extends Usuario {
     }
     public static List<Producto> obtenerProductosPorUsuario(String nombreUsuario) {
         List<Producto> productosUsuario = new ArrayList<>();
-
         File file = new File("productos.txt");
+
         if (!file.exists()) {
             return productosUsuario; // Si el archivo no existe, retorna lista vacía
         }
@@ -91,30 +91,33 @@ public class Vendedor extends Usuario {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 6) { // Verifica que la línea tenga 6 elementos
-                    int codigo = Integer.parseInt(data[0].trim());
-                    String nombre = data[1].trim();
-                    double precio = Double.parseDouble(data[2].trim());
-                    int cantidad = Integer.parseInt(data[3].trim());
-                    String descripcion = data[4].trim();
-                    String nombreVendedor = data[5].trim(); // Último campo es el vendedor
+                    try {
+                        int codigo = Integer.parseInt(data[0].trim());
+                        String nombre = data[1].trim();
+                        // 🔹 Reemplazamos la coma por un punto en el precio antes de convertirlo a double
+                        double precio = Double.parseDouble(data[2].trim().replace(",", "."));
+                        int cantidad = Integer.parseInt(data[3].trim());
+                        String descripcion = data[4].trim();
+                        String nombreVendedor = data[5].trim(); // Último campo es el vendedor
 
-                    // Filtra solo los productos del usuario actual
-                    if (nombreVendedor.equals(nombreUsuario)) {
-                        productosUsuario.add(new Producto(codigo, nombre, precio, cantidad, descripcion, nombreVendedor));
+                        // Filtra solo los productos del usuario actual
+                        if (nombreVendedor.equals(nombreUsuario)) {
+                            productosUsuario.add(new Producto(codigo, nombre, precio, cantidad, descripcion, nombreVendedor));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error en el formato de la línea: " + line);
                     }
-                    
                 } else {
                     System.out.println("Formato incorrecto en línea: " + line);
                 }
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo de productos.");
-        } catch (NumberFormatException e) {
-            System.out.println("Error en el formato de los datos del archivo.");
         }
 
         return productosUsuario; // Devuelve los productos del usuario o una lista vacía si no tiene
     }
+
 
 
 

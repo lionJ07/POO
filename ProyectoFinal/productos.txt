@@ -1,2 +1,1 @@
-24553,Torta,1,00,20000,Torta pa comer,xxx
-3242,Mouse,4000,00,345,Mouse para compu,xxxx
+34232,Lapiz,422.0,23,Lapicero,xxx
