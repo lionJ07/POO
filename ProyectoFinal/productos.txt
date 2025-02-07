@@ -1,1 +1,4 @@
-34232,Lapiz,422,00,23,Lapicero,xxx
+34232,Mouse,346.00,2,Mpuse para,xxx
+3423,Mouse,3232.00,45,Mouse para,xxx
+456,Pc,3534.00,23,Pc para jugar,xxxx
+34,Celular,468765.00,2,Celular,xxxx

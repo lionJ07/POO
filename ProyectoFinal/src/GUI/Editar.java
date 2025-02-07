@@ -1,133 +1,189 @@
-/**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- */
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-/**
- * Ventana para editar algun producto
- */
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import Logica.Producto;
+import Logica.SesionIniciada;
+
 public class Editar extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textFieldCodigo;
-	private JTextField textFieldCodigoNuevo;
-	private JTextField textFieldNombreNuevo;
-	private JTextField textFieldPrecioNuevo;
-	private JTextField textFieldCantidadNuevo;
-	private JTextField textFieldDescripcionNuevo;
-	/**
-	 * Create the frame.
-	 */
-	public Editar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(157, 226, 230));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JComboBox<String> productosComboBox;
+    private JTextField textFieldCodigoNuevo;
+    private JTextField textFieldNombreNuevo;
+    private JTextField textFieldPrecioNuevo;
+    private JTextField textFieldCantidadNuevo;
+    private JTextField textFieldDescripcionNuevo;
+    private List<Producto> productosUsuario;
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Editar Producto");
-		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-		lblNewLabel.setBounds(146, 10, 164, 36);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Código del producto a editar: ");
-		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(34, 46, 217, 20);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Indique el código nuevo:");
-		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(34, 76, 197, 20);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Nombre del nuevo producto: ");
-		lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(34, 106, 208, 20);
-		contentPane.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Precio del nuevo producto:");
-		lblNewLabel_4.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_4.setBounds(34, 136, 197, 20);
-		contentPane.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("Cantidad del nuevo producto:");
-		lblNewLabel_5.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_5.setBounds(34, 166, 217, 20);
-		contentPane.add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("Descripción del nuevo producto:");
-		lblNewLabel_6.setFont(new Font("Sitka Subheading", Font.BOLD, 15) );
-		lblNewLabel_6.setBounds(34, 196, 239, 20);
-		contentPane.add(lblNewLabel_6);
-		/**
-		 * Botón para regresar al menú de la ventana de vendedor 
-		 */
-		JButton btnRegresar = new JButton("Regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				VendedorGUI vendedorwindow = new VendedorGUI();
-				vendedorwindow.setVisible(true);
-			}
-		});
-		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(80, 226, 102, 27);
-		contentPane.add(btnRegresar);
-		/**
-		 * Botón para editar el producto indicado por el codigo 
-		 */
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnEditar.setBounds(265, 226, 93, 27);
-		contentPane.add(btnEditar);
-		
-		textFieldCodigo = new JTextField();
-		textFieldCodigo.setBounds(245, 45, 164, 19);
-		contentPane.add(textFieldCodigo);
-		textFieldCodigo.setColumns(10);
-		
-		textFieldCodigoNuevo = new JTextField();
-		textFieldCodigoNuevo.setBounds(214, 76, 195, 19);
-		contentPane.add(textFieldCodigoNuevo);
-		textFieldCodigoNuevo.setColumns(10);
-		
-		textFieldNombreNuevo = new JTextField();
-		textFieldNombreNuevo.setBounds(238, 105, 171, 19);
-		contentPane.add(textFieldNombreNuevo);
-		textFieldNombreNuevo.setColumns(10);
-		
-		textFieldPrecioNuevo = new JTextField();
-		textFieldPrecioNuevo.setBounds(230, 135, 179, 19);
-		contentPane.add(textFieldPrecioNuevo);
-		textFieldPrecioNuevo.setColumns(10);
-		
-		textFieldCantidadNuevo = new JTextField();
-		textFieldCantidadNuevo.setBounds(245, 165, 164, 19);
-		contentPane.add(textFieldCantidadNuevo);
-		textFieldCantidadNuevo.setColumns(10);
-		
-		textFieldDescripcionNuevo = new JTextField();
-		textFieldDescripcionNuevo.setBounds(272, 195, 137, 19);
-		contentPane.add(textFieldDescripcionNuevo);
-		textFieldDescripcionNuevo.setColumns(10);
-	}
+    public Editar() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 350);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(157, 226, 230));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("Editar Producto");
+        lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
+        lblNewLabel.setBounds(146, 10, 164, 36);
+        contentPane.add(lblNewLabel);
+
+        JLabel lblCodigo = new JLabel("Seleccione el producto a editar:");
+        lblCodigo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCodigo.setBounds(34, 46, 250, 20);
+        contentPane.add(lblCodigo);
+
+        productosComboBox = new JComboBox<>();
+        productosComboBox.setBounds(34, 70, 360, 25);
+        contentPane.add(productosComboBox);
+
+        if (SesionIniciada.getUsuarioActual() == null) {
+            JOptionPane.showMessageDialog(null, "No hay usuario en sesión.", "Error", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            return;
+        }
+
+        String usuarioActual = SesionIniciada.getUsuarioActual().getNombre();
+        productosUsuario = Producto.obtenerProductosPorUsuario(usuarioActual);
+
+        if (productosUsuario == null || productosUsuario.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No tienes productos para editar.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            return;
+        }
+
+        for (Producto producto : productosUsuario) {
+            productosComboBox.addItem(producto.getNombreprod() + " - " + producto.getCodigo());
+        }
+
+        productosComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarDatosProductoSeleccionado();
+            }
+        });
+
+        JLabel lblCodigoNuevo = new JLabel("Nuevo Código:");
+        lblCodigoNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCodigoNuevo.setBounds(34, 100, 150, 20);
+        contentPane.add(lblCodigoNuevo);
+
+        textFieldCodigoNuevo = new JTextField();
+        textFieldCodigoNuevo.setBounds(180, 100, 214, 19);
+        contentPane.add(textFieldCodigoNuevo);
+
+        JLabel lblNombreNuevo = new JLabel("Nuevo Nombre:");
+        lblNombreNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblNombreNuevo.setBounds(34, 130, 150, 20);
+        contentPane.add(lblNombreNuevo);
+
+        textFieldNombreNuevo = new JTextField();
+        textFieldNombreNuevo.setBounds(180, 130, 214, 19);
+        contentPane.add(textFieldNombreNuevo);
+
+        JLabel lblPrecioNuevo = new JLabel("Nuevo Precio:");
+        lblPrecioNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblPrecioNuevo.setBounds(34, 160, 150, 20);
+        contentPane.add(lblPrecioNuevo);
+
+        textFieldPrecioNuevo = new JTextField();
+        textFieldPrecioNuevo.setBounds(180, 160, 214, 19);
+        contentPane.add(textFieldPrecioNuevo);
+
+        JLabel lblCantidadNuevo = new JLabel("Nueva Cantidad:");
+        lblCantidadNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCantidadNuevo.setBounds(34, 190, 150, 20);
+        contentPane.add(lblCantidadNuevo);
+
+        textFieldCantidadNuevo = new JTextField();
+        textFieldCantidadNuevo.setBounds(180, 190, 214, 19);
+        contentPane.add(textFieldCantidadNuevo);
+
+        JLabel lblDescripcionNuevo = new JLabel("Nueva Descripción:");
+        lblDescripcionNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblDescripcionNuevo.setBounds(34, 220, 150, 20);
+        contentPane.add(lblDescripcionNuevo);
+
+        textFieldDescripcionNuevo = new JTextField();
+        textFieldDescripcionNuevo.setBounds(180, 220, 214, 19);
+        contentPane.add(textFieldDescripcionNuevo);
+
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VendedorGUI vendedorwindow = new VendedorGUI();
+                vendedorwindow.setVisible(true);
+            }
+        });
+        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegresar.setBounds(80, 260, 102, 27);
+        contentPane.add(btnRegresar);
+
+        JButton btnEditar = new JButton("Editar");
+        btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnEditar.setBounds(265, 260, 93, 27);
+        btnEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String itemSeleccionado = (String) productosComboBox.getSelectedItem();
+                    if (itemSeleccionado == null) {
+                        JOptionPane.showMessageDialog(null, "Seleccione un producto para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    int codigo = Integer.parseInt(itemSeleccionado.split(" - ")[1]);
+                    String nuevoNombre = textFieldNombreNuevo.getText();
+                    double nuevoPrecio = Double.parseDouble(textFieldPrecioNuevo.getText().replace(",", ".")); // 🔹 Convertir si hay coma
+                    int nuevaCantidad = Integer.parseInt(textFieldCantidadNuevo.getText());
+                    String nuevaDescripcion = textFieldDescripcionNuevo.getText();
+
+                    boolean actualizado = Producto.editarProducto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion);
+
+                    if (actualizado) {
+                        JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Error en el formato de los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+        contentPane.add(btnEditar);
+        setVisible(true);
+    }
+
+    private void cargarDatosProductoSeleccionado() {
+        int selectedIndex = productosComboBox.getSelectedIndex();
+        if (selectedIndex != -1) {
+            Producto productoSeleccionado = productosUsuario.get(selectedIndex);
+            textFieldCodigoNuevo.setText(String.valueOf(productoSeleccionado.getCodigo()));
+            textFieldNombreNuevo.setText(productoSeleccionado.getNombreprod());
+            textFieldPrecioNuevo.setText(String.format(Locale.US, "%.2f", productoSeleccionado.getPrecioprod())); // 🔹 Formato corregido
+            textFieldCantidadNuevo.setText(String.valueOf(productoSeleccionado.getCantprod()));
+            textFieldDescripcionNuevo.setText(productoSeleccionado.getDescripcionprod());
+        }
+    }
+
+
+   
 }
