@@ -1,4 +1,5 @@
 234,Lapiz,400.00,27,Lapicero,xxx
 232,Pijama,45678.00,2,Pa mimir,xxxx
 231,Mouse,34000.00,453,Pa compu,xxxx
-8789,Juguete,5000.00,43,Pa jugar,xxxx
+8789,Juguete,5000.00,42,Pa jugar,xxxx
+3232,Lapicero,3456.00,44,Lapicero,xxx
