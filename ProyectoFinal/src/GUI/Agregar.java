@@ -134,6 +134,14 @@ public class Agregar extends JFrame {
                 int codigo = Integer.parseInt(codigoTexto);
                 double precio = Double.parseDouble(precioTexto);
                 int cantidad = Integer.parseInt(cantidadTexto);
+                
+                // Verificar si el código ya existe
+                if (Producto.existeCodigo(codigo)) {
+                    Icon imagenError = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+                    JOptionPane.showMessageDialog(rootPane, "El código del producto ya existe. Intente con otro.", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagenError);
+                    return;
+                }
+
 
                 // Verificar si hay un vendedor en sesión
                 if (!SesionIniciada.esVendedor()) {

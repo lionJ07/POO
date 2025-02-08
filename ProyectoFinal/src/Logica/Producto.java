@@ -1,6 +1,8 @@
 package Logica;
 
 import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -70,7 +72,7 @@ public class Producto {
 	public void setDescripcionprod(String descripcionprod) {
 		this.descripcionprod = descripcionprod;
 	}
-	public void venderProductos(int cantidadVendida) {
+	public void venderProductos(int cantidadVendida) throws ParseException {
         if (cantidadVendida <= cantprod) {
             this.cantprod -= cantidadVendida;
 
@@ -87,8 +89,8 @@ public class Producto {
                             p.getNombreprod(),
                             p.getPrecioprod(),
                             p.getCantprod(),
-                            p.getDescripcionprod()));
-                    		p.getNombreVendedor();
+                            p.getDescripcionprod(),
+                    		p.getNombreVendedor()));
                     writer.newLine();
                 }
             } catch (IOException e) {
@@ -100,7 +102,7 @@ public class Producto {
     }
 
 
-	private void actualizarProductoEnArchivo() {
+	private void actualizarProductoEnArchivo() throws ParseException {
 	    List<Producto> productos = cargarProductos();
 	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
 	        for (Producto p : productos) {
@@ -119,13 +121,13 @@ public class Producto {
 	}
 
 
-    public static List<Producto> obtenerProductosPorUsuario(String nombreVendedor) {
+    public static List<Producto> obtenerProductosPorUsuario(String nombreVendedor) throws ParseException {
         return cargarProductos().stream()
                 .filter(p -> p.getNombreVendedor().equals(nombreVendedor))
                 .collect(Collectors.toList());
     }
     
-    public static void eliminarProducto(Producto productoAEliminar) {
+    public static void eliminarProducto(Producto productoAEliminar) throws ParseException {
         List<Producto> productos = cargarProductos();
         
         // Verifica si el producto está en la lista antes de intentar eliminarlo
@@ -138,7 +140,7 @@ public class Producto {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", false))) { // Sobreescribe correctamente
             for (Producto p : productos) {
-                writer.write(String.format("%d,%s,%.2f,%d,%s,%s",
+                writer.write(String.format(Locale.US, "%d,%s,%.2f,%d,%s,%s",
                         p.getCodigo(),
                         p.getNombreprod(),
                         p.getPrecioprod(),
@@ -156,7 +158,7 @@ public class Producto {
 
 
 
-    public static List<Producto> cargarProductos() {
+    public static List<Producto> cargarProductos() throws ParseException {
         List<Producto> productos = new ArrayList<>();
         File file = new File("productos.txt");
 
@@ -167,11 +169,13 @@ public class Producto {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
+            	line = line.trim();
+                if (line.isEmpty()) continue; 
                 String[] data = line.split(",");
                 if (data.length == 6) {
                     int codigo = Integer.parseInt(data[0].trim());
                     String nombre = data[1].trim();
-                    double precio = Double.parseDouble(data[2].trim().replace(",", ".")); // 🔹 Asegurar que usa punto
+                    double precio = NumberFormat.getInstance(Locale.US).parse(data[2].trim()).doubleValue();
                     int cantidad = Integer.parseInt(data[3].trim());
                     String descripcion = data[4].trim();
                     String nombreVendedor = data[5].trim();
@@ -186,31 +190,56 @@ public class Producto {
     }
 
     
-    public static boolean editarProducto(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) {
+    public static boolean editarProducto(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) throws ParseException {
         List<Producto> productos = cargarProductos();
         boolean actualizado = false;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", false))) { // Sobreescribe el archivo
-            for (Producto p : productos) {
-                if (p.getCodigo() == codigo) {
-                    p = new Producto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion, p.getNombreVendedor());
-                    actualizado = true;
-                }
-                writer.write(String.format(Locale.US, "%d,%s,%.2f,%d,%s,%s",
-                        p.getCodigo(),
-                        p.getNombreprod(),
-                        p.getPrecioprod(),
-                        p.getCantprod(),
-                        p.getDescripcionprod(),
-                        p.getNombreVendedor()));
-                writer.newLine();
+        for (int i = 0; i < productos.size(); i++) {
+            Producto p = productos.get(i);
+            if (p.getCodigo() == codigo) {
+                productos.set(i, new Producto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion, p.getNombreVendedor()));
+                actualizado = true;
+                break;
             }
-        } catch (IOException e) {
-            System.out.println("Error al actualizar productos.");
+        }
+
+        if (actualizado) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", false))) {
+                for (Producto p : productos) {
+                    writer.write(String.format(Locale.US, "%d,%s,%.2f,%d,%s,%s",
+                            p.getCodigo(),
+                            p.getNombreprod(),
+                            p.getPrecioprod(),
+                            p.getCantprod(),
+                            p.getDescripcionprod(),
+                            p.getNombreVendedor()));
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al actualizar productos.");
+            }
         }
 
         return actualizado;
     }
+
+    
+    private static List<Producto> productos = new ArrayList<>();
+
+    public static void recargarProductos() throws ParseException {
+        productos = cargarProductos();
+    }
+    
+    public static boolean existeCodigo(int codigo) throws ParseException {
+        List<Producto> productos = cargarProductos();
+        for (Producto p : productos) {
+            if (p.getCodigo() == codigo) {
+                return true; // El código ya existe
+            }
+        }
+        return false; // El código no existe
+    }
+
 
 
 }

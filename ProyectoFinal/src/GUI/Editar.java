@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,7 +35,7 @@ public class Editar extends JFrame {
     private JTextField textFieldDescripcionNuevo;
     private List<Producto> productosUsuario;
 
-    public Editar() {
+    public Editar() throws ParseException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 350);
         contentPane = new JPanel();
@@ -165,7 +166,7 @@ public class Editar extends JFrame {
                     boolean actualizado = Producto.editarProducto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion);
 
                     if (actualizado) {
-                    	Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower.png"));
+                    	Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
                     	JOptionPane.showMessageDialog(contentPane, "Producto actualizado exitosamente", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
                     } else {
                     	Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
@@ -173,7 +174,10 @@ public class Editar extends JFrame {
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Error en el formato de los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                } catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         contentPane.add(btnEditar);

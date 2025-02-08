@@ -50,31 +50,32 @@ public class Usuario {
      * @return el usuario si es correcto, o null si no lo es
      */
     public static Usuario verificar(String usuario, String contraseña) {
-        File archivo = new File("usuarios.txt");
-        if (!archivo.exists()) {
-            JOptionPane.showMessageDialog(null, "El archivo de usuarios no existe", "Error", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length == 5) { // Verificamos que haya 5 elementos
+                    String nombreArchivo = datos[0];
+                    String usuarioArchivo = datos[1];
+                    String correoArchivo = datos[2];
+                    String contraseñaArchivo = datos[3];
+                    String tipoUsuario = datos[4]; // Último campo indica el tipo de usuario
 
-        try (Scanner scanner = new Scanner(archivo)) {
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                String[] partes = linea.split(",");
-                if (partes.length == 4) {
-                    String usuarioArchivo = partes[0].trim();
-                    String contraseñaArchivo = partes[1].trim();
-                    String nombreArchivo = partes[2].trim();
-                    String correoArchivo = partes[3].trim();
                     if (usuario.equals(usuarioArchivo) && contraseña.equals(contraseñaArchivo)) {
-                        return new Usuario(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+                        if (tipoUsuario.equalsIgnoreCase("Comprador")) {
+                            return new Comprador(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+                        } else if (tipoUsuario.equalsIgnoreCase("Vendedor")) {
+                            return new Vendedor(nombreArchivo, usuarioArchivo, correoArchivo, contraseñaArchivo);
+                        }
                     }
                 }
             }
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Archivo de usuarios no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
+        return null; // Usuario no encontrado
     }
+
 }
 
 

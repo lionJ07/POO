@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.List;
 
 import Logica.CarritoCompras;
@@ -22,7 +23,7 @@ public class Comprar extends JFrame {
     private List<Producto> productos;
     private Usuario usuarioActual; // Usuario que está comprando
 
-    public Comprar(CarritoCompras manejoCarrito, Usuario usuarioActual) {
+    public Comprar(CarritoCompras manejoCarrito, Usuario usuarioActual) throws ParseException {
         this.manejoCarrito = manejoCarrito;
         this.usuarioActual = usuarioActual;
         this.productos = Producto.cargarProductos();
@@ -91,7 +92,10 @@ public class Comprar extends JFrame {
         comboBox.addActionListener(e -> actualizarDetallesProducto());
     }
 
-    private void llenarComboBox() {
+    private void llenarComboBox() throws ParseException {
+        productos = Producto.cargarProductos(); // 🔹 Asegurarnos de obtener los productos más recientes
+
+        comboBox.removeAllItems(); // Limpiar la lista antes de agregar nuevos productos
         if (productos != null && !productos.isEmpty()) {
             for (Producto p : productos) {
                 comboBox.addItem(p.getCodigo() + " - " + p.getNombreprod() + " - $" + p.getPrecioprod());
@@ -103,6 +107,7 @@ public class Comprar extends JFrame {
             lblDescripcion.setText("");
         }
     }
+
 
     private void actualizarDetallesProducto() {
         int selectedIndex = comboBox.getSelectedIndex();

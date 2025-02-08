@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -28,8 +29,9 @@ public class Eliminar extends JFrame {
 
     /**
      * Create the frame.
+     * @throws ParseException 
      */
-    public Eliminar() {
+    public Eliminar() throws ParseException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -104,7 +106,12 @@ public class Eliminar extends JFrame {
                 int selectedIndex = productosComboBox.getSelectedIndex();
                 if (selectedIndex != -1) {
                     Producto productoSeleccionado = productosUsuario.get(selectedIndex);
-                    Producto.eliminarProducto(productoSeleccionado);
+                    try {
+						Producto.eliminarProducto(productoSeleccionado);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
                     JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     productosComboBox.removeItemAt(selectedIndex);
                 } else {

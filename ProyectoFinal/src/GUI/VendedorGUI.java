@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -46,8 +47,15 @@ public class VendedorGUI extends JFrame {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Editar editarwindow = new Editar();
-				editarwindow.setVisible(true);
+				Editar editarwindow;
+				try {
+					editarwindow = new Editar();
+					editarwindow.setVisible(true);
+
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -59,8 +67,15 @@ public class VendedorGUI extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Eliminar eliminarwindow = new Eliminar();
-				eliminarwindow.setVisible(true);
+				Eliminar eliminarwindow;
+				try {
+					eliminarwindow = new Eliminar();
+					eliminarwindow.setVisible(true);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btnEliminar.setBounds(145, 138, 175, 29);

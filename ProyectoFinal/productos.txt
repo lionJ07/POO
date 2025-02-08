@@ -1,4 +1,4 @@
-34232,Mouse,346.00,2,Mpuse para,xxx
-3423,Mouse,3232.00,45,Mouse para,xxx
-456,Pc,3534.00,23,Pc para jugar,xxxx
-34,Celular,468765.00,2,Celular,xxxx
+234,Lapiz,400.00,27,Lapicero,xxx
+232,Pijama,45678.00,3,Pa mimir,xxxx
+231,Mouse,34000.00,453,Pa compu,xxxx
+111,Saco,56888.00,234,Para cosas grandes,xxxx

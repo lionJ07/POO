@@ -3,6 +3,8 @@ package Logica;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 
 public class CarritoCompras {
     private List<Producto> productosCarrito;
@@ -38,16 +40,23 @@ public class CarritoCompras {
         guardarEnArchivo(productoComprado, comprador);
     }
 
+
     private void guardarEnArchivo(Producto producto, String comprador) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_CARRITO, true))) {
-            writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," +
-                        producto.getCantprod() + "," + producto.getDescripcionprod() + "," + 
-                        producto.getNombreVendedor() + "," + comprador);
+            writer.write(String.format(Locale.US, "%d,%s,%.2f,%d,%s,%s,%s",
+                    producto.getCodigo(),
+                    producto.getNombreprod(),
+                    producto.getPrecioprod(),
+                    producto.getCantprod(),
+                    producto.getDescripcionprod(),
+                    producto.getNombreVendedor(),
+                    comprador));
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Error al guardar en el archivo del carrito: " + e.getMessage());
         }
     }
+
 
     public List<Producto> obtenerProductosCarrito(String comprador) {
         List<Producto> productos = new ArrayList<>();

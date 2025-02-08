@@ -22,5 +22,8 @@ public class SesionIniciada {
     public static void setUsuarioActual(Usuario usuario) {
         usuarioActual = usuario;
     }
-    
+    public static boolean esComprador() {
+        return usuarioActual instanceof Comprador;
+    }
+
 }

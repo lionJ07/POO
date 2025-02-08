@@ -1,0 +1,12 @@
+232,Lapiz,400.00,2,Lapicero,xxx,xxxx
+232,Lapiz,400.00,3,Lapicero,xxx,xxx
+232,Lapiz,400.00,4,Lapicero,xxx,xxx
+232,Pijama,45678.00,3,Pa mimir,xxxx,xxx
+232,Lapiz,400.00,2,Lapicero,xxx,xxx
+232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
+232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
+232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
+234,Lapiz,400.00,1,Lapicero,xxx,xxx
+232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
+231,Mouse,34000.00,2,Pa compu,xxxx,xxx
+231,Mouse,34000.00,1,Pa compu,xxxx,xxx

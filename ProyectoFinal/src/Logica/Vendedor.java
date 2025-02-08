@@ -9,6 +9,9 @@ package Logica;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
+import java.text.ParseException;
+import java.io.*;
+import java.util.Locale;
 public class Vendedor extends Usuario {
 	
     private List<Producto> productos;
@@ -27,12 +30,19 @@ public class Vendedor extends Usuario {
 
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
-            // Escribimos en el orden correcto: código, nombre, precio, cantidad, descripción
-        	writer.write(producto.getCodigo() + "," + producto.getNombreprod() + "," + producto.getPrecioprod() + "," + producto.getCantprod() + "," + producto.getDescripcionprod() + "," + producto.getNombreVendedor() + "\n");
+            writer.write(producto.getCodigo() + "," +
+                         producto.getNombreprod() + "," +
+                         String.format(Locale.US, "%.2f", producto.getPrecioprod()) + "," + // 🔹 Asegura el punto decimal
+                         producto.getCantprod() + "," +
+                         producto.getDescripcionprod() + "," +
+                         producto.getNombreVendedor());
+            writer.newLine(); // Asegura el salto de línea
         } catch (IOException e) {
             System.out.println("Error al guardar el producto.");
         }
     }
+
+
 
     
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
@@ -120,7 +130,7 @@ public class Vendedor extends Usuario {
     }
 
 
-    public boolean editarProductoDeVendedor(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) {
+    public boolean editarProductoDeVendedor(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) throws ParseException {
         return Producto.editarProducto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion);
     }
 

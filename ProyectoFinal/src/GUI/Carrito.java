@@ -4,8 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import javax.swing.*;
+import java.util.Locale;
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import Logica.CarritoCompras;
 import Logica.Producto;
 import Logica.Usuario;
@@ -58,7 +65,14 @@ public class Carrito extends JFrame {
         btnFinalizar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnFinalizar.setBounds(260, 323, 214, 30);
         contentPane.add(btnFinalizar);
-        btnFinalizar.addActionListener(e -> finalizarCompra(comboPago.getSelectedItem().toString()));
+        btnFinalizar.addActionListener(e -> {
+			try {
+				finalizarCompra(comboPago.getSelectedItem().toString());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
         JButton btnRegresar = new JButton("Regresar");
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
@@ -82,7 +96,7 @@ public class Carrito extends JFrame {
             lblTotal.setText("Total: $0.0");
             return;
         }
-        
+
         double total = 0;
         StringBuilder contenido = new StringBuilder();
         for (Producto p : productos) {
@@ -97,10 +111,77 @@ public class Carrito extends JFrame {
         lblTotal.setText("Total: $" + total);
     }
 
-    private void finalizarCompra(String metodoPago) {
-        JOptionPane.showMessageDialog(this, "Compra finalizada con " + metodoPago, "Compra Exitosa", JOptionPane.INFORMATION_MESSAGE);
-        manejoCarrito.vaciarCarrito(usuario.getUsuario()); // Vaciar solo el carrito del usuario
-        dispose();
-        new CompradorGUI(manejoCarrito, usuario).setVisible(true);
+
+    private void finalizarCompra(String metodoPago) throws ParseException {
+        List<Producto> productos = manejoCarrito.obtenerProductosCarrito(usuario.getUsuario());
+
+        if (productos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El carrito está vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try (BufferedWriter historialWriter = new BufferedWriter(new FileWriter("historial.txt", true))) {
+            List<Producto> productosActualizados = Producto.cargarProductos(); // Cargar productos actuales
+            NumberFormat formatter = NumberFormat.getInstance(Locale.US);
+            formatter.setMinimumFractionDigits(2);
+            formatter.setMaximumFractionDigits(2);
+
+            for (Producto p : productos) {
+                int cantidadComprada = p.getCantprod();
+                String precioFormateado = String.format(Locale.US, "%.2f", p.getPrecioprod());
+
+                historialWriter.write(String.format("%d,%s,%s,%d,%s,%s,%s\n",
+                        p.getCodigo(), p.getNombreprod(), precioFormateado,
+                        cantidadComprada, p.getDescripcionprod(),
+                        p.getNombreVendedor(), usuario.getUsuario()));
+
+                // Restar la cantidad comprada del stock global
+                for (Producto prod : productosActualizados) {
+                    if (prod.getCodigo() == p.getCodigo()) {
+                        int nuevaCantidad = prod.getCantprod() - cantidadComprada;
+                        prod.setCantprod(Math.max(nuevaCantidad, 0)); // Evitar números negativos
+                        break;
+                    }
+                }
+            }
+
+            historialWriter.flush(); // Asegurar que los datos se escriban correctamente
+
+            // Guardar los productos actualizados en productos.txt
+            try (BufferedWriter productosWriter = new BufferedWriter(new FileWriter("productos.txt", false))) {
+                for (int i = 0; i < productosActualizados.size(); i++) {
+                    Producto prod = productosActualizados.get(i);
+                    String precioFormateado = String.format(Locale.US, "%.2f", prod.getPrecioprod());
+
+                    String linea = String.format("%d,%s,%s,%d,%s,%s",
+                            prod.getCodigo(), prod.getNombreprod(), precioFormateado,
+                            prod.getCantprod(), prod.getDescripcionprod(), prod.getNombreVendedor());
+
+                    System.out.println("Escribiendo en productos.txt: " + linea); // Agrega esta línea para ver qué se guarda
+                    productosWriter.write(linea);
+                    if (i < productosActualizados.size() - 1) {
+                        productosWriter.newLine();
+                    }
+                }
+            }
+
+
+            // Confirmación de compra
+            JOptionPane.showMessageDialog(this, "Compra finalizada con " + metodoPago, "Compra Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
+            // Vaciar solo el carrito del usuario
+            manejoCarrito.vaciarCarrito(usuario.getUsuario());
+
+            // Recargar productos en la interfaz de compra
+            Producto.recargarProductos();
+
+            dispose();
+            new CompradorGUI(manejoCarrito, usuario).setVisible(true);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar la compra.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
+
 }
