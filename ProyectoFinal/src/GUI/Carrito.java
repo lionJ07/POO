@@ -1,3 +1,9 @@
+/**
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -9,7 +15,9 @@ import javax.swing.*;
 import Logica.CarritoCompras;
 import Logica.Producto;
 import Logica.Usuario;
-
+/**
+ * Ventana del carrito
+ */
 public class Carrito extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -49,17 +57,23 @@ public class Carrito extends JFrame {
         lblMetodoPago.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         lblMetodoPago.setBounds(30, 290, 200, 22);
         contentPane.add(lblMetodoPago);
-
+        /**
+         * Botón para seleccionar el método de pago 
+         */
         JComboBox<String> comboPago = new JComboBox<>(new String[]{"Tarjeta", "Efectivo"});
         comboPago.setBounds(250, 290, 100, 22);
         contentPane.add(comboPago);
-
+        /**
+         * Botón para finalizar la compra 
+         */
         JButton btnFinalizar = new JButton("Finalizar Compra");
         btnFinalizar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnFinalizar.setBounds(260, 323, 214, 30);
         contentPane.add(btnFinalizar);
         btnFinalizar.addActionListener(e -> finalizarCompra(comboPago.getSelectedItem().toString()));
-
+        /**
+         * Botón para regresar a la ventana de comprador  
+         */
         JButton btnRegresar = new JButton("Regresar");
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnRegresar.setBounds(30, 323, 120, 30);
@@ -74,7 +88,9 @@ public class Carrito extends JFrame {
 
         cargarCarrito();
     }
-
+    /**
+     * Método para cargar los productos al carrito 
+     */
     private void cargarCarrito() {
         List<Producto> productos = manejoCarrito.obtenerProductosCarrito(usuario.getUsuario()); // Filtrar por usuario
         if (productos.isEmpty()) {
@@ -96,7 +112,10 @@ public class Carrito extends JFrame {
         textArea.setText(contenido.toString());
         lblTotal.setText("Total: $" + total);
     }
-
+    /**
+     * Método para finalizar la compra 
+     * @param metodoPago
+     */
     private void finalizarCompra(String metodoPago) {
         JOptionPane.showMessageDialog(this, "Compra finalizada con " + metodoPago, "Compra Exitosa", JOptionPane.INFORMATION_MESSAGE);
         manejoCarrito.vaciarCarrito(usuario.getUsuario()); // Vaciar solo el carrito del usuario

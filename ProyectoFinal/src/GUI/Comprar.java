@@ -1,3 +1,9 @@
+/**
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -10,7 +16,9 @@ import java.util.List;
 import Logica.CarritoCompras;
 import Logica.Producto;
 import Logica.Usuario;
-
+/**
+ * Ventana para comprar 
+ */
 public class Comprar extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -66,7 +74,9 @@ public class Comprar extends JFrame {
         txtCantidad = new JTextField();
         txtCantidad.setBounds(230, 160, 100, 22);
         contentPane.add(txtCantidad);
-        
+        /**
+         * Botón para regresar a la ventana de comprador
+         */
         JButton btnRegresar = new JButton("Regresar");
         btnRegresar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -112,6 +122,9 @@ public class Comprar extends JFrame {
             lblDescripcion.setText("Descripción: " + p.getDescripcionprod());
         }
     }
+    /**
+     * Método para agregar al carrito 
+     */
 
     private void agregarAlCarrito() {
         int selectedIndex = comboBox.getSelectedIndex();
@@ -124,14 +137,16 @@ public class Comprar extends JFrame {
         try {
             int cantidadComprada = Integer.parseInt(txtCantidad.getText().trim());
             if (cantidadComprada <= 0 || cantidadComprada > productoSeleccionado.getCantprod()) {
-                JOptionPane.showMessageDialog(this, "Cantidad inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+            	Icon imagen1 = new ImageIcon (getClass().getResource("/Imagenes/gatitoo.png"));
+            	JOptionPane.showMessageDialog(contentPane, "Cantidad Invalida", "Error", JOptionPane.PLAIN_MESSAGE,imagen1);
                 return;
             }
-
             manejoCarrito.agregarProductoAlCarrito(productoSeleccionado, cantidadComprada, usuarioActual.getUsuario());
-            JOptionPane.showMessageDialog(this, "Producto añadido al carrito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            Icon imagen2 = new ImageIcon (getClass().getResource("/Imagenes/gatipower2.png"));
+            JOptionPane.showMessageDialog(contentPane, "Producto añadido al carrito", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        	Icon imagen3 =  new ImageIcon (getClass().getResource("/Imagenes/gatitoo.png"));
+        	JOptionPane.showMessageDialog(contentPane, "Ingrese una cantidad valida", "Érror", JOptionPane.PLAIN_MESSAGE,imagen3);
         }
     }
 }

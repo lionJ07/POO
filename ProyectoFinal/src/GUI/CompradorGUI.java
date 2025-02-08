@@ -1,9 +1,10 @@
 /**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  * @JulianaSofiaLopez
  * @LeonardoAlejandroGuio
  * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  */
+
 package GUI;
 
 import java.awt.Color;
@@ -19,7 +20,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Ventana del comprador 
+ */
 public class CompradorGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +50,9 @@ public class CompradorGUI extends JFrame {
 		lblNewLabel.setBounds(133, 22, 193, 22);
 		contentPane.add(lblNewLabel);
 		
+		/**
+		 * Botón para visualizar el carrito de compras
+		 */
 		JButton btnCarrito = new JButton("Tú Carrito de Compras");
 		btnCarrito.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnCarrito.addActionListener(new ActionListener() {
@@ -59,6 +65,9 @@ public class CompradorGUI extends JFrame {
 		btnCarrito.setBounds(96, 120, 243, 29);
 		contentPane.add(btnCarrito);
 		
+		/**
+		 * Botón para ver los productos disponibles
+		 */
 		JButton btnProductoDisponibles = new JButton("Ver Productos disponibles\r\n");
 		btnProductoDisponibles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,7 +79,9 @@ public class CompradorGUI extends JFrame {
 		btnProductoDisponibles.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnProductoDisponibles.setBounds(96, 68, 243, 29);
 		contentPane.add(btnProductoDisponibles);
-		
+		/**
+		 * Botón para regresar a la ventana de Selección
+		 */
 		JButton btnRegresar = new JButton("Regresar");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +93,9 @@ public class CompradorGUI extends JFrame {
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegresar.setBounds(156, 208, 117, 29);
 		contentPane.add(btnRegresar);
-		
+		/**
+		 * Botón para ver el historial de compras
+		 */
 		JButton btnHistorial = new JButton("Historial de Compras");
 		btnHistorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

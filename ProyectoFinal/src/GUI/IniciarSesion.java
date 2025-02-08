@@ -1,8 +1,8 @@
 /**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  * @JulianaSofiaLopez
  * @LeonardoAlejandroGuio
  * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  */
 package GUI;
 
@@ -125,6 +125,12 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
 	} 	
+	/**
+	 * Método para verificar el usuario
+	 * @param usuario si es correcto 
+	 * @param contraseña si es correcto 
+	 * @return a usuario no encontrado 
+	 */
 	private Usuario verificar(String usuario, String contraseña) {
 		try {
 			File archivo = new File("usuarios.txt");

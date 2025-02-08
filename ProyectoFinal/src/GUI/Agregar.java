@@ -39,57 +39,57 @@ public class Agregar extends JFrame {
         
         JLabel lblNewLabel = new JLabel("Agregar Producto:");
         lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-        lblNewLabel.setBounds(129, 10, 173, 23);
+        lblNewLabel.setBounds(129, 10, 173, 35);
         contentPane.add(lblNewLabel);
         
         JLabel lblNewLabel_1 = new JLabel("Código del Producto:");
         lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_1.setBounds(26, 32, 147, 23);
+        lblNewLabel_1.setBounds(26, 45, 147, 23);
         contentPane.add(lblNewLabel_1);
         
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(180, 32, 234, 19);
+        textFieldCodigo.setBounds(180, 45, 234, 19);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
         JLabel lblNewLabel_2 = new JLabel("Nombre del Producto:");
         lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_2.setBounds(26, 61, 163, 23);
+        lblNewLabel_2.setBounds(26, 74, 163, 23);
         contentPane.add(lblNewLabel_2);
         
         textFieldNombreProducto = new JTextField();
-        textFieldNombreProducto.setBounds(190, 61, 224, 19);
+        textFieldNombreProducto.setBounds(190, 74, 224, 19);
         contentPane.add(textFieldNombreProducto);
         textFieldNombreProducto.setColumns(10);
         
         JLabel lblNewLabel_3 = new JLabel("Precio del Producto:");
         lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_3.setBounds(26, 90, 147, 23);
+        lblNewLabel_3.setBounds(26, 104, 147, 23);
         contentPane.add(lblNewLabel_3);
         
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(178, 90, 236, 19);
+        textFieldPrecio.setBounds(178, 104, 236, 19);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
         
         JLabel lblNewLabel_4 = new JLabel("Cantidad del Producto:");
         lblNewLabel_4.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_4.setBounds(26, 119, 173, 23);
+        lblNewLabel_4.setBounds(26, 133, 173, 23);
         contentPane.add(lblNewLabel_4);
         
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(198, 119, 216, 19);
+        textFieldCantidad.setBounds(198, 133, 216, 19);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblNewLabel_5 = new JLabel("Descripción:");
         lblNewLabel_5.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_5.setBounds(26, 152, 109, 29);
+        lblNewLabel_5.setBounds(26, 168, 109, 29);
         contentPane.add(lblNewLabel_5);
         
         // Campo de texto para descripción
         textPaneDescripcion = new JTextPane();
-        textPaneDescripcion.setBounds(118, 152, 296, 41);
+        textPaneDescripcion.setBounds(118, 169, 296, 56);
         contentPane.add(textPaneDescripcion);
 
         /**
@@ -102,7 +102,7 @@ public class Agregar extends JFrame {
             vendedorwindow.setVisible(true);
         });
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnRegresar.setBounds(89, 203, 85, 41);
+        btnRegresar.setBounds(63, 251, 109, 41);
         contentPane.add(btnRegresar);
 
         /**
@@ -159,7 +159,7 @@ public class Agregar extends JFrame {
         });
 
         btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnAgregar.setBounds(253, 203, 103, 41);
+        btnAgregar.setBounds(252, 251, 103, 41);
         contentPane.add(btnAgregar);
     }
 }

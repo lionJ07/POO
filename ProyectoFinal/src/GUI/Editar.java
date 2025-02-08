@@ -1,8 +1,8 @@
 /**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  * @JulianaSofiaLopez
  * @LeonardoAlejandroGuio
  * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
  */
 package GUI;
 
@@ -21,7 +21,9 @@ import javax.swing.border.EmptyBorder;
 
 import Logica.Producto;
 import Logica.SesionIniciada;
-
+/**
+ * Ventana para editar el prooducto
+ */
 public class Editar extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -69,7 +71,7 @@ public class Editar extends JFrame {
 
         if (productosUsuario == null || productosUsuario.isEmpty()) {
         	Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
-        	JOptionPane.showMessageDialog(contentPane, "No tienes productos para editar", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen);
+        	JOptionPane.showMessageDialog(contentPane, "No tienes productos para editar", "Érror", JOptionPane.PLAIN_MESSAGE,imagen);
             dispose();
             return;
         }
@@ -129,7 +131,10 @@ public class Editar extends JFrame {
         textFieldDescripcionNuevo = new JTextField();
         textFieldDescripcionNuevo.setBounds(180, 220, 214, 19);
         contentPane.add(textFieldDescripcionNuevo);
-
+        
+        /**
+         * Botón para regresar a la ventana de vendedor
+         */
         JButton btnRegresar = new JButton("Regresar");
         btnRegresar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -141,7 +146,10 @@ public class Editar extends JFrame {
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnRegresar.setBounds(80, 260, 102, 27);
         contentPane.add(btnRegresar);
-
+        
+        /**
+         * Botón para editar el producto 
+         */
         JButton btnEditar = new JButton("Editar");
         btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnEditar.setBounds(265, 260, 93, 27);
@@ -179,7 +187,9 @@ public class Editar extends JFrame {
         contentPane.add(btnEditar);
         setVisible(true);
     }
-
+    /**
+     * Método para cargar los datos del producto seleccionado 
+     */
     private void cargarDatosProductoSeleccionado() {
         int selectedIndex = productosComboBox.getSelectedIndex();
         if (selectedIndex != -1) {

@@ -1,3 +1,9 @@
+/**
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -11,7 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
-
+/**
+ * Ventana del vendedor
+ */
 public class VendedorGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +37,9 @@ public class VendedorGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		/**
+		 * Botón para Agregar un nuevo producto 
+		 */
 		JButton btnAgregar = new JButton("Agregar Producto");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +51,9 @@ public class VendedorGUI extends JFrame {
 		btnAgregar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnAgregar.setBounds(145, 60, 175, 29);
 		contentPane.add(btnAgregar);
-		
+		/**
+		 * Botón para editar el producto 
+		 */
 		JButton btnEditar = new JButton("Editar Producto");
 		btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnEditar.addActionListener(new ActionListener() {
@@ -53,7 +66,9 @@ public class VendedorGUI extends JFrame {
 		
 		btnEditar.setBounds(145, 99, 175, 29);
 		contentPane.add(btnEditar);
-		
+		/**
+		 * Botón para eliminar el producto seleccionado
+		 */
 		JButton btnEliminar = new JButton("Eliminar Producto");
 		btnEliminar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnEliminar.addActionListener(new ActionListener() {
@@ -65,7 +80,9 @@ public class VendedorGUI extends JFrame {
 		});
 		btnEliminar.setBounds(145, 138, 175, 29);
 		contentPane.add(btnEliminar);
-		
+		/**
+		 * Botón para ver el balance de los productos 
+		 */
 		JButton btnBalance = new JButton("Ver Balance");
 		btnBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
