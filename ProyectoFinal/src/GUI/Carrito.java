@@ -1,71 +1,106 @@
-/**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- */
 package GUI;
 
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-/**
- * Ventana de Carrito 
- */
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.*;
+import Logica.CarritoCompras;
+import Logica.Producto;
+import Logica.Usuario;
+
 public class Carrito extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JTextArea textArea;
+    private JLabel lblTotal;
+    private CarritoCompras manejoCarrito;
+    private Usuario usuario;
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    public Carrito(CarritoCompras manejoCarrito, Usuario usuario) {
+        this.manejoCarrito = manejoCarrito;
+        this.usuario = usuario;
 
-	/**
-	 * Create the frame.
-	 */
-	public Carrito() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(157, 226, 230));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 500, 400);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(157, 226, 230));
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("  Carrito de Compras:");
-		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel.setBounds(140, 20, 157, 28);
-		contentPane.add(lblNewLabel);
-		/**
-		 * Botón para mostrar el listado de las compras realizadas 
-		 */
-		JButton btnMostrar = new JButton("Mostrar");
-		btnMostrar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnMostrar.setBounds(166, 47, 100, 28);
-		contentPane.add(btnMostrar);
-		/**
-		 * Botón para regresar a la ventana de comprador
-		 */
-		JButton btnRegresar = new JButton("Regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				CompradorGUI compradorwindow = new CompradorGUI();
-				compradorwindow.setVisible(true);
-			}
-		});
-		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(166, 221, 100, 32);
-		contentPane.add(btnRegresar);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(54, 85, 319, 126);
-		contentPane.add(scrollPane);
-	}
+        JLabel lblTitulo = new JLabel("Carrito de Compras");
+        lblTitulo.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
+        lblTitulo.setBounds(170, 10, 200, 22);
+        contentPane.add(lblTitulo);
+
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(30, 50, 420, 200);
+        contentPane.add(scrollPane);
+
+        lblTotal = new JLabel("Total: $0.0");
+        lblTotal.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblTotal.setBounds(30, 260, 200, 22);
+        contentPane.add(lblTotal);
+
+        JLabel lblMetodoPago = new JLabel("Seleccione método de pago:");
+        lblMetodoPago.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblMetodoPago.setBounds(30, 290, 200, 22);
+        contentPane.add(lblMetodoPago);
+
+        JComboBox<String> comboPago = new JComboBox<>(new String[]{"Tarjeta", "Efectivo"});
+        comboPago.setBounds(250, 290, 100, 22);
+        contentPane.add(comboPago);
+
+        JButton btnFinalizar = new JButton("Finalizar Compra");
+        btnFinalizar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnFinalizar.setBounds(260, 323, 214, 30);
+        contentPane.add(btnFinalizar);
+        btnFinalizar.addActionListener(e -> finalizarCompra(comboPago.getSelectedItem().toString()));
+
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegresar.setBounds(30, 323, 120, 30);
+        contentPane.add(btnRegresar);
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CompradorGUI compradorwindow = new CompradorGUI(manejoCarrito, usuario);
+                compradorwindow.setVisible(true);
+            }
+        });
+
+        cargarCarrito();
+    }
+
+    private void cargarCarrito() {
+        List<Producto> productos = manejoCarrito.obtenerProductosCarrito(usuario.getUsuario()); // Filtrar por usuario
+        if (productos.isEmpty()) {
+            textArea.setText("El carrito está vacío.");
+            lblTotal.setText("Total: $0.0");
+            return;
+        }
+        
+        double total = 0;
+        StringBuilder contenido = new StringBuilder();
+        for (Producto p : productos) {
+            contenido.append("Código: ").append(p.getCodigo())
+                     .append(" | ").append(p.getNombreprod())
+                     .append(" | Precio: $").append(p.getPrecioprod())
+                     .append(" | Cantidad: ").append(p.getCantprod())
+                     .append(" | ").append(p.getDescripcionprod()).append("\n");
+            total += p.getPrecioprod() * p.getCantprod();
+        }
+        textArea.setText(contenido.toString());
+        lblTotal.setText("Total: $" + total);
+    }
+
+    private void finalizarCompra(String metodoPago) {
+        JOptionPane.showMessageDialog(this, "Compra finalizada con " + metodoPago, "Compra Exitosa", JOptionPane.INFORMATION_MESSAGE);
+        manejoCarrito.vaciarCarrito(usuario.getUsuario()); // Vaciar solo el carrito del usuario
+        dispose();
+        new CompradorGUI(manejoCarrito, usuario).setVisible(true);
+    }
 }

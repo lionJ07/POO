@@ -11,9 +11,5 @@ public class Comprador extends Usuario {
 
     public CarritoCompras getCarrito() { return carrito; }
 
-    public void comprar() {
-        Transaccion transaccion = new Transaccion(this, carrito.getProductos(), carrito.getTotal());
-        transaccion.procesar();
-        carrito.vaciarCarrito();
-    }
+    
 }

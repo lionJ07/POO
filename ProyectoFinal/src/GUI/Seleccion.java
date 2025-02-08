@@ -10,6 +10,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logica.CarritoCompras;
 import Logica.SesionIniciada;
 import Logica.Usuario;
 import Logica.Vendedor;
@@ -69,12 +71,14 @@ public class Seleccion extends JFrame {
 		 */
 		JButton btnComprador = new JButton("Comprador");
 		btnComprador.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				CompradorGUI compradorwindow = new CompradorGUI();
-				compradorwindow.setVisible(true);
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        Usuario usuario = SesionIniciada.getUsuarioActual(); // Obtener usuario actual
+		        CompradorGUI compradorwindow = new CompradorGUI(new CarritoCompras(), usuario); // Pasar usuario
+		        compradorwindow.setVisible(true);
+		    }
 		});
+
 		
 		btnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnComprador.setBounds(159, 136, 127, 36);

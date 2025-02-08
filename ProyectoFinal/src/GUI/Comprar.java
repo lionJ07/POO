@@ -1,104 +1,137 @@
-/**
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- */
 package GUI;
 
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.JList;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
-/**
- * Ventana para comprar productos 
- */
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import Logica.CarritoCompras;
+import Logica.Producto;
+import Logica.Usuario;
+
 public class Comprar extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JComboBox<String> comboBox;
+    private JLabel lblCantidadDisponible;
+    private JLabel lblDescripcion;
+    private JTextField txtCantidad;
+    private CarritoCompras manejoCarrito;
+    private List<Producto> productos;
+    private Usuario usuarioActual; // Usuario que está comprando
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	
-	/**
-	 * Create the frame.
-	 */
-	public Comprar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(157, 226, 230));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public Comprar(CarritoCompras manejoCarrito, Usuario usuarioActual) {
+        this.manejoCarrito = manejoCarrito;
+        this.usuarioActual = usuarioActual;
+        this.productos = Producto.cargarProductos();
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Comprar productos ");
-		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
-		lblNewLabel.setBounds(145, 10, 167, 22);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Método de pago:");
-		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(157, 143, 118, 20);
-		contentPane.add(lblNewLabel_1);
-		/**
-		 * Botón para finalizar la compra, sacando un mensaje para la confirmación de la compra 
-		 */
-		JButton btnFinalizarCompra = new JButton("Finalizar compra ");
-		btnFinalizarCompra.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnFinalizarCompra.setBounds(236, 208, 159, 22);
-		contentPane.add(btnFinalizarCompra);
-		/**
-		 * Botón para regresar a la ventana de comprador y mostrando su menú 
-		 */
-		JButton btnRegresar = new JButton("Regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				CompradorGUI compradorwindow = new CompradorGUI();
-				compradorwindow.setVisible(true);
-			}
-		});
-		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(69, 208, 118, 23);
-		contentPane.add(btnRegresar);
-		/**
-		 * Botón para seleciona si el metodo de pago es efectivo 
-		 */
-		JRadioButton rdbtnEfectivo = new JRadioButton("Efectivo");
-		rdbtnEfectivo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		rdbtnEfectivo.setBounds(84, 169, 103, 21);
-		contentPane.add(rdbtnEfectivo);
-		/**
-		 * Botón para seleccionar si el metodo de pago es tarjeta 
-		 */
-		JRadioButton rdbtnTarjeta = new JRadioButton("Tarjeta ");
-		rdbtnTarjeta.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		rdbtnTarjeta.setBounds(236, 169, 103, 21);
-		contentPane.add(rdbtnTarjeta);
-		
-		JLabel lblNewLabel_2 = new JLabel("Seleccione el producto a comprar: ");
-		lblNewLabel_2.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(102, 42, 246, 22);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Cantidad:");
-		lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		lblNewLabel_3.setBounds(173, 89, 79, 22);
-		contentPane.add(lblNewLabel_3);
-		
-		JList listProducto = new JList();
-		listProducto.setBounds(145, 63, 130, 22);
-		contentPane.add(listProducto);
-		
-		JList listCantidad = new JList();
-		listCantidad.setBounds(145, 111, 130, 22);
-		contentPane.add(listCantidad);
-	}
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(157, 226, 230));
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
+
+        JLabel lblTitulo = new JLabel("Comprar productos");
+        lblTitulo.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
+        lblTitulo.setBounds(145, 10, 167, 22);
+        contentPane.add(lblTitulo);
+
+        JLabel lblSeleccionarProducto = new JLabel("Seleccione el producto:");
+        lblSeleccionarProducto.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblSeleccionarProducto.setBounds(40, 50, 200, 22);
+        contentPane.add(lblSeleccionarProducto);
+
+        comboBox = new JComboBox<>();
+        comboBox.setBounds(230, 50, 170, 22);
+        contentPane.add(comboBox);
+        
+        lblCantidadDisponible = new JLabel("Cantidad Disponible: ");
+        lblCantidadDisponible.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCantidadDisponible.setBounds(40, 90, 350, 22);
+        contentPane.add(lblCantidadDisponible);
+
+        lblDescripcion = new JLabel("Descripción: ");
+        lblDescripcion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblDescripcion.setBounds(40, 120, 350, 22);
+        contentPane.add(lblDescripcion);
+
+        JLabel lblCantidad = new JLabel("Cantidad a comprar:");
+        lblCantidad.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        lblCantidad.setBounds(40, 160, 200, 22);
+        contentPane.add(lblCantidad);
+
+        txtCantidad = new JTextField();
+        txtCantidad.setBounds(230, 160, 100, 22);
+        contentPane.add(txtCantidad);
+        
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CompradorGUI seleccionwindow = new CompradorGUI(manejoCarrito, usuarioActual);
+                seleccionwindow.setVisible(true);
+            }
+        });
+        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegresar.setBounds(40, 201, 117, 29);
+        contentPane.add(btnRegresar);
+
+        JButton btnAgregarCarrito = new JButton("Añadir al Carrito");
+        btnAgregarCarrito.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnAgregarCarrito.setBounds(230, 200, 170, 30);
+        contentPane.add(btnAgregarCarrito);
+
+        btnAgregarCarrito.addActionListener(e -> agregarAlCarrito());
+
+        // Llenar comboBox y asignar listener
+        llenarComboBox();
+        comboBox.addActionListener(e -> actualizarDetallesProducto());
+    }
+
+    private void llenarComboBox() {
+        if (productos != null && !productos.isEmpty()) {
+            for (Producto p : productos) {
+                comboBox.addItem(p.getCodigo() + " - " + p.getNombreprod() + " - $" + p.getPrecioprod());
+            }
+            comboBox.setSelectedIndex(0);
+            actualizarDetallesProducto();
+        } else {
+            lblCantidadDisponible.setText("No hay productos disponibles.");
+            lblDescripcion.setText("");
+        }
+    }
+
+    private void actualizarDetallesProducto() {
+        int selectedIndex = comboBox.getSelectedIndex();
+        if (productos != null && selectedIndex >= 0) {
+            Producto p = productos.get(selectedIndex);
+            lblCantidadDisponible.setText("Cantidad Disponible: " + p.getCantprod());
+            lblDescripcion.setText("Descripción: " + p.getDescripcionprod());
+        }
+    }
+
+    private void agregarAlCarrito() {
+        int selectedIndex = comboBox.getSelectedIndex();
+        if (selectedIndex < 0 || productos == null || productos.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Producto productoSeleccionado = productos.get(selectedIndex);
+        try {
+            int cantidadComprada = Integer.parseInt(txtCantidad.getText().trim());
+            if (cantidadComprada <= 0 || cantidadComprada > productoSeleccionado.getCantprod()) {
+                JOptionPane.showMessageDialog(this, "Cantidad inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            manejoCarrito.agregarProductoAlCarrito(productoSeleccionado, cantidadComprada, usuarioActual.getUsuario());
+            JOptionPane.showMessageDialog(this, "Producto añadido al carrito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
