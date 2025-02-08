@@ -109,5 +109,4 @@ public class VendedorGUI extends JFrame {
 		lblNewLabel.setBounds(145, 26, 175, 24);
 		contentPane.add(lblNewLabel);
 	}
-
 }

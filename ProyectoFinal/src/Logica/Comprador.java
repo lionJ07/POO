@@ -13,7 +13,9 @@ public class Comprador extends Usuario {
         this.carrito = new CarritoCompras();
     }
 
-    public CarritoCompras getCarrito() { return carrito; }
+    public CarritoCompras getCarrito() { 
+    	return carrito; 
+    }
 
     public String cargarHistorial() {
         StringBuilder historial = new StringBuilder();

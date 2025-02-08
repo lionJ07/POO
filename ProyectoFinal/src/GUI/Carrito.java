@@ -28,7 +28,6 @@ public class Carrito extends JFrame {
     public Carrito(CarritoCompras manejoCarrito, Usuario usuario) {
         this.manejoCarrito = manejoCarrito;
         this.usuario = usuario;
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 400);
         contentPane = new JPanel();

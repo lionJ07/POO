@@ -84,6 +84,7 @@ public class CarritoCompras {
         }
         return productos;
     }
+    
     public void vaciarCarrito(String comprador) {
         List<String> nuevasLineas = new ArrayList<>();
 
@@ -101,7 +102,6 @@ public class CarritoCompras {
         } catch (IOException e) {
             System.err.println("Error al leer el archivo del carrito: " + e.getMessage());
         }
-
         // Escribimos solo las líneas que NO pertenecen al comprador actual
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_CARRITO, false))) {
             for (String nuevaLinea : nuevasLineas) {

@@ -81,6 +81,7 @@ public class CompradorGUI extends JFrame {
 				}
             }
         });
+        
         btnProductoDisponibles.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnProductoDisponibles.setBounds(96, 68, 243, 29);
         contentPane.add(btnProductoDisponibles);

@@ -36,7 +36,6 @@ public class Inicio extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(157, 226, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		/**

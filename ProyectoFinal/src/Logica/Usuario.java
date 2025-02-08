@@ -45,9 +45,6 @@ public class Usuario {
 
     /**
      * Método para verificar si el usuario y la contraseña son correctos
-     * @param usuario el nombre de usuario
-     * @param contraseña la contraseña proporcionada
-     * @return el usuario si es correcto, o null si no lo es
      */
     public static Usuario verificar(String usuario, String contraseña) {
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {

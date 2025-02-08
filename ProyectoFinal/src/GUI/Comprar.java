@@ -86,7 +86,6 @@ public class Comprar extends JFrame {
         contentPane.add(btnAgregarCarrito);
 
         btnAgregarCarrito.addActionListener(e -> agregarAlCarrito());
-
         // Llenar comboBox y asignar listener
         llenarComboBox();
         comboBox.addActionListener(e -> actualizarDetallesProducto());

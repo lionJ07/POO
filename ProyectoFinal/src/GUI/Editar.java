@@ -85,7 +85,6 @@ public class Editar extends JFrame {
                 cargarDatosProductoSeleccionado();
             }
         });
-
         JLabel lblCodigoNuevo = new JLabel("Nuevo Código:");
         lblCodigoNuevo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         lblCodigoNuevo.setBounds(34, 100, 150, 20);

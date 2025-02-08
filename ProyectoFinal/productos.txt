@@ -1,4 +1,3 @@
 234,Lapiz,400.00,27,Lapicero,xxx
-232,Pijama,45678.00,3,Pa mimir,xxxx
+232,Pijama,45678.00,2,Pa mimir,xxxx
 231,Mouse,34000.00,453,Pa compu,xxxx
-111,Saco,56888.00,234,Para cosas grandes,xxxx

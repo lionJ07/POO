@@ -101,7 +101,6 @@ public class Producto {
         }
     }
 
-
 	private void actualizarProductoEnArchivo() throws ParseException {
 	    List<Producto> productos = cargarProductos();
 	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
@@ -154,9 +153,6 @@ public class Producto {
             System.out.println("Error al actualizar productos: " + e.getMessage());
         }
     }
-
-
-
 
     public static List<Producto> cargarProductos() throws ParseException {
         List<Producto> productos = new ArrayList<>();
@@ -221,7 +217,6 @@ public class Producto {
 
         return actualizado;
     }
-
     
     private static List<Producto> productos = new ArrayList<>();
 
