@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -52,6 +58,7 @@ public class Editar extends JFrame {
         contentPane.add(productosComboBox);
 
         if (SesionIniciada.getUsuarioActual() == null) {
+        	
             JOptionPane.showMessageDialog(null, "No hay usuario en sesión.", "Error", JOptionPane.ERROR_MESSAGE);
             dispose();
             return;
@@ -61,7 +68,8 @@ public class Editar extends JFrame {
         productosUsuario = Producto.obtenerProductosPorUsuario(usuarioActual);
 
         if (productosUsuario == null || productosUsuario.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No tienes productos para editar.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        	Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
+        	JOptionPane.showMessageDialog(contentPane, "No tienes productos para editar", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen);
             dispose();
             return;
         }
@@ -143,7 +151,8 @@ public class Editar extends JFrame {
                 try {
                     String itemSeleccionado = (String) productosComboBox.getSelectedItem();
                     if (itemSeleccionado == null) {
-                        JOptionPane.showMessageDialog(null, "Seleccione un producto para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+                    	Icon imagen1 = new ImageIcon(getClass().getResource("/Imagenes/gatocaja2.png"));
+                    	JOptionPane.showMessageDialog(contentPane, "Seleccione el producto a editar", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen1);
                         return;
                     }
 
@@ -156,18 +165,17 @@ public class Editar extends JFrame {
                     boolean actualizado = Producto.editarProducto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion);
 
                     if (actualizado) {
-                        JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    	Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower.png"));
+                    	JOptionPane.showMessageDialog(contentPane, "Producto actualizado exitosamente", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen2);
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se encontró el producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                    	Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
+                    	JOptionPane.showMessageDialog(contentPane, "Producto actualizado exitosamente", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen3);
                     }
-
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Error en el formato de los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-
-
         contentPane.add(btnEditar);
         setVisible(true);
     }

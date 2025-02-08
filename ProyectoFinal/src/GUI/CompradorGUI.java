@@ -1,3 +1,9 @@
+/**
+ * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * @JulianaSofiaLopez
+ * @LeonardoAlejandroGuio
+ * @version1.0, Febrero 10,2025 
+ */
 package GUI;
 
 import java.awt.Color;
@@ -20,8 +26,6 @@ public class CompradorGUI extends JFrame {
 	private JPanel contentPane;
 	private CarritoCompras carrito;
 	private Usuario usuario;
-
-
 
 	/**
 	 * Create the frame.
@@ -76,8 +80,22 @@ public class CompradorGUI extends JFrame {
 			}
 		});
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(159, 207, 117, 29);
+		btnRegresar.setBounds(156, 208, 117, 29);
 		contentPane.add(btnRegresar);
+		
+		JButton btnHistorial = new JButton("Historial de Compras");
+		btnHistorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Historial historialwindow = new Historial();
+				historialwindow.setVisible(true);
+				
+			}
+		});
+		btnHistorial.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+		btnHistorial.setBounds(96, 169, 241, 29);
+		contentPane.add(btnHistorial);
 	}
+	
 
 }

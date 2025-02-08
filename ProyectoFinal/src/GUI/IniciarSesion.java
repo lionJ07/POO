@@ -124,7 +124,7 @@ public class IniciarSesion extends JFrame {
 		btnNewButton.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnNewButton.setBounds(64, 196, 102, 28);
 		contentPane.add(btnNewButton);
-	}	
+	} 	
 	private Usuario verificar(String usuario, String contraseña) {
 		try {
 			File archivo = new File("usuarios.txt");
