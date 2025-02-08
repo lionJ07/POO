@@ -84,7 +84,6 @@ public class CarritoCompras {
         }
         return productos;
     }
-
     public void vaciarCarrito(String comprador) {
         List<String> nuevasLineas = new ArrayList<>();
 

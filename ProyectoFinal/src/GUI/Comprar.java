@@ -108,7 +108,6 @@ public class Comprar extends JFrame {
         }
     }
 
-
     private void actualizarDetallesProducto() {
         int selectedIndex = comboBox.getSelectedIndex();
         if (productos != null && selectedIndex >= 0) {

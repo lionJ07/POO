@@ -158,6 +158,7 @@ public class Agregar extends JFrame {
 
                 Icon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
                 JOptionPane.showMessageDialog(rootPane, "Producto registrado con éxito", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen2);
+                
             } catch (NumberFormatException ex) {
                 Icon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
                 JOptionPane.showMessageDialog(rootPane, "Fijate que los campos tengan los datos correctos", "Mensaje", JOptionPane.PLAIN_MESSAGE, imagen3);

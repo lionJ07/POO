@@ -75,7 +75,6 @@ public class Usuario {
         }
         return null; // Usuario no encontrado
     }
-
 }
 
 

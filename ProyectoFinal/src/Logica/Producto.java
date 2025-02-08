@@ -188,7 +188,6 @@ public class Producto {
         }
         return productos;
     }
-
     
     public static boolean editarProducto(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) throws ParseException {
         List<Producto> productos = cargarProductos();

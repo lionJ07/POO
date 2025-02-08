@@ -78,7 +78,6 @@ public class Seleccion extends JFrame {
 		        compradorwindow.setVisible(true);
 		    }
 		});
-
 		
 		btnComprador.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnComprador.setBounds(159, 136, 127, 36);

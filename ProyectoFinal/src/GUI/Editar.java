@@ -195,7 +195,4 @@ public class Editar extends JFrame {
             textFieldDescripcionNuevo.setText(productoSeleccionado.getDescripcionprod());
         }
     }
-
-
-   
 }

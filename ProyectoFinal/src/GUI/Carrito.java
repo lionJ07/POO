@@ -165,7 +165,6 @@ public class Carrito extends JFrame {
                 }
             }
 
-
             // Confirmación de compra
             JOptionPane.showMessageDialog(this, "Compra finalizada con " + metodoPago, "Compra Exitosa", JOptionPane.INFORMATION_MESSAGE);
 

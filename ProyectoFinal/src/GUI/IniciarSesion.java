@@ -153,6 +153,4 @@ public class IniciarSesion extends JFrame {
         }
         return null;
     }
-
-
 }

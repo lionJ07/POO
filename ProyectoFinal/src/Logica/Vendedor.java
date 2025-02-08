@@ -59,7 +59,6 @@ public class Vendedor extends Usuario {
         }
         return null; 
     }
-
     
     private void actualizarArchivoProductos() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {

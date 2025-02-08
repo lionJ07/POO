@@ -29,7 +29,6 @@ public class Historial extends JFrame {
             dispose();
             return;
         }
-
         this.compradorActual = (Comprador) usuario; 
         this.carrito = carrito;
 

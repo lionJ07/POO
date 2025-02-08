@@ -75,7 +75,6 @@ public class VendedorGUI extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 		btnEliminar.setBounds(145, 138, 175, 29);

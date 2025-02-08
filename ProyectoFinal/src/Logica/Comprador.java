@@ -38,7 +38,4 @@ public class Comprador extends Usuario {
             return "Error al cargar el historial.";
         }
     }
-
-
-
 }
