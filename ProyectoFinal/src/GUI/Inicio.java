@@ -66,6 +66,7 @@ public class Inicio extends JFrame {
 		});
 		btnInicioSesion.setBounds(140, 123, 150, 37);
 		contentPane.add(btnInicioSesion);
+		
 		/**
 		 * Botón para salir del programa
 		 */

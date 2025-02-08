@@ -157,11 +157,9 @@ public class Producto {
     public static List<Producto> cargarProductos() throws ParseException {
         List<Producto> productos = new ArrayList<>();
         File file = new File("productos.txt");
-
         if (!file.exists()) {
             return productos;
         }
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {

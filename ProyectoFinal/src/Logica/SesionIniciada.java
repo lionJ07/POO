@@ -26,4 +26,5 @@ public class SesionIniciada {
     public static boolean esComprador() {
         return usuarioActual instanceof Comprador;
     }
+    
 }

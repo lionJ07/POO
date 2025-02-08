@@ -182,7 +182,6 @@ public class Editar extends JFrame {
         contentPane.add(btnEditar);
         setVisible(true);
     }
-
     private void cargarDatosProductoSeleccionado() {
         int selectedIndex = productosComboBox.getSelectedIndex();
         if (selectedIndex != -1) {

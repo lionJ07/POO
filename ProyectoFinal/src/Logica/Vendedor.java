@@ -41,7 +41,6 @@ public class Vendedor extends Usuario {
             System.out.println("Error al guardar el producto.");
         }
     }
-    
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
         try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) {
             String line;

@@ -46,6 +46,7 @@ public class Seleccion extends JFrame {
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
 		lblNewLabel.setBounds(125, 22, 210, 36);
 		contentPane.add(lblNewLabel);
+		
 		/**
 		 * Este botón dirige al usuario a la ventana de vendedor
 		 */

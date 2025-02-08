@@ -78,7 +78,6 @@ public class Eliminar extends JFrame {
             dispose();
             return;
         }
-
         String usuarioActual = SesionIniciada.getUsuarioActual().getNombre();
         List<Producto> productosUsuario = Producto.obtenerProductosPorUsuario(usuarioActual);
         

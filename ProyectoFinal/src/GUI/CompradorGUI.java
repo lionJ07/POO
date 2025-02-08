@@ -111,7 +111,6 @@ public class CompradorGUI extends JFrame {
         btnHistorial.setBounds(96, 169, 241, 29);
         contentPane.add(btnHistorial);
     }
-
     /**
      * Método para actualizar un usuario a Comprador en el archivo.
      */

@@ -70,11 +70,9 @@ public class CarritoCompras {
                         int codigo = Integer.parseInt(datos[0].trim());
                         double precio = Double.parseDouble(datos[2].replace(",", "."));
                         int cantidad = Integer.parseInt(datos[3]);
-
                         Producto producto = new Producto(
                             codigo, datos[1], precio, cantidad, datos[4], datos[5]
                         );
-
                         productos.add(producto);
                     }
                 }

@@ -23,7 +23,6 @@ public class Comprador extends Usuario {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] datos = linea.split(",");
-
                 if (datos.length >= 7) {
                     String usuarioArchivo = datos[6].trim(); // Asegurar que no haya espacios adicionales
                     if (usuarioArchivo.equalsIgnoreCase(this.getUsuario().trim())) { // Comparar sin importar mayúsculas/minúsculas

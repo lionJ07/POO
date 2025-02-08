@@ -95,7 +95,6 @@ public class Carrito extends JFrame {
             lblTotal.setText("Total: $0.0");
             return;
         }
-
         double total = 0;
         StringBuilder contenido = new StringBuilder();
         for (Producto p : productos) {

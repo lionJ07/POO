@@ -90,7 +90,6 @@ public class IniciarSesion extends JFrame {
 			}
 		});
 
-
         btnIniciarSesion.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         btnIniciarSesion.setBounds(252, 192, 102, 32);
         contentPane.add(btnIniciarSesion);

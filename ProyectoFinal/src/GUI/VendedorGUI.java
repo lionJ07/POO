@@ -100,6 +100,7 @@ public class VendedorGUI extends JFrame {
 				seleccionwindow.setVisible(true);
 			}
 		});
+		
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnRegresar.setBounds(26, 203, 106, 34);
 		contentPane.add(btnRegresar);

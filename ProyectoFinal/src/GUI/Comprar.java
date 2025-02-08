@@ -122,7 +122,6 @@ public class Comprar extends JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un producto.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         Producto productoSeleccionado = productos.get(selectedIndex);
         try {
             int cantidadComprada = Integer.parseInt(txtCantidad.getText().trim());

@@ -67,6 +67,7 @@ public class Usuario {
                     }
                 }
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

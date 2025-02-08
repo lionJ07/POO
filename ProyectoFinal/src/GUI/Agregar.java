@@ -147,7 +147,6 @@ public class Agregar extends JFrame {
                 if (!SesionIniciada.esVendedor()) {
                     throw new Exception("Error: No hay un vendedor en sesión.");
                 }
-
                 // Obtener el vendedor actual
                 Vendedor vendedor = (Vendedor) SesionIniciada.getUsuarioActual();
                 String nombreVendedor = vendedor.getNombre();

@@ -64,6 +64,7 @@ public class Historial extends JFrame {
                 compradorwindow.setVisible(true);
             }
         });
+        
         btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 10));
         btnRegresar.setBounds(315, 230, 85, 21);
         contentPane.add(btnRegresar);
