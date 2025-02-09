@@ -9,6 +9,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import Logica.SesionIniciada;
+import Logica.Vendedor;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 /**
  * Ventana del vendedor
@@ -25,10 +29,13 @@ public class VendedorGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
+    private static Vendedor vendedorAutenticado; // Variable estática
+
+
 	/**
 	 */
 	public VendedorGUI() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -99,12 +106,21 @@ public class VendedorGUI extends JFrame {
 		 */
 		JButton btnBalance = new JButton("Ver Balance");
 		btnBalance.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				Mostrar mostrarwindow = new Mostrar();
-				mostrarwindow.setVisible(true);
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        if (vendedorAutenticado == null) { 
+		            vendedorAutenticado = (Vendedor) SesionIniciada.getUsuarioActual(); 
+		        }
+
+		        if (vendedorAutenticado != null) { 
+		            Mostrar mostrarWindow = new Mostrar(vendedorAutenticado);
+		            mostrarWindow.setVisible(true);
+		            dispose();
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Error: No hay vendedor disponible.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
 		});
+
 		btnBalance.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
 		btnBalance.setBounds(167, 177, 128, 29);
 		contentPane.add(btnBalance);
@@ -126,5 +142,13 @@ public class VendedorGUI extends JFrame {
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 17));
 		lblNewLabel.setBounds(145, 26, 175, 24);
 		contentPane.add(lblNewLabel);
+	}
+		public static void setVendedorAutenticado(Vendedor vendedor) {
+	        vendedorAutenticado = vendedor;
+	    }
+
+	    public static Vendedor getVendedorAutenticado() {
+	        return vendedorAutenticado;
+	    
 	}
 }

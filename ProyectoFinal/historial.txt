@@ -6,3 +6,4 @@
 232,Pijama,45678.00,1,Pa mimir,xxxx,xxxx
 8789,Juguete,5000.00,1,Pa jugar,xxxx,xxx
 234,Lapiz,400.00,1,Lapicero,xxx,jslg99
+234,Lapiz,400.00,2,Lapicero,xxx,xxx

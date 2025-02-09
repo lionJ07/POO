@@ -85,13 +85,34 @@ public class Vendedor extends Usuario {
         return false;
     }
 
-    public double calcularBalance() {
-        double balance = 0;
-        for (Producto p : productos) {
-            balance += p.getPrecioprod() * p.getCantprod();
+    public List<Producto> obtenerVentas() {
+        List<Producto> ventas = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("historial.txt"))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length == 7) {
+                    String vendedorArchivo = datos[5].trim();
+                    if (vendedorArchivo.equals(this.getUsuario().trim())) { // Verifica que la venta sea del vendedor actual
+                        int codigo = Integer.parseInt(datos[0].trim());
+                        double precio = Double.parseDouble(datos[2].replace(",", "."));
+                        int cantidad = Integer.parseInt(datos[3]);
+
+                        Producto venta = new Producto(
+                            codigo, datos[1], precio, cantidad, datos[4], vendedorArchivo
+                        );
+                        ventas.add(venta);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al leer el historial de ventas: " + e.getMessage());
         }
-        return balance;
+        
+        return ventas;
     }
+
     public static List<Producto> obtenerProductosPorUsuario(String nombreUsuario) {
         List<Producto> productosUsuario = new ArrayList<>();
         File file = new File("productos.txt");
