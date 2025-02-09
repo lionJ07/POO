@@ -1,9 +1,13 @@
 /**
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * Clase que representa el carrito de compras de un usuario.
+ * Permite agregar productos, obtener los productos del carrito y vaciarlo.
+ * Los productos se almacenan en un archivo para persistencia.
+ * 
+ * @author Juliana Sofia Lopez
+ * @author Leonardo Alejandro Guio
+ * @version 1.0, Febrero 10, 2025
  */
+
 package Logica;
 
 import java.io.*;
@@ -15,12 +19,21 @@ import java.util.Locale;
 public class CarritoCompras {
     private List<Producto> productosCarrito;
     private static final String ARCHIVO_CARRITO = "carrito.txt";
+    
+    /**
+     * Constructor de la clase CarritoCompras.
+     * Inicializa la lista de productos del carrito y verifica la existencia del archivo de almacenamiento.
+     */
 
     public CarritoCompras() {
         productosCarrito = new ArrayList<>();
         inicializarArchivo();
     }
-
+    
+    /**
+     * Verifica si el archivo del carrito existe, y si no, lo crea.
+     * Esto asegura la persistencia de los datos del carrito de compras.
+     */
     private void inicializarArchivo() {
         File archivo = new File(ARCHIVO_CARRITO);
         try {
@@ -31,7 +44,14 @@ public class CarritoCompras {
             System.err.println("Error al crear el archivo del carrito: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * Agrega un producto al carrito con la cantidad especificada y lo guarda en el archivo.
+     * 
+     * @param producto El producto que se va a agregar al carrito.
+     * @param cantidad La cantidad del producto que se desea agregar.
+     * @param comprador El nombre del usuario que está agregando el producto al carrito.
+     */
     public void agregarProductoAlCarrito(Producto producto, int cantidad, String comprador) {
         Producto productoComprado = new Producto(
             producto.getCodigo(),
@@ -46,7 +66,12 @@ public class CarritoCompras {
         guardarEnArchivo(productoComprado, comprador);
     }
 
-
+    /**
+     * Guarda un producto en el archivo del carrito junto con el nombre del comprador.
+     * 
+     * @param producto El producto que se guardará en el archivo del carrito.
+     * @param comprador El nombre del usuario que añadió el producto.
+     */
     private void guardarEnArchivo(Producto producto, String comprador) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_CARRITO, true))) {
             writer.write(String.format(Locale.US, "%d,%s,%.2f,%d,%s,%s,%s",
@@ -63,7 +88,12 @@ public class CarritoCompras {
         }
     }
 
-
+    /**
+     * Obtiene todos los productos del carrito asociados a un comprador específico.
+     * 
+     * @param comprador El nombre del usuario cuyo carrito se desea consultar.
+     * @return Una lista de productos que pertenecen al carrito del comprador.
+     */
     public List<Producto> obtenerProductosCarrito(String comprador) {
         List<Producto> productos = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_CARRITO))) {
@@ -89,6 +119,12 @@ public class CarritoCompras {
         return productos;
     }
     
+    /**
+     * Elimina todos los productos del carrito de un comprador específico.
+     * Solo elimina los productos del comprador indicado, dejando intactos los demás.
+     * 
+     * @param comprador El nombre del usuario cuyo carrito será vaciado.
+     */
     public void vaciarCarrito(String comprador) {
         List<String> nuevasLineas = new ArrayList<>();
 

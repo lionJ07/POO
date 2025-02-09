@@ -1,9 +1,14 @@
 /**
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * Representa a un vendedor dentro del sistema de e-commerce. 
+ * Un vendedor puede gestionar sus productos, agregarlos, eliminarlos y consultar sus ventas.
+ * 
+ * Esta clase extiende de {@link Usuario} y proporciona funcionalidades específicas para la gestión de productos.
+ * 
+ * @author Juliana Sofia Lopez
+ * @author Leonardo Alejandro Guio
+ * @version 1.0, Febrero 10, 2025
  */
+
 package Logica;
 
 import java.util.ArrayList;
@@ -16,17 +21,38 @@ public class Vendedor extends Usuario {
 	
     private List<Producto> productos;
     private double balanceTotal;
+    
+    /**
+     * Crea un nuevo vendedor con la información proporcionada.
+     * 
+     * @param nombre Nombre del vendedor.
+     * @param usuario Nombre de usuario del vendedor.
+     * @param correo Correo electrónico del vendedor.
+     * @param contraseña Contraseña del vendedor.
+     */
 
     public Vendedor(String nombre, String usuario, String correo, String contraseña) {
         super(nombre, usuario, correo, contraseña);
         this.balanceTotal = 0.0;
         this.productos = new ArrayList<>();
     }
+    
+    /**
+     * Agrega un producto a la lista de productos del vendedor y lo guarda en el archivo.
+     * 
+     * @param producto Producto a agregar.
+     */
 
     public void agregarProducto(Producto producto) {
         productos.add(producto);
         guardarProductoEnArchivo(producto);
     }
+    
+    /**
+     * Guarda la información de un producto en el archivo de productos.
+     * 
+     * @param producto Producto que se va a guardar.
+     */
 
     private void guardarProductoEnArchivo(Producto producto) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt", true))) {
@@ -41,6 +67,14 @@ public class Vendedor extends Usuario {
             System.out.println("Error al guardar el producto.");
         }
     }
+    
+    /**
+     * Carga un vendedor desde el archivo de usuarios a partir de su nombre de usuario.
+     * 
+     * @param usuarioBuscado Nombre de usuario del vendedor a buscar.
+     * @return Una instancia de {@code Vendedor} si se encuentra, de lo contrario {@code null}.
+     */
+
     public static Vendedor cargarVendedorDesdeArchivo(String usuarioBuscado) {
         try (BufferedReader reader = new BufferedReader(new FileReader("usuarios.txt"))) {
             String line;
@@ -56,6 +90,10 @@ public class Vendedor extends Usuario {
         return null; 
     }
     
+    /**
+     * Actualiza el archivo de productos con la información más reciente.
+     */
+
     private void actualizarArchivoProductos() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
             for (Producto p : productos) {
@@ -73,6 +111,12 @@ public class Vendedor extends Usuario {
         }
     }
 
+    /**
+     * Elimina un producto del vendedor a partir de su código.
+     * 
+     * @param codigo Código del producto a eliminar.
+     * @return {@code true} si el producto fue eliminado, {@code false} si no se encontró.
+     */
 
     public boolean eliminarProducto(int codigo) {
         for (Producto p : productos) {
@@ -84,6 +128,12 @@ public class Vendedor extends Usuario {
         }
         return false;
     }
+    
+    /**
+     * Obtiene una lista de productos vendidos por el vendedor.
+     * 
+     * @return Lista de productos vendidos.
+     */
 
     public List<Producto> obtenerVentas() {
         List<Producto> ventas = new ArrayList<>();
@@ -112,6 +162,13 @@ public class Vendedor extends Usuario {
         
         return ventas;
     }
+    
+    /**
+     * Obtiene todos los productos de un vendedor en base a su nombre de usuario.
+     * 
+     * @param nombreUsuario Nombre de usuario del vendedor.
+     * @return Lista de productos pertenecientes al vendedor.
+     */
 
     public static List<Producto> obtenerProductosPorUsuario(String nombreUsuario) {
         List<Producto> productosUsuario = new ArrayList<>();
@@ -155,6 +212,17 @@ public class Vendedor extends Usuario {
         return productosUsuario; // Devuelve los productos del usuario o una lista vacía si no tiene
     }
 
+    /**
+     * Edita un producto perteneciente al vendedor.
+     * 
+     * @param codigo Código del producto a editar.
+     * @param nuevoNombre Nuevo nombre del producto.
+     * @param nuevoPrecio Nuevo precio del producto.
+     * @param nuevaCantidad Nueva cantidad disponible del producto.
+     * @param nuevaDescripcion Nueva descripción del producto.
+     * @return {@code true} si la edición fue exitosa, {@code false} en caso contrario.
+     * @throws ParseException Si hay un error en el formato de los datos.
+     */
 
     public boolean editarProductoDeVendedor(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) throws ParseException {
         return Producto.editarProducto(codigo, nuevoNombre, nuevoPrecio, nuevaCantidad, nuevaDescripcion);

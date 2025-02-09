@@ -1,9 +1,16 @@
 /**
- * @JulianaSofiaLopez
- * @LeonardoAlejandroGuio
- * @version1.0, Febrero 10,2025 
- * Este programa es una ecommerce que le permite al usuario entrar como vendedor y comprador 
+ * Representa un producto dentro del ecommerce.
+ * Contiene información como el código, nombre, precio, cantidad disponible,
+ * descripción y el nombre del vendedor que lo ofrece.
+ * 
+ * Incluye métodos para manipular la información de los productos, 
+ * como cargar, editar, eliminar y vender productos.
+ * 
+ * @author Juliana Sofia Lopez
+ * @author Leonardo Alejandro Guio
+ * @version 1.0, Febrero 10, 2025
  */
+
 package Logica;
 
 import java.io.*;
@@ -25,7 +32,17 @@ public class Producto {
     private String descripcionprod;
     private String nombreVendedor; // Nuevo atributo
 
-    // Nuevo constructor con nombre del vendedor
+    /**
+     * Constructor de la clase Producto.
+     * Inicializa un producto con los atributos especificados.
+     * 
+     * @param codigo Código único del producto.
+     * @param nombreprod Nombre del producto.
+     * @param precioprod Precio del producto.
+     * @param cantprod Cantidad disponible del producto.
+     * @param descripcionprod Descripción del producto.
+     * @param nombreVendedor Nombre del vendedor que ofrece el producto.
+     */
     public Producto(int codigo, String nombreprod, double precioprod, int cantprod, String descripcionprod, String nombreVendedor) {
         this.codigo = codigo;
         this.nombreprod = nombreprod;
@@ -34,50 +51,131 @@ public class Producto {
         this.descripcionprod = descripcionprod;
         this.nombreVendedor = nombreVendedor;
     }
- // Getters y Setters
+    /**
+     * Obtiene el nombre del vendedor del producto.
+     * 
+     * @return Nombre del vendedor.
+     */
+
     public String getNombreVendedor() {
         return nombreVendedor;
     }
-
+    
+    /**
+     * Establece el nombre del vendedor del producto.
+     * 
+     * @param nombreVendedor Nombre del vendedor.
+     */
+    
     public void setNombreVendedor(String nombreVendedor) {
         this.nombreVendedor = nombreVendedor;
     }
+    /**
+     * Obtiene el nombre del producto.
+     * 
+     * @return Nombre del producto.
+     */
+
     public String getNombreprod() {
         return nombreprod;
     }
-
+    /**
+     * Obtiene el precio del producto.
+     * 
+     * @return Precio del producto.
+     */
     public double getPrecioprod() {
         return precioprod;
     }
+    
+    /**
+     * Obtiene la cantidad del producto.
+     * 
+     * @return Cantidad del producto.
+     */
 
     public int getCantprod() {
         return cantprod;
     }
+    
+    /**
+     * Obtiene el codigo del producto.
+     * 
+     * @return Codigo del producto.
+     */
 
     public int getCodigo() {
         return codigo;
     }
+    
+    /**
+     * Obtiene la descripcion del producto.
+     * 
+     * @return Descripcion del producto.
+     */
 
     public String getDescripcionprod() {
         return descripcionprod;
     }
+    
+    /**
+     * Establece la cantidad del producto.
+     * 
+     * @param Cantprod Cantidad del producto.
+     */
 
     public void setCantprod(int cantprod) {
         this.cantprod = cantprod;
     }
     
+    /**
+     * Establece el codigo del producto.
+     * 
+     * @param Codigo Codigo del producto.
+     */
+
     public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+    
+    /**
+     * Establece el nombre del producto.
+     * 
+     * @param nombreprod Nombre del producto.
+     */
+
 	public void setNombreprod(String nombreprod) {
 		this.nombreprod = nombreprod;
 	}
+	
+	/**
+	 * Establece el precio del producto.
+	 * 
+	 * @param Precioprod Precio del producto.
+	 */
+
 	public void setPrecioprod(double precioprod) {
 		this.precioprod = precioprod;
 	}
+	
+	/**
+	 * Establece la descripcion del producto.
+	 * 
+	 * @param Descripcionprod Descripcion del producto.
+	 */
+
 	public void setDescripcionprod(String descripcionprod) {
 		this.descripcionprod = descripcionprod;
 	}
+	
+	/**
+	 * Reduce la cantidad disponible del producto cuando se realiza una venta.
+	 * También actualiza el archivo de productos con la nueva cantidad.
+	 * 
+	 * @param cantidadVendida Cantidad de unidades vendidas.
+	 * @throws ParseException Si hay un error en el formato numérico del archivo.
+	 */
+
 	public void venderProductos(int cantidadVendida) throws ParseException {
         if (cantidadVendida <= cantprod) {
             this.cantprod -= cantidadVendida;
@@ -106,6 +204,12 @@ public class Producto {
             System.out.println("Stock insuficiente.");
         }
     }
+	
+	/**
+	 * Actualiza la información del producto en el archivo "productos.txt".
+	 * 
+	 * @throws ParseException Si hay un error en el formato numérico del archivo.
+	 */
 
 	private void actualizarProductoEnArchivo() throws ParseException {
 	    List<Producto> productos = cargarProductos();
@@ -124,14 +228,28 @@ public class Producto {
 	        System.out.println("Error al actualizar productos.");
 	    }
 	}
-
-
+	
+	/**
+	 * Obtiene la lista de productos de un vendedor específico.
+	 * 
+	 * @param nombreVendedor Nombre del vendedor cuyos productos se desean obtener.
+	 * @return Lista de productos del vendedor.
+	 * @throws ParseException Si hay un error en el formato numérico del archivo.
+	 */
+	
     public static List<Producto> obtenerProductosPorUsuario(String nombreVendedor) throws ParseException {
         return cargarProductos().stream()
                 .filter(p -> p.getNombreVendedor().equals(nombreVendedor))
                 .collect(Collectors.toList());
     }
-    
+    	
+    /**
+     * Elimina un producto del archivo "productos.txt".
+     * 
+     * @param productoAEliminar Producto que se desea eliminar.
+     * @throws ParseException Si hay un error en el formato numérico del archivo.
+     */
+
     public static void eliminarProducto(Producto productoAEliminar) throws ParseException {
         List<Producto> productos = cargarProductos();
         
@@ -159,6 +277,13 @@ public class Producto {
             System.out.println("Error al actualizar productos: " + e.getMessage());
         }
     }
+    
+    /**
+     * Carga la lista de productos desde el archivo "productos.txt".
+     * 
+     * @return Lista de productos disponibles.
+     * @throws ParseException Si hay un error en el formato numérico del archivo.
+     */
 
     public static List<Producto> cargarProductos() throws ParseException {
         List<Producto> productos = new ArrayList<>();
@@ -189,6 +314,18 @@ public class Producto {
         return productos;
     }
     
+    /**
+     * Edita la información de un producto existente en el archivo.
+     * 
+     * @param codigo Código del producto a editar.
+     * @param nuevoNombre Nuevo nombre del producto.
+     * @param nuevoPrecio Nuevo precio del producto.
+     * @param nuevaCantidad Nueva cantidad disponible del producto.
+     * @param nuevaDescripcion Nueva descripción del producto.
+     * @return true si el producto fue actualizado correctamente, false en caso contrario.
+     * @throws ParseException Si hay un error en el formato numérico del archivo.
+     */
+
     public static boolean editarProducto(int codigo, String nuevoNombre, double nuevoPrecio, int nuevaCantidad, String nuevaDescripcion) throws ParseException {
         List<Producto> productos = cargarProductos();
         boolean actualizado = false;
@@ -223,11 +360,25 @@ public class Producto {
     }
     
     private static List<Producto> productos = new ArrayList<>();
+    
+    /**
+     * Recarga la lista de productos desde el archivo para reflejar cambios recientes.
+     * 
+     * @throws ParseException Si hay un error en el formato numérico del archivo.
+     */
 
     public static void recargarProductos() throws ParseException {
         productos = cargarProductos();
     }
     
+    /**
+     * Verifica si un código de producto ya existe en la lista de productos.
+     * 
+     * @param codigo Código del producto a verificar.
+     * @return true si el código existe, false en caso contrario.
+     * @throws ParseException Si hay un error en el formato numérico del archivo.
+     */
+
     public static boolean existeCodigo(int codigo) throws ParseException {
         List<Producto> productos = cargarProductos();
         for (Producto p : productos) {
