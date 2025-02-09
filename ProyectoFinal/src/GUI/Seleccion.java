@@ -21,6 +21,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 /**
  * Esta ventana permite al usuario seleccionar el rol que desea ser
  */
@@ -35,6 +36,8 @@ public class Seleccion extends JFrame {
 	public Seleccion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(157, 226, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -42,9 +45,10 @@ public class Seleccion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Seleccione una opción");
+		JLabel lblNewLabel = new JLabel("Seleccione una opción:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-		lblNewLabel.setBounds(125, 22, 210, 36);
+		lblNewLabel.setBounds(106, 21, 232, 36);
 		contentPane.add(lblNewLabel);
 		
 		/**
@@ -85,7 +89,7 @@ public class Seleccion extends JFrame {
 		/**
 		 * Botón para regresar a la ventana de inicio
 		 */
-		JButton btnRegresar = new JButton("Regresar");
+		JButton btnRegresar = new JButton("Cerrar Sesión");
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -94,7 +98,7 @@ public class Seleccion extends JFrame {
 			}
 		});
 		btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnRegresar.setBounds(159, 195, 127, 36);
+		btnRegresar.setBounds(150, 214, 147, 36);
 		contentPane.add(btnRegresar);
 	}
 

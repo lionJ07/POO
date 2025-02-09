@@ -31,6 +31,7 @@ public class Agregar extends JFrame {
     public Agregar() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 350);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(157, 226, 230));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,16 +40,16 @@ public class Agregar extends JFrame {
         
         JLabel lblNewLabel = new JLabel("Agregar Producto:");
         lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-        lblNewLabel.setBounds(129, 10, 173, 35);
+        lblNewLabel.setBounds(129, 10, 202, 35);
         contentPane.add(lblNewLabel);
         
         JLabel lblNewLabel_1 = new JLabel("Código del Producto:");
         lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_1.setBounds(26, 45, 147, 23);
+        lblNewLabel_1.setBounds(26, 45, 164, 23);
         contentPane.add(lblNewLabel_1);
         
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(180, 45, 234, 19);
+        textFieldCodigo.setBounds(200, 45, 214, 19);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
@@ -58,17 +59,17 @@ public class Agregar extends JFrame {
         contentPane.add(lblNewLabel_2);
         
         textFieldNombreProducto = new JTextField();
-        textFieldNombreProducto.setBounds(190, 74, 224, 19);
+        textFieldNombreProducto.setBounds(200, 74, 214, 19);
         contentPane.add(textFieldNombreProducto);
         textFieldNombreProducto.setColumns(10);
         
         JLabel lblNewLabel_3 = new JLabel("Precio del Producto:");
         lblNewLabel_3.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_3.setBounds(26, 104, 147, 23);
+        lblNewLabel_3.setBounds(26, 104, 164, 23);
         contentPane.add(lblNewLabel_3);
         
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(178, 104, 236, 19);
+        textFieldPrecio.setBounds(200, 104, 214, 19);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
         
@@ -78,13 +79,13 @@ public class Agregar extends JFrame {
         contentPane.add(lblNewLabel_4);
         
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(198, 133, 216, 19);
+        textFieldCantidad.setBounds(200, 133, 214, 19);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblNewLabel_5 = new JLabel("Descripción:");
         lblNewLabel_5.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        lblNewLabel_5.setBounds(26, 168, 109, 29);
+        lblNewLabel_5.setBounds(10, 182, 109, 29);
         contentPane.add(lblNewLabel_5);
         
         // Campo de texto para descripción

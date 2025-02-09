@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 /**
  * Ventana de Inicio 
  */
@@ -33,6 +34,8 @@ public class Inicio extends JFrame {
 	public Inicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(157, 226, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,8 +84,9 @@ public class Inicio extends JFrame {
 		contentPane.add(btnSalir);
 		
 		JLabel lblNewLabel_1 = new JLabel("GATICOMMERCE");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Sitka Subheading", Font.BOLD, 25));
-		lblNewLabel_1.setBounds(124, 24, 201, 38);
+		lblNewLabel_1.setBounds(104, 25, 221, 38);
 		contentPane.add(lblNewLabel_1);
 		/**
 		 * Objetos que permiten el uso de las imagenes y la visualización de las mismas 

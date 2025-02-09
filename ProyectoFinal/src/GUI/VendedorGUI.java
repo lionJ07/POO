@@ -38,6 +38,8 @@ public class VendedorGUI extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(157, 226, 230));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,7 +124,7 @@ public class VendedorGUI extends JFrame {
 		});
 
 		btnBalance.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-		btnBalance.setBounds(167, 177, 128, 29);
+		btnBalance.setBounds(145, 177, 175, 29);
 		contentPane.add(btnBalance);
 		
 		JButton btnRegresar = new JButton("Regresar");

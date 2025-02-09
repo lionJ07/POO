@@ -38,6 +38,8 @@ public class IniciarSesion extends JFrame {
     public IniciarSesion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
+        setLocationRelativeTo(null);
+
         contentPane = new JPanel();
         contentPane.setBackground(new Color(157, 226, 230));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -46,8 +48,9 @@ public class IniciarSesion extends JFrame {
         contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("Inicio de Sesión ");
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 20));
-        lblNewLabel.setBounds(144, 31, 152, 32);
+        lblNewLabel.setBounds(138, 33, 160, 32);
         contentPane.add(lblNewLabel);
 
         JLabel lblNewLabel_1 = new JLabel("Usuario:");
