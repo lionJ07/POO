@@ -59,12 +59,20 @@ public class Vendedor extends Usuario {
     private void actualizarArchivoProductos() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("productos.txt"))) {
             for (Producto p : productos) {
-                writer.write(p.getCodigo() + "," + p.getNombreprod() + "," + p.getPrecioprod() + "," + p.getCantprod() + "," + p.getDescripcionprod() + "\n");
+                // Escribe los datos del producto en el archivo con el formato correcto
+                writer.write(p.getCodigo() + "," + 
+                             p.getNombreprod() + "," + 
+                             String.format(Locale.US, "%.2f", p.getPrecioprod()) + "," + 
+                             p.getCantprod() + "," + 
+                             p.getDescripcionprod() + "," + 
+                             p.getNombreVendedor());
+                writer.newLine(); // Asegura que se inserte un salto de línea después de cada producto
             }
         } catch (IOException e) {
             System.out.println("Error al actualizar el archivo de productos.");
         }
     }
+
 
     public boolean eliminarProducto(int codigo) {
         for (Producto p : productos) {

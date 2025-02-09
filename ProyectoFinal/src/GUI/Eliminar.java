@@ -110,10 +110,12 @@ public class Eliminar extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-                    JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatipower2.png"));
+                    JOptionPane.showMessageDialog(contentPane, "Producto eliminado exitosamente", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen);
                     productosComboBox.removeItemAt(selectedIndex);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Seleccione un producto para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                	Icon imagen1 = new ImageIcon (getClass().getResource("/Imagenes/gatipower2.png"));
+                	 JOptionPane.showMessageDialog(contentPane, "Seleccione un producto para eliminar", "Érror", JOptionPane.PLAIN_MESSAGE,imagen1);
                 }
             }
         });
