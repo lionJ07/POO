@@ -55,6 +55,18 @@ public class Editar extends JFrame {
         lblCodigo.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
         lblCodigo.setBounds(34, 46, 250, 20);
         contentPane.add(lblCodigo);
+        
+        JButton btnRegresar = new JButton("Regresar");
+        btnRegresar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                VendedorGUI vendedorwindow = new VendedorGUI();
+                vendedorwindow.setVisible(true);
+            }
+        });
+        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
+        btnRegresar.setBounds(80, 260, 102, 27);
+        contentPane.add(btnRegresar);
 
         productosComboBox = new JComboBox<>();
         productosComboBox.setBounds(34, 70, 360, 25);
@@ -73,6 +85,7 @@ public class Editar extends JFrame {
         if (productosUsuario == null || productosUsuario.isEmpty()) {
         	Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatitoo.png"));
         	JOptionPane.showMessageDialog(contentPane, "No tienes productos para editar", "Éxito", JOptionPane.PLAIN_MESSAGE,imagen);
+            btnRegresar.setVisible(true); // 🔹 Hacer visible el botón de regresar
             dispose();
             return;
         }
@@ -131,18 +144,6 @@ public class Editar extends JFrame {
         textFieldDescripcionNuevo = new JTextField();
         textFieldDescripcionNuevo.setBounds(180, 220, 214, 19);
         contentPane.add(textFieldDescripcionNuevo);
-
-        JButton btnRegresar = new JButton("Regresar");
-        btnRegresar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                VendedorGUI vendedorwindow = new VendedorGUI();
-                vendedorwindow.setVisible(true);
-            }
-        });
-        btnRegresar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));
-        btnRegresar.setBounds(80, 260, 102, 27);
-        contentPane.add(btnRegresar);
 
         JButton btnEditar = new JButton("Editar");
         btnEditar.setFont(new Font("Sitka Subheading", Font.BOLD, 15));

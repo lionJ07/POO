@@ -61,7 +61,7 @@ public class Vendedor extends Usuario {
                          String.format(Locale.US, "%.2f", producto.getPrecioprod()) + "," + // 🔹 Asegura el punto decimal
                          producto.getCantprod() + "," +
                          producto.getDescripcionprod() + "," +
-                         producto.getNombreVendedor());
+                         producto.getNombreVendedor() + "\n");
             writer.newLine(); // Asegura el salto de línea
         } catch (IOException e) {
             System.out.println("Error al guardar el producto.");
@@ -103,7 +103,7 @@ public class Vendedor extends Usuario {
                              String.format(Locale.US, "%.2f", p.getPrecioprod()) + "," + 
                              p.getCantprod() + "," + 
                              p.getDescripcionprod() + "," + 
-                             p.getNombreVendedor());
+                             p.getNombreVendedor() + "\n");
                 writer.newLine(); // Asegura que se inserte un salto de línea después de cada producto
             }
         } catch (IOException e) {

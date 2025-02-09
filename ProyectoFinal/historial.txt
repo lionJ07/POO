@@ -1,10 +1,32 @@
-232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
-234,Lapiz,400.00,1,Lapicero,xxx,xxx
-232,Pijama,45678.00,1,Pa mimir,xxxx,xxx
-231,Mouse,34000.00,2,Pa compu,xxxx,xxx
-231,Mouse,34000.00,1,Pa compu,xxxx,xxx
-232,Pijama,45678.00,1,Pa mimir,xxxx,xxxx
-8789,Juguete,5000.00,1,Pa jugar,xxxx,xxx
-234,Lapiz,400.00,1,Lapicero,xxx,jslg99
-234,Lapiz,400.00,2,Lapicero,xxx,xxx
-234,Lapiz,400.00,5,Lapicero,xxx,xxx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2,Silla,150000.00,2,Sillas usadas de madera,xxx,xxxx
+1,Mesa,500000.00,1,Mesa usada de madera,xxx,xxxx
+3,Mouse,45000.00,1,Mouse gamer para computador,xxx,xxxx
+4,Humidificador,50000.00,1,Humidifcador de madera,xxx,xxxx

@@ -82,7 +82,7 @@ public class CarritoCompras {
                     producto.getDescripcionprod(),
                     producto.getNombreVendedor(),
                     comprador));
-            writer.newLine();
+            
         } catch (IOException e) {
             System.err.println("Error al guardar en el archivo del carrito: " + e.getMessage());
         }
