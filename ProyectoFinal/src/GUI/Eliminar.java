@@ -85,7 +85,7 @@ public class Eliminar extends JFrame {
         
         if (productosUsuario == null || productosUsuario.isEmpty()) {
         	Icon imagen = new ImageIcon(getClass().getResource("/Imagenes/gatriste.png"));
-        	JOptionPane.showMessageDialog(contentPane, "No tienes productos para eliminar", "Información", JOptionPane.PLAIN_MESSAGE,imagen);
+        	JOptionPane.showMessageDialog(contentPane, "No tienes productos para eliminar", "Info", JOptionPane.PLAIN_MESSAGE,imagen);
         	dispose();
         	return;
         }
